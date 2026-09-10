@@ -6,16 +6,19 @@ class SplashWidgetBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final locale = Localizations.localeOf(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Row(
-          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisAlignment: locale.languageCode == 'ar'
+              ? MainAxisAlignment.end
+              : MainAxisAlignment.start,
           children: [SvgPicture.asset('assets/images/plan.svg')],
         ),
-        SvgPicture.asset('assets/images/logo.svg'),
-        SvgPicture.asset('assets/images/splash_bottom.svg', fit: BoxFit.fill),
+        SvgPicture.asset('assets/images/logo.svg', width: 178, height: 173),
+        SvgPicture.asset('assets/images/splash_bottom.svg'),
       ],
     );
   }
