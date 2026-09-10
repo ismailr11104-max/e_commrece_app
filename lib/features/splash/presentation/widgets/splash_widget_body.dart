@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_svg/svg.dart';
 
 class SplashWidgetBody extends StatelessWidget {
   const SplashWidgetBody({super.key});
