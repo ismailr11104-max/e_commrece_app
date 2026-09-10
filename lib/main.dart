@@ -1,14 +1,20 @@
+import 'package:e_commrece_app/features/splash/presentation/splash_view.dart';
 import 'package:flutter/material.dart';
 
+import 'core/helper_functions/on_generate_routes.dart';
+
 void main() {
-  runApp(const MyApp());
+  runApp(const FruitHub());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class FruitHub extends StatelessWidget {
+  const FruitHub({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(title: 'Flutter Demo');
+    return const MaterialApp(
+      onGenerateRoute: onGenerateRoutes,
+      initialRoute: SplashView.routeName,
+    );
   }
 }
