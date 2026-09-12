@@ -1,3 +1,4 @@
+import 'package:e_commrece_app/core/services/shared_pref_manger.dart';
 import 'package:e_commrece_app/features/splash/presentation/splash_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -5,7 +6,9 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'core/helper_functions/on_generate_routes.dart';
 import 'generated/l10n.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await SharedPrefManger().init();
   runApp(const FruitHub());
 }
 
