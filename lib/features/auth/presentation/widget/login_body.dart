@@ -2,8 +2,10 @@ import 'package:e_commrece_app/core/utils/app_colors.dart';
 import 'package:e_commrece_app/core/utils/app_text_styles.dart';
 import 'package:e_commrece_app/core/widget/custom_button.dart';
 import 'package:e_commrece_app/core/widget/custom_text_from_field.dart';
-import 'package:e_commrece_app/features/auth/presentation/widget/dont_have_account.dart';
+import 'package:e_commrece_app/features/auth/presentation/screen/signup_view.dart';
 import 'package:e_commrece_app/features/auth/presentation/widget/or_divider.dart';
+import 'package:e_commrece_app/features/auth/presentation/widget/social_login_button.dart';
+import 'package:e_commrece_app/features/auth/presentation/widget/terms_or_auth_action_widget.dart';
 import 'package:flutter/material.dart';
 
 class LoginBody extends StatelessWidget {
@@ -45,9 +47,33 @@ class LoginBody extends StatelessWidget {
             const SizedBox(height: 32),
             CustomButton(onPressed: () {}, text: 'تسجيل الدخول'),
             const SizedBox(height: 32),
-            const DontHaveAccount(),
+            TermsOrAuthActionWidget(
+              mainText: 'لا تمتلك حساب؟',
+              actionText: ' قم بإنشاء حساب',
+              onTap: () {
+                Navigator.of(context).pushNamed(SignupView.routesSignUp);
+              },
+            ),
             const SizedBox(height: 49),
             const OrDivider(),
+            const SizedBox(height: 16),
+            SocialLoginButton(
+              title: 'تسجيل بواسطة جوجل',
+              image: 'assets/images/google_icon.svg',
+              onPrissed: () {},
+            ),
+            const SizedBox(height: 16),
+            SocialLoginButton(
+              title: 'تسجيل بواسطة أبل',
+              image: 'assets/images/apple_icon.svg',
+              onPrissed: () {},
+            ),
+            const SizedBox(height: 16),
+            SocialLoginButton(
+              title: 'تسجيل بواسطة فيسبوك',
+              image: 'assets/images/facebook_icon.svg',
+              onPrissed: () {},
+            ),
           ],
         ),
       ),

@@ -1,9 +1,19 @@
 import 'package:e_commrece_app/core/utils/app_colors.dart';
 import 'package:e_commrece_app/core/utils/app_text_styles.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-class DontHaveAccount extends StatelessWidget {
-  const DontHaveAccount({super.key});
+class TermsOrAuthActionWidget extends StatelessWidget {
+  const TermsOrAuthActionWidget({
+    super.key,
+    required this.mainText,
+    required this.actionText,
+    required this.onTap,
+  });
+
+  final String mainText;
+  final String actionText;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -11,20 +21,18 @@ class DontHaveAccount extends StatelessWidget {
       TextSpan(
         children: [
           TextSpan(
-            text: 'ليس لديك حساب؟ ',
+            text: mainText,
             style: TextStyles.semiBold16.copyWith(
               color: const Color(0xff949D9E),
             ),
           ),
+          const TextSpan(text: ' '),
           TextSpan(
-            text: ' ',
-            style: TextStyles.semiBold16.copyWith(color: Color(0xff949D9E)),
-          ),
-          TextSpan(
-            text: 'قم انشإب حساب',
+            text: actionText,
             style: TextStyles.semiBold16.copyWith(
               color: AppColors.primaryColor,
             ),
+            recognizer: TapGestureRecognizer()..onTap = onTap,
           ),
         ],
       ),
