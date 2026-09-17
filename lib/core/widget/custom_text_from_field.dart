@@ -6,15 +6,21 @@ class CustomTextFromField extends StatelessWidget {
     required this.hintText,
     required this.keyboardType,
     this.suffixIcon,
+    required this.controller,
+    this.validator,
   });
 
+  final TextEditingController controller;
   final String hintText;
   final TextInputType keyboardType;
   final Widget? suffixIcon;
+  final String? Function(String? value)? validator;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: controller,
+      validator: validator,
       keyboardType: keyboardType,
       decoration: InputDecoration(
         suffixIcon: suffixIcon,
@@ -23,7 +29,7 @@ class CustomTextFromField extends StatelessWidget {
         enabledBorder: builderBorder(),
         focusedBorder: builderBorder(),
         filled: true,
-        fillColor: Color(0xffF9FAFA),
+        fillColor: const Color(0xffF9FAFA),
       ),
     );
   }
@@ -31,7 +37,7 @@ class CustomTextFromField extends StatelessWidget {
   OutlineInputBorder builderBorder() {
     return OutlineInputBorder(
       borderRadius: BorderRadius.circular(8.0),
-      borderSide: BorderSide(width: 1, color: Color(0xffE6E9E9)),
+      borderSide: const BorderSide(width: 1, color: Color(0xffE6E9E9)),
     );
   }
 }

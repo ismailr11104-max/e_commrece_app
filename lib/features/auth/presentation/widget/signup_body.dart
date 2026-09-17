@@ -1,52 +1,157 @@
+import 'package:e_commrece_app/core/helper_functions/build_error_bar.dart';
+import 'package:e_commrece_app/core/utils/app_text_styles.dart';
 import 'package:e_commrece_app/core/widget/custom_button.dart';
 import 'package:e_commrece_app/core/widget/custom_text_from_field.dart';
+import 'package:e_commrece_app/features/auth/presentation/controller/email_auth_cubit.dart';
 import 'package:e_commrece_app/features/auth/presentation/screen/login_view.dart';
 import 'package:e_commrece_app/features/auth/presentation/widget/terms_and_condition_widget.dart';
 import 'package:e_commrece_app/features/auth/presentation/widget/terms_or_auth_action_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class SignupBody extends StatelessWidget {
-  const SignupBody({super.key});
+class SignupBody extends StatefulWidget {
+  SignupBody({super.key});
+
+  @override
+  State<SignupBody> createState() => _SignupBodyState();
+}
+
+class _SignupBodyState extends State<SignupBody> {
+  TextEditingController emailController = TextEditingController();
+
+  TextEditingController passwordController = TextEditingController();
+
+  TextEditingController nameController = TextEditingController();
+
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    nameController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: SingleChildScrollView(
-        child: Column(
-          children: [
-            SizedBox(height: 24),
-            const CustomTextFromField(
-              hintText: 'الاسم كامل',
-              keyboardType: TextInputType.emailAddress,
-            ),
-            SizedBox(height: 16),
-            const CustomTextFromField(
-              hintText: 'البريد الإلكتروني',
-              keyboardType: TextInputType.visiblePassword,
-            ),
-            SizedBox(height: 16),
-            const CustomTextFromField(
-              hintText: 'كلمة المرور',
-              keyboardType: TextInputType.visiblePassword,
-              suffixIcon: const Icon(
-                Icons.remove_red_eye_outlined,
-                color: Color(0xffC9CECF),
+        child: Form(
+          key: formKey,
+          child: Column(
+            children: [
+              SizedBox(height: 24),
+              CustomTextFromField(
+                controller: nameController,
+                validator: (value) {
+                  if (value == null || value.trim().isEmpty) {
+                    return 'يرجى إدخال اسمك الكامل';
+                  }
+                  return null;
+                },
+                hintText: 'الاسم كامل',
+                keyboardType: TextInputType.name,
               ),
-            ),
-            SizedBox(height: 16),
-            TermsAndConditionWidget(),
-            const SizedBox(height: 32),
-            CustomButton(onPressed: () {}, text: 'إنشاء حساب جديد'),
-            const SizedBox(height: 26),
-            TermsOrAuthActionWidget(
-              mainText: 'تمتلك حساب بالفعل؟',
-              actionText: 'تسجيل دخول',
-              onTap: () {
-                Navigator.of(context).pop(LoginView.routeLogin);
-              },
-            ),
-          ],
+              SizedBox(height: 16),
+              CustomTextFromField(
+                validator: (value) {
+                  if (value == null || value.trim().isEmpty) {
+                    return 'يرجى إدخال بريدك الإلكتروني';
+                  }
+                  return null;
+                },
+                controller: emailController,
+                hintText: 'البريد الإلكتروني',
+                keyboardType: TextInputType.emailAddress,
+              ),
+              SizedBox(height: 16),
+              CustomTextFromField(
+                validator: (value) {
+                  if (value == null || value.trim().isEmpty) {
+                    return 'يرجى إدخال كلمة المرور';
+                  }
+                  return null;
+                },
+                controller: passwordController,
+                hintText: 'كلمة المرور',
+                keyboardType: TextInputType.visiblePassword,
+                suffixIcon: const Icon(
+                  Icons.remove_red_eye_outlined,
+                  color: Color(0xffC9CECF),
+                ),
+              ),
+              SizedBox(height: 16),
+              TermsAndConditionWidget(),
+              const SizedBox(height: 32),
+              BlocConsumer<EmailAuthCubit, EmailAuthState>(
+                listener: (context, state) {
+                  if (state is EmailAuthSuccess) {
+                    Navigator.of(context).pop();
+                  }
+
+                  if (state is EmailAuthFailure) {
+                    buildErrorBar(context, state.failure);
+                  }
+                },
+                builder: (context, state) {
+                  final isLoading = state is EmailAuthLoading;
+
+                  return CustomButton(
+                    onPressed: isLoading
+                        ? null
+                        : () {
+                            if (formKey.currentState?.validate() ?? false) {
+                              context
+                                  .read<EmailAuthCubit>()
+                                  .createEmailAndPassword(
+                                    email: emailController.text.trim(),
+                                    password: passwordController.text,
+                                    name: nameController.text.trim(),
+                                  );
+                            }
+                          },
+                    child: isLoading
+                        ? Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SizedBox(
+                                width: 24,
+                                height: 24,
+                                child: CircularProgressIndicator(
+                                  color: Colors.white,
+                                  strokeWidth: 2,
+                                ),
+                              ),
+                              SizedBox(width: 12),
+                              Text(
+                                'إنشاء حساب جديد',
+                                style: TextStyles.bold16.copyWith(
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ],
+                          )
+                        : Text(
+                            'إنشاء حساب جديد',
+                            style: TextStyles.bold16.copyWith(
+                              color: Colors.white,
+                            ),
+                          ),
+                  );
+                },
+              ),
+              const SizedBox(height: 26),
+              TermsOrAuthActionWidget(
+                mainText: 'تمتلك حساب بالفعل؟',
+                actionText: 'تسجيل دخول',
+                onTap: () {
+                  Navigator.of(context).pop(LoginView.routeLogin);
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );

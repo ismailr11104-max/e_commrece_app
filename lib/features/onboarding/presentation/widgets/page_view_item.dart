@@ -1,4 +1,4 @@
-import 'package:e_commrece_app/core/services/shared_pref_manger.dart';
+import 'package:e_commrece_app/core/services/shared_preferences/shared_pref_manger.dart';
 import 'package:e_commrece_app/core/utils/app_colors.dart';
 import 'package:e_commrece_app/core/utils/app_text_styles.dart';
 import 'package:e_commrece_app/features/auth/presentation/screen/login_view.dart';

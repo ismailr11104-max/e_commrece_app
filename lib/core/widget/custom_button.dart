@@ -1,12 +1,11 @@
 import 'package:e_commrece_app/core/utils/app_colors.dart';
-import 'package:e_commrece_app/core/utils/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
-  const CustomButton({super.key, required this.onPressed, required this.text});
+  const CustomButton({super.key, required this.onPressed, required this.child});
 
-  final VoidCallback onPressed;
-  final String text;
+  final VoidCallback? onPressed;
+  final Widget child;
 
   @override
   Widget build(BuildContext context) {
@@ -22,10 +21,7 @@ class CustomButton extends StatelessWidget {
           ),
         ),
         onPressed: onPressed,
-        child: Text(
-          text,
-          style: TextStyles.bold16.copyWith(color: Colors.white),
-        ),
+        child: child,
       ),
     );
   }

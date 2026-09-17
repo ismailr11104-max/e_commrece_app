@@ -1,5 +1,6 @@
-import 'package:e_commrece_app/core/services/shared_pref_manger.dart';
+import 'package:e_commrece_app/core/services/shared_preferences/shared_pref_manger.dart';
 import 'package:e_commrece_app/core/utils/app_colors.dart';
+import 'package:e_commrece_app/core/utils/app_text_styles.dart';
 import 'package:e_commrece_app/core/widget/custom_button.dart';
 import 'package:e_commrece_app/features/auth/presentation/screen/login_view.dart';
 import 'package:e_commrece_app/features/onboarding/data/models/onboarding_item_model.dart';
@@ -58,7 +59,10 @@ class OnboardingBodyWidget extends StatelessWidget {
                       context,
                     ).pushReplacementNamed(LoginView.routeLogin);
                   },
-                  text: 'ابدأ الان',
+                  child: Text(
+                    'ابدأ الان',
+                    style: TextStyles.bold16.copyWith(color: Colors.white),
+                  ),
                 ),
               ),
             );
