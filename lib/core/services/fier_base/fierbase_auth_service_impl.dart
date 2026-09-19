@@ -4,7 +4,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 class FierBaseAuthServiceImpl extends FierBaseAuthService {
   final FirebaseAuth _firebaseAuth;
+
   FierBaseAuthServiceImpl(this._firebaseAuth);
+
   @override
   Future<User> createUser({
     required String email,
@@ -15,21 +17,49 @@ class FierBaseAuthServiceImpl extends FierBaseAuthService {
         email: email,
         password: password,
       );
+
+      final user = credential.user;
+
+      if (user == null) {
+        throw const AuthException(
+          'User not found after creating account.',
+          code: 'user-null',
+        );
+      }
+
+      return user;
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'network-request-failed') {
+        throw NetworkException('Network request failed.', code: e.code);
+      }
+
+      throw AuthException('Firebase authentication failed.', code: e.code);
+    }
+  }
+
+  @override
+  Future<User> signInWithEmail({
+    required String email,
+    required String password,
+  }) async {
+    try {
+      final credential = await _firebaseAuth.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
       final user = credential.user;
       if (user == null) {
-        throw ServerException('Failed to create user.');
+        throw const AuthException(
+          'User not found after sign in.',
+          code: 'user-null',
+        );
       }
       return user;
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'weak-password') {
-        throw ValidationException('The password provided is too weak.');
-      } else if (e.code == 'email-already-in-use') {
-        throw ValidationException('The account already exists for that email.');
-      } else {
-        throw ServerException('Failed to create user: ${e.toString()}');
+      if (e.code == 'network-request-failed') {
+        throw NetworkException('Network request failed.', code: e.code);
       }
-    } catch (e) {
-      throw ServerException('Failed to create user: ${e.toString()}');
+      throw AuthException('Firebase authentication failed.', code: e.code);
     }
   }
 }

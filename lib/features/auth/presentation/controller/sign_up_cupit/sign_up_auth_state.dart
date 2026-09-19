@@ -1,4 +1,4 @@
-part of 'email_auth_cubit.dart';
+part of 'sign_up_auth_cubit.dart';
 
 @immutable
 sealed class EmailAuthState {}

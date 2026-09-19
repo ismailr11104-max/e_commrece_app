@@ -2,8 +2,12 @@ import 'package:e_commrece_app/core/services/fier_base/fierbase_auth_service.dar
 import 'package:e_commrece_app/core/services/fier_base/fierbase_auth_service_impl.dart';
 import 'package:e_commrece_app/features/auth/data/data_sources/create_user_data_source.dart';
 import 'package:e_commrece_app/features/auth/data/data_sources/create_user_data_source_impl.dart';
-import 'package:e_commrece_app/features/auth/data/repo/auth_repo_impl.dart';
-import 'package:e_commrece_app/features/auth/domain/repo/auth_repo.dart';
+import 'package:e_commrece_app/features/auth/data/data_sources/sign_in_with_email_data_source.dart';
+import 'package:e_commrece_app/features/auth/data/data_sources/sign_in_with_email_data_source_impl.dart';
+import 'package:e_commrece_app/features/auth/data/repo/create_user_repository_impl.dart';
+import 'package:e_commrece_app/features/auth/data/repo/sing_in_repository_impl.dart';
+import 'package:e_commrece_app/features/auth/domain/repo/create_user_repository.dart';
+import 'package:e_commrece_app/features/auth/domain/repo/sing_in_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
 
@@ -20,7 +24,15 @@ Future<void> initDependencies() async {
     () => CreateUserDataImpl(sl<FierBaseAuthService>()),
   );
 
-  sl.registerLazySingleton<AuthRepo>(
-    () => AuthRepoImpl(sl<CreateUserDataSource>()),
+  sl.registerLazySingleton<CreateUserRepository>(
+    () => CreateUserRepositoryImpl(sl<CreateUserDataSource>()),
+  );
+
+  sl.registerLazySingleton<SignInWithEmailDataSource>(
+    () => SignInWithEmailDataSourceImpl(sl<FierBaseAuthService>()),
+  );
+
+  sl.registerLazySingleton<SingInRepository>(
+    () => SingInRepositoryImpl(sl<SignInWithEmailDataSource>()),
   );
 }

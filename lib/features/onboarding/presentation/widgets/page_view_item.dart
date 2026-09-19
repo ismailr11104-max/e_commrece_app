@@ -1,7 +1,7 @@
 import 'package:e_commrece_app/core/services/shared_preferences/shared_pref_manger.dart';
 import 'package:e_commrece_app/core/utils/app_colors.dart';
 import 'package:e_commrece_app/core/utils/app_text_styles.dart';
-import 'package:e_commrece_app/features/auth/presentation/screen/login_view.dart';
+import 'package:e_commrece_app/features/auth/presentation/screen/sign_in_view.dart';
 import 'package:e_commrece_app/features/onboarding/data/models/onboarding_item_model.dart';
 import 'package:e_commrece_app/features/onboarding/presentation/controller/onboarding_cubit.dart';
 import 'package:flutter/material.dart';
@@ -55,7 +55,7 @@ class PageViewItem extends StatelessWidget {
                           );
                           Navigator.of(
                             context,
-                          ).pushReplacementNamed(LoginView.routeLogin);
+                          ).pushReplacementNamed(SignInView.routeLogin);
                         },
                         child: Text(
                           'تخطي',

@@ -1,12 +1,16 @@
+import 'package:e_commrece_app/core/helper_functions/build_error_bar.dart';
 import 'package:e_commrece_app/core/utils/app_colors.dart';
 import 'package:e_commrece_app/core/utils/app_text_styles.dart';
 import 'package:e_commrece_app/core/widget/custom_button.dart';
+import 'package:e_commrece_app/core/widget/custom_password_from_field.dart';
 import 'package:e_commrece_app/core/widget/custom_text_from_field.dart';
+import 'package:e_commrece_app/features/auth/presentation/controller/sign_in_cubit/sign_in_cubit.dart';
 import 'package:e_commrece_app/features/auth/presentation/screen/signup_view.dart';
 import 'package:e_commrece_app/features/auth/presentation/widget/or_divider.dart';
 import 'package:e_commrece_app/features/auth/presentation/widget/social_login_button.dart';
 import 'package:e_commrece_app/features/auth/presentation/widget/terms_or_auth_action_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LoginBody extends StatefulWidget {
   LoginBody({super.key});
@@ -36,6 +40,7 @@ class _LoginBodyState extends State<LoginBody> {
       child: SingleChildScrollView(
         child: Form(
           key: formKey,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
           child: Column(
             children: [
               SizedBox(height: 24),
@@ -51,7 +56,7 @@ class _LoginBodyState extends State<LoginBody> {
                 controller: emailController,
               ),
               SizedBox(height: 16),
-              CustomTextFromField(
+              CustomPasswordFromField(
                 validator: (value) {
                   if (value == null || value.trim().isEmpty) {
                     return 'يرجى إدخال كلمة المرور';
@@ -59,12 +64,6 @@ class _LoginBodyState extends State<LoginBody> {
                   return null;
                 },
                 controller: passwordController,
-                hintText: 'كلمة المرور',
-                keyboardType: TextInputType.visiblePassword,
-                suffixIcon: const Icon(
-                  Icons.remove_red_eye_outlined,
-                  color: Color(0xffC9CECF),
-                ),
               ),
               SizedBox(height: 16),
               Row(
@@ -79,12 +78,55 @@ class _LoginBodyState extends State<LoginBody> {
                 ],
               ),
               const SizedBox(height: 32),
-              CustomButton(
-                onPressed: () {},
-                child: Text(
-                  'تسجيل الدخول',
-                  style: TextStyles.bold16.copyWith(color: Colors.white),
-                ),
+              BlocConsumer<SignInCubit, SignInState>(
+                listener: (context, state) {
+                  if (state is SignInAuthSuccess) {
+                    Navigator.of(context).pushNamed(SignupView.routesSignUp);
+                  }
+                  if (state is SignInAuthFailure) {
+                    buildErrorBar(context, state.failure);
+                  }
+                },
+                builder: (context, state) {
+                  final isLoading = state is SignInAuthLoading;
+                  return CustomButton(
+                    onPressed: () {
+                      if (formKey.currentState?.validate() ?? false) {
+                        context.read<SignInCubit>().signInWithEmail(
+                          email: emailController.text,
+                          password: passwordController.text,
+                        );
+                      }
+                    },
+                    child: isLoading
+                        ? Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SizedBox(
+                                width: 24,
+                                height: 24,
+                                child: CircularProgressIndicator(
+                                  color: Colors.white,
+                                  strokeWidth: 2,
+                                ),
+                              ),
+                              SizedBox(width: 12),
+                              Text(
+                                'تسجيل الدخول',
+                                style: TextStyles.bold16.copyWith(
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ],
+                          )
+                        : Text(
+                            'تسجيل الدخول',
+                            style: TextStyles.bold16.copyWith(
+                              color: Colors.white,
+                            ),
+                          ),
+                  );
+                },
               ),
               const SizedBox(height: 32),
               TermsOrAuthActionWidget(

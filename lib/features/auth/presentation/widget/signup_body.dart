@@ -1,9 +1,10 @@
 import 'package:e_commrece_app/core/helper_functions/build_error_bar.dart';
 import 'package:e_commrece_app/core/utils/app_text_styles.dart';
 import 'package:e_commrece_app/core/widget/custom_button.dart';
+import 'package:e_commrece_app/core/widget/custom_password_from_field.dart';
 import 'package:e_commrece_app/core/widget/custom_text_from_field.dart';
-import 'package:e_commrece_app/features/auth/presentation/controller/email_auth_cubit.dart';
-import 'package:e_commrece_app/features/auth/presentation/screen/login_view.dart';
+import 'package:e_commrece_app/features/auth/presentation/controller/sign_up_cupit/sign_up_auth_cubit.dart';
+import 'package:e_commrece_app/features/auth/presentation/screen/sign_in_view.dart';
 import 'package:e_commrece_app/features/auth/presentation/widget/terms_and_condition_widget.dart';
 import 'package:e_commrece_app/features/auth/presentation/widget/terms_or_auth_action_widget.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +25,7 @@ class _SignupBodyState extends State<SignupBody> {
   TextEditingController nameController = TextEditingController();
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  late bool isTermsAccepted = false;
 
   @override
   void dispose() {
@@ -40,6 +42,7 @@ class _SignupBodyState extends State<SignupBody> {
       child: SingleChildScrollView(
         child: Form(
           key: formKey,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
           child: Column(
             children: [
               SizedBox(height: 24),
@@ -67,7 +70,7 @@ class _SignupBodyState extends State<SignupBody> {
                 keyboardType: TextInputType.emailAddress,
               ),
               SizedBox(height: 16),
-              CustomTextFromField(
+              CustomPasswordFromField(
                 validator: (value) {
                   if (value == null || value.trim().isEmpty) {
                     return 'يرجى إدخال كلمة المرور';
@@ -75,15 +78,15 @@ class _SignupBodyState extends State<SignupBody> {
                   return null;
                 },
                 controller: passwordController,
-                hintText: 'كلمة المرور',
-                keyboardType: TextInputType.visiblePassword,
-                suffixIcon: const Icon(
-                  Icons.remove_red_eye_outlined,
-                  color: Color(0xffC9CECF),
-                ),
               ),
               SizedBox(height: 16),
-              TermsAndConditionWidget(),
+              TermsAndConditionsWidget(
+                onChanged: (bool value) {
+                  setState(() {
+                    isTermsAccepted = value;
+                  });
+                },
+              ),
               const SizedBox(height: 32),
               BlocConsumer<EmailAuthCubit, EmailAuthState>(
                 listener: (context, state) {
@@ -103,13 +106,20 @@ class _SignupBodyState extends State<SignupBody> {
                         ? null
                         : () {
                             if (formKey.currentState?.validate() ?? false) {
-                              context
-                                  .read<EmailAuthCubit>()
-                                  .createEmailAndPassword(
-                                    email: emailController.text.trim(),
-                                    password: passwordController.text,
-                                    name: nameController.text.trim(),
-                                  );
+                              if (isTermsAccepted) {
+                                context
+                                    .read<EmailAuthCubit>()
+                                    .createEmailAndPassword(
+                                      email: emailController.text.trim(),
+                                      password: passwordController.text,
+                                      name: nameController.text.trim(),
+                                    );
+                              } else {
+                                buildErrorBar(
+                                  context,
+                                  'يرجى الموافقة على الشروط والأحكام',
+                                );
+                              }
                             }
                           },
                     child: isLoading
@@ -147,7 +157,7 @@ class _SignupBodyState extends State<SignupBody> {
                 mainText: 'تمتلك حساب بالفعل؟',
                 actionText: 'تسجيل دخول',
                 onTap: () {
-                  Navigator.of(context).pop(LoginView.routeLogin);
+                  Navigator.of(context).pop(SignInView.routeLogin);
                 },
               ),
             ],
