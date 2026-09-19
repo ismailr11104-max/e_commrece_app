@@ -6,4 +6,5 @@ abstract class FierBaseAuthService {
     required String email,
     required String password,
   });
+  Future<UserCredential> signInWithGoogle();
 }

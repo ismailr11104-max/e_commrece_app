@@ -1,6 +1,7 @@
 import 'package:e_commrece_app/core/errors/exceptions.dart';
 import 'package:e_commrece_app/core/services/fier_base/fierbase_auth_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class FierBaseAuthServiceImpl extends FierBaseAuthService {
   final FirebaseAuth _firebaseAuth;
@@ -55,6 +56,37 @@ class FierBaseAuthServiceImpl extends FierBaseAuthService {
         );
       }
       return user;
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'network-request-failed') {
+        throw NetworkException('Network request failed.', code: e.code);
+      }
+      throw AuthException('Firebase authentication failed.', code: e.code);
+    }
+  }
+
+  @override
+  Future<UserCredential> signInWithGoogle() async {
+    try {
+      final GoogleSignInAccount googleUser = await GoogleSignIn.instance
+          .authenticate();
+
+      final GoogleSignInAuthentication googleAuth = googleUser.authentication;
+      final credential = GoogleAuthProvider.credential(
+        idToken: googleAuth.idToken,
+      );
+      return await _firebaseAuth.signInWithCredential(credential);
+    } on GoogleSignInException catch (e) {
+      if (e.code == GoogleSignInExceptionCode.canceled) {
+        throw AuthException(
+          'Google sign in was canceled.',
+          code: e.code.toString(),
+        );
+      }
+
+      throw AuthException(
+        'Google authentication failed.',
+        code: e.code.toString(),
+      );
     } on FirebaseAuthException catch (e) {
       if (e.code == 'network-request-failed') {
         throw NetworkException('Network request failed.', code: e.code);

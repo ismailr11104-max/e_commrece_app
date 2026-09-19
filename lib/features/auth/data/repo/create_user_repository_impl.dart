@@ -16,12 +16,12 @@ class CreateUserRepositoryImpl implements CreateUserRepository {
     required String name,
   }) async {
     try {
-      final userModel = await _createUserDataSource.createUser(
+      final result = await _createUserDataSource.createUser(
         email: email,
         password: password,
       );
 
-      return Right(userModel);
+      return Right(result);
     } on AuthException catch (e) {
       return Left(AuthFailure(_mapAuthError(e.code)));
     } on NetworkException {

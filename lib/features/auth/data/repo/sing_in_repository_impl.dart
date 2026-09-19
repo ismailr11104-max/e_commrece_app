@@ -18,12 +18,12 @@ class SingInRepositoryImpl implements SingInRepository {
     required String password,
   }) async {
     try {
-      final response = await _emailDataSource.signInWithEmail(
+      final result = await _emailDataSource.signInWithEmail(
         email: email,
         password: password,
       );
 
-      return Right(response);
+      return Right(result);
     } on AuthException catch (e) {
       return Left(AuthFailure(_mapAuthError(e.code)));
     } on NetworkException {

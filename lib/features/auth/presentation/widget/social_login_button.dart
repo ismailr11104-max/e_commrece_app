@@ -29,14 +29,17 @@ class SocialLoginButton extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
         ),
         onPressed: onPrissed,
-        child: ListTile(
-          visualDensity: VisualDensity(vertical: VisualDensity.minimumDensity),
-          leading: SvgPicture.asset(image),
-          title: Text(
-            title,
-            textAlign: TextAlign.center,
-            style: TextStyles.semiBold16,
-          ),
+        child: Row(
+          children: [
+            SvgPicture.asset(image),
+            const Expanded(child: SizedBox()),
+            Text(
+              title,
+              textAlign: TextAlign.center,
+              style: TextStyles.semiBold16,
+            ),
+            const Expanded(child: SizedBox()),
+          ],
         ),
       ),
     );

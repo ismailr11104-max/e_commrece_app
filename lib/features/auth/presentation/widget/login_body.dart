@@ -5,6 +5,7 @@ import 'package:e_commrece_app/core/widget/custom_button.dart';
 import 'package:e_commrece_app/core/widget/custom_password_from_field.dart';
 import 'package:e_commrece_app/core/widget/custom_text_from_field.dart';
 import 'package:e_commrece_app/features/auth/presentation/controller/sign_in_cubit/sign_in_cubit.dart';
+import 'package:e_commrece_app/features/auth/presentation/controller/social_auth_cupit/social_auth_cubit.dart';
 import 'package:e_commrece_app/features/auth/presentation/screen/signup_view.dart';
 import 'package:e_commrece_app/features/auth/presentation/widget/or_divider.dart';
 import 'package:e_commrece_app/features/auth/presentation/widget/social_login_button.dart';
@@ -139,22 +140,45 @@ class _LoginBodyState extends State<LoginBody> {
               const SizedBox(height: 49),
               const OrDivider(),
               const SizedBox(height: 16),
-              SocialLoginButton(
-                title: 'تسجيل بواسطة جوجل',
-                image: 'assets/images/google_icon.svg',
-                onPrissed: () {},
-              ),
-              const SizedBox(height: 16),
-              SocialLoginButton(
-                title: 'تسجيل بواسطة أبل',
-                image: 'assets/images/apple_icon.svg',
-                onPrissed: () {},
-              ),
-              const SizedBox(height: 16),
-              SocialLoginButton(
-                title: 'تسجيل بواسطة فيسبوك',
-                image: 'assets/images/facebook_icon.svg',
-                onPrissed: () {},
+              BlocConsumer<SocialAuthCubit, SocialAuthState>(
+                listener: (context, state) {
+                  if (state is SocialAuthSuccess) {
+                    Navigator.pushNamed(context, SignupView.routesSignUp);
+                  }
+                  if (state is SocialAuthFailure) {
+                    buildErrorBar(context, state.failure);
+                  }
+                },
+                builder: (context, state) {
+                  final isLoading = state is SocialAuthLoading;
+                  return Column(
+                    children: [
+                      SocialLoginButton(
+                        title: 'تسجيل بواسطة جوجل',
+                        image: 'assets/images/google_icon.svg',
+                        onPrissed: isLoading
+                            ? () {}
+                            : () {
+                                context
+                                    .read<SocialAuthCubit>()
+                                    .signInWithGoogle();
+                              },
+                      ),
+                      const SizedBox(height: 16),
+                      SocialLoginButton(
+                        title: 'تسجيل بواسطة أبل',
+                        image: 'assets/images/apple_icon.svg',
+                        onPrissed: () {},
+                      ),
+                      const SizedBox(height: 16),
+                      SocialLoginButton(
+                        title: 'تسجيل بواسطة فيسبوك',
+                        image: 'assets/images/facebook_icon.svg',
+                        onPrissed: () {},
+                      ),
+                    ],
+                  );
+                },
               ),
             ],
           ),
