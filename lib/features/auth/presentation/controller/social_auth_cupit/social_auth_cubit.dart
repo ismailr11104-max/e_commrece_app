@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:e_commrece_app/core/enum/social_provider.dart';
 import 'package:e_commrece_app/features/auth/domain/entites/user_entity.dart';
 import 'package:e_commrece_app/features/auth/domain/repo/social_auth_repository.dart';
 import 'package:meta/meta.dart';
@@ -11,7 +12,7 @@ class SocialAuthCubit extends Cubit<SocialAuthState> {
   final SocialAuthRepository _authRepository;
 
   Future<void> signInWithGoogle() async {
-    emit(SocialAuthLoading());
+    emit(SocialAuthLoading(SocialProvider.google));
 
     final result = await _authRepository.signInWithGoogle();
 
@@ -22,6 +23,15 @@ class SocialAuthCubit extends Cubit<SocialAuthState> {
       (user) {
         emit(SocialAuthSuccess(user));
       },
+    );
+  }
+
+  Future<void> signInWithFacebook() async {
+    emit(SocialAuthLoading(SocialProvider.facebook));
+    final result = await _authRepository.signInWithFacebook();
+    result.fold(
+      (failure) => emit(SocialAuthFailure(failure.message)),
+      (user) => emit(SocialAuthSuccess(user)),
     );
   }
 }

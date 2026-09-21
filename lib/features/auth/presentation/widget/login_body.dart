@@ -1,3 +1,4 @@
+import 'package:e_commrece_app/core/enum/social_provider.dart';
 import 'package:e_commrece_app/core/helper_functions/build_error_bar.dart';
 import 'package:e_commrece_app/core/utils/app_colors.dart';
 import 'package:e_commrece_app/core/utils/app_text_styles.dart';
@@ -10,22 +11,23 @@ import 'package:e_commrece_app/features/auth/presentation/screen/signup_view.dar
 import 'package:e_commrece_app/features/auth/presentation/widget/or_divider.dart';
 import 'package:e_commrece_app/features/auth/presentation/widget/social_login_button.dart';
 import 'package:e_commrece_app/features/auth/presentation/widget/terms_or_auth_action_widget.dart';
+import 'package:e_commrece_app/features/home/presentation/home_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LoginBody extends StatefulWidget {
-  LoginBody({super.key});
+  const LoginBody({super.key});
 
   @override
   State<LoginBody> createState() => _LoginBodyState();
 }
 
 class _LoginBodyState extends State<LoginBody> {
-  TextEditingController emailController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
 
-  TextEditingController passwordController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
-  GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
@@ -82,7 +84,9 @@ class _LoginBodyState extends State<LoginBody> {
               BlocConsumer<SignInCubit, SignInState>(
                 listener: (context, state) {
                   if (state is SignInAuthSuccess) {
-                    Navigator.of(context).pushNamed(SignupView.routesSignUp);
+                    Navigator.of(
+                      context,
+                    ).pushReplacementNamed(HomeView.routeHome);
                   }
                   if (state is SignInAuthFailure) {
                     buildErrorBar(context, state.failure);
@@ -143,20 +147,30 @@ class _LoginBodyState extends State<LoginBody> {
               BlocConsumer<SocialAuthCubit, SocialAuthState>(
                 listener: (context, state) {
                   if (state is SocialAuthSuccess) {
-                    Navigator.pushNamed(context, SignupView.routesSignUp);
+                    Navigator.pushReplacementNamed(context, HomeView.routeHome);
                   }
                   if (state is SocialAuthFailure) {
                     buildErrorBar(context, state.failure);
                   }
                 },
                 builder: (context, state) {
-                  final isLoading = state is SocialAuthLoading;
+                  final isGoogleLoading =
+                      state is SocialAuthLoading &&
+                      state.provider == SocialProvider.google;
+
+                  final isFacebookLoading =
+                      state is SocialAuthLoading &&
+                      state.provider == SocialProvider.facebook;
+
+                  final isAppleLoading =
+                      state is SocialAuthLoading &&
+                      state.provider == SocialProvider.apple;
                   return Column(
                     children: [
                       SocialLoginButton(
                         title: 'تسجيل بواسطة جوجل',
                         image: 'assets/images/google_icon.svg',
-                        onPrissed: isLoading
+                        onPrissed: isGoogleLoading
                             ? () {}
                             : () {
                                 context
@@ -174,7 +188,13 @@ class _LoginBodyState extends State<LoginBody> {
                       SocialLoginButton(
                         title: 'تسجيل بواسطة فيسبوك',
                         image: 'assets/images/facebook_icon.svg',
-                        onPrissed: () {},
+                        onPrissed: isFacebookLoading
+                            ? () {}
+                            : () {
+                                context
+                                    .read<SocialAuthCubit>()
+                                    .signInWithFacebook();
+                              },
                       ),
                     ],
                   );

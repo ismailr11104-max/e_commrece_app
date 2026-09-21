@@ -1,6 +1,7 @@
 import 'package:e_commrece_app/core/errors/exceptions.dart';
 import 'package:e_commrece_app/core/services/fier_base/fierbase_auth_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class FierBaseAuthServiceImpl extends FierBaseAuthService {
@@ -65,7 +66,7 @@ class FierBaseAuthServiceImpl extends FierBaseAuthService {
   }
 
   @override
-  Future<UserCredential> signInWithGoogle() async {
+  Future<User> signInWithGoogle() async {
     try {
       final GoogleSignInAccount googleUser = await GoogleSignIn.instance
           .authenticate();
@@ -74,7 +75,19 @@ class FierBaseAuthServiceImpl extends FierBaseAuthService {
       final credential = GoogleAuthProvider.credential(
         idToken: googleAuth.idToken,
       );
-      return await _firebaseAuth.signInWithCredential(credential);
+      final userCredential = await _firebaseAuth.signInWithCredential(
+        credential,
+      );
+      final user = userCredential.user;
+
+      if (user == null) {
+        throw const AuthException(
+          'User not found after Google sign in.',
+          code: 'user-null',
+        );
+      }
+
+      return user;
     } on GoogleSignInException catch (e) {
       if (e.code == GoogleSignInExceptionCode.canceled) {
         throw AuthException(
@@ -92,6 +105,46 @@ class FierBaseAuthServiceImpl extends FierBaseAuthService {
         throw NetworkException('Network request failed.', code: e.code);
       }
       throw AuthException('Firebase authentication failed.', code: e.code);
+    }
+  }
+
+  @override
+  Future<User> signInWithFacebook() async {
+    try {
+      final LoginResult loginResult = await FacebookAuth.instance.login();
+
+      if (loginResult.status != LoginStatus.success ||
+          loginResult.accessToken == null) {
+        throw AuthException(
+          'Facebook sign in was canceled or failed.',
+          code: loginResult.status.name,
+        );
+      }
+
+      final credential = FacebookAuthProvider.credential(
+        loginResult.accessToken!.tokenString,
+      );
+
+      final userCredential = await _firebaseAuth.signInWithCredential(
+        credential,
+      );
+
+      final user = userCredential.user;
+
+      if (user == null) {
+        throw const AuthException(
+          'User not found after Facebook sign in.',
+          code: 'user-null',
+        );
+      }
+
+      return user;
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'network-request-failed') {
+        throw NetworkException('Network request failed.', code: e.code);
+      }
+
+      throw AuthException('Facebook authentication failed.', code: e.code);
     }
   }
 }

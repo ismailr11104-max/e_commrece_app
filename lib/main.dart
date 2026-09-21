@@ -7,7 +7,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 
 import 'core/helper_functions/on_generate_routes.dart';
 import 'firebase_options.dart';
@@ -19,10 +18,10 @@ void main() async {
   await initDependencies();
   Bloc.observer = CustomObserver();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  await GoogleSignIn.instance.initialize(
-    serverClientId:
-        '473106444167-fs4ecku3drnhpt2nrdlntlnnmdh4vo93.apps.googleusercontent.com',
-  );
+  // await GoogleSignIn.instance.initialize(
+  //   serverClientId:
+  //       '473106444167-fs4ecku3drnhpt2nrdlntlnnmdh4vo93.apps.googleusercontent.com',
+  // );
   runApp(const FruitHub());
 }
 

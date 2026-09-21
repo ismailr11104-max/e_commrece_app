@@ -4,9 +4,9 @@ import 'package:e_commrece_app/core/widget/custom_button.dart';
 import 'package:e_commrece_app/core/widget/custom_password_from_field.dart';
 import 'package:e_commrece_app/core/widget/custom_text_from_field.dart';
 import 'package:e_commrece_app/features/auth/presentation/controller/sign_up_cupit/sign_up_auth_cubit.dart';
-import 'package:e_commrece_app/features/auth/presentation/screen/sign_in_view.dart';
 import 'package:e_commrece_app/features/auth/presentation/widget/terms_and_condition_widget.dart';
 import 'package:e_commrece_app/features/auth/presentation/widget/terms_or_auth_action_widget.dart';
+import 'package:e_commrece_app/features/home/presentation/home_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -18,14 +18,11 @@ class SignupBody extends StatefulWidget {
 }
 
 class _SignupBodyState extends State<SignupBody> {
-  TextEditingController emailController = TextEditingController();
-
-  TextEditingController passwordController = TextEditingController();
-
-  TextEditingController nameController = TextEditingController();
-
-  GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  late bool isTermsAccepted = false;
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController nameController = TextEditingController();
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  bool isTermsAccepted = false;
 
   @override
   void dispose() {
@@ -91,7 +88,9 @@ class _SignupBodyState extends State<SignupBody> {
               BlocConsumer<EmailAuthCubit, EmailAuthState>(
                 listener: (context, state) {
                   if (state is EmailAuthSuccess) {
-                    Navigator.of(context).pop();
+                    Navigator.of(
+                      context,
+                    ).pushReplacementNamed(HomeView.routeHome);
                   }
 
                   if (state is EmailAuthFailure) {
@@ -157,7 +156,7 @@ class _SignupBodyState extends State<SignupBody> {
                 mainText: 'تمتلك حساب بالفعل؟',
                 actionText: 'تسجيل دخول',
                 onTap: () {
-                  Navigator.of(context).pop(SignInView.routeLogin);
+                  Navigator.of(context).pop();
                 },
               ),
             ],

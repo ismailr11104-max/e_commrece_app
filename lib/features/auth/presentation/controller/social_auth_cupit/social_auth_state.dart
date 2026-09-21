@@ -5,7 +5,11 @@ sealed class SocialAuthState {}
 
 final class SocialAuthInitial extends SocialAuthState {}
 
-final class SocialAuthLoading extends SocialAuthState {}
+class SocialAuthLoading extends SocialAuthState {
+  final SocialProvider provider;
+
+  SocialAuthLoading(this.provider);
+}
 
 final class SocialAuthSuccess extends SocialAuthState {
   final UserEntity userEntity;

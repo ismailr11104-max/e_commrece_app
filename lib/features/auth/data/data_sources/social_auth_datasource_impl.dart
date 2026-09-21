@@ -11,11 +11,12 @@ class SocialAuthDatasourceImpl implements SocialAuthDatasource {
   @override
   Future<UserModel> signInWithGoogle() async {
     final response = await _authService.signInWithGoogle();
+    return UserModel.fromFirebaseUser(response);
+  }
 
-    final user = response.user;
-    if (user == null) {
-      throw Exception('Google sign-in succeeded but user is null');
-    }
-    return UserModel.fromFirebaseUser(user);
+  @override
+  Future<UserModel> signInWithFacebook() async {
+    final response = await _authService.signInWithFacebook();
+    return UserModel.fromFirebaseUser(response);
   }
 }

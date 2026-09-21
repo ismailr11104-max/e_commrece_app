@@ -6,5 +6,6 @@ abstract class FierBaseAuthService {
     required String email,
     required String password,
   });
-  Future<UserCredential> signInWithGoogle();
+  Future<User> signInWithGoogle();
+  Future<User> signInWithFacebook();
 }

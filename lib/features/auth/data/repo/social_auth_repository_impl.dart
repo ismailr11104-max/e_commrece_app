@@ -16,7 +16,23 @@ class SocialAuthRepositoryImpl implements SocialAuthRepository {
       final result = await _socialAuthDatasource.signInWithGoogle();
       return Right(result);
     } on AuthException catch (e) {
-      return Left(AuthFailure(_mapGoogleAuthError(e.code)));
+      return Left(AuthFailure(_mapSocialAuthError(e.code)));
+    } on NetworkException {
+      return Left(NetworkFailure('تأكد من اتصالك بالإنترنت.'));
+    } on ServerException catch (e) {
+      return Left(ServerFailure(e.message));
+    } catch (e) {
+      return Left(ServerFailure('حدث خطأ غير متوقع، يرجى المحاولة لاحقًا.'));
+    }
+  }
+
+  @override
+  Future<Either<Failures, UserEntity>> signInWithFacebook() async {
+    try {
+      final result = await _socialAuthDatasource.signInWithFacebook();
+      return Right(result);
+    } on AuthException catch (e) {
+      return Left(AuthFailure(_mapSocialAuthError(e.code)));
     } on NetworkException {
       return Left(NetworkFailure('تأكد من اتصالك بالإنترنت.'));
     } on ServerException catch (e) {
@@ -27,10 +43,11 @@ class SocialAuthRepositoryImpl implements SocialAuthRepository {
   }
 }
 
-String _mapGoogleAuthError(String? code) {
+String _mapSocialAuthError(String? code) {
   switch (code) {
     case 'canceled':
-      return 'تم إلغاء تسجيل الدخول باستخدام Google.';
+    case 'popup-closed-by-user':
+      return 'تم إلغاء تسجيل الدخول.';
 
     case 'network-request-failed':
       return 'تأكد من اتصالك بالإنترنت.';
@@ -41,7 +58,16 @@ String _mapGoogleAuthError(String? code) {
     case 'user-disabled':
       return 'تم تعطيل هذا الحساب.';
 
+    case 'invalid-credential':
+      return 'بيانات تسجيل الدخول غير صالحة، يرجى المحاولة مرة أخرى.';
+
+    case 'operation-not-allowed':
+      return 'طريقة تسجيل الدخول هذه غير متاحة حاليًا.';
+
+    case 'credential-already-in-use':
+      return 'بيانات تسجيل الدخول هذه مرتبطة بحساب آخر.';
+
     default:
-      return 'فشل تسجيل الدخول باستخدام Google، يرجى المحاولة مرة أخرى.';
+      return 'فشل تسجيل الدخول، يرجى المحاولة مرة أخرى.';
   }
 }
