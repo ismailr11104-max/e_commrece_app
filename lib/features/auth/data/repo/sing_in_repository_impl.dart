@@ -4,26 +4,29 @@ import 'package:dartz/dartz.dart';
 import 'package:e_commrece_app/core/errors/exceptions.dart';
 import 'package:e_commrece_app/core/errors/failures.dart';
 import 'package:e_commrece_app/features/auth/data/data_sources/sign_in_with_email_data_source.dart';
-import 'package:e_commrece_app/features/auth/data/model/user_model.dart';
+import 'package:e_commrece_app/features/auth/domain/entites/user_entity.dart';
 import 'package:e_commrece_app/features/auth/domain/repo/sing_in_repository.dart';
+import 'package:e_commrece_app/features/auth/domain/repo/user_data_repository.dart';
 
 class SingInRepositoryImpl implements SingInRepository {
-  SignInWithEmailDataSource _emailDataSource;
+  final SignInWithEmailDataSource _emailDataSource;
+  final UserDataRepository _userDataRepository;
 
-  SingInRepositoryImpl(this._emailDataSource);
+  SingInRepositoryImpl(this._emailDataSource, this._userDataRepository);
 
   @override
-  Future<Either<Failures, UserModel>> signInWithEmail({
+  Future<Either<Failures, UserEntity>> signInWithEmail({
     required String email,
     required String password,
   }) async {
     try {
-      final result = await _emailDataSource.signInWithEmail(
+      final user = await _emailDataSource.signInWithEmail(
         email: email,
         password: password,
       );
+      UserEntity userEntity = await _userDataRepository.getData(user: user);
 
-      return Right(result);
+      return Right(userEntity);
     } on AuthException catch (e) {
       return Left(AuthFailure(_mapAuthError(e.code)));
     } on NetworkException {

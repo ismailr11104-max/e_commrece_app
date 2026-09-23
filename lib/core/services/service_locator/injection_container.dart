@@ -71,7 +71,10 @@ Future<void> initDependencies() async {
   );
 
   sl.registerLazySingleton<SingInRepository>(
-    () => SingInRepositoryImpl(sl<SignInWithEmailDataSource>()),
+    () => SingInRepositoryImpl(
+      sl<SignInWithEmailDataSource>(),
+      sl<UserDataRepository>(),
+    ),
   );
 
   // Social Auth

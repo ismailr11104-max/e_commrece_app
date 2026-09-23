@@ -14,4 +14,13 @@ class FireStoreServiceImpl implements FireStoreService {
   }) async {
     await _fireStore.collection(path).doc(documentId).set(data);
   }
+
+  @override
+  Future<Map<String, dynamic>> getData({
+    required String path,
+    required String documentId,
+  }) async {
+    final userData = await _fireStore.collection(path).doc(documentId).get();
+    return userData.data() as Map<String, dynamic>;
+  }
 }

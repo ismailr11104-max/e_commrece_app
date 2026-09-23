@@ -16,4 +16,9 @@ class UserDataRepositoryImpl extends UserDataRepository {
       data: user.toMap(),
     );
   }
+
+  @override
+  Future<dynamic> getData({required UserEntity user}) async {
+    await _userDataSource.getData(uId: user.uid);
+  }
 }
