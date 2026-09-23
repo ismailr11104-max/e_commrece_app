@@ -1,15 +1,22 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:e_commrece_app/core/errors/exceptions.dart';
 import 'package:e_commrece_app/core/errors/failures.dart';
 import 'package:e_commrece_app/features/auth/data/data_sources/create_user_data_source.dart';
 import 'package:e_commrece_app/features/auth/domain/entites/user_entity.dart';
 import 'package:e_commrece_app/features/auth/domain/repo/create_user_repository.dart';
+import 'package:e_commrece_app/features/auth/domain/repo/user_data_repository.dart';
 
 class CreateUserRepositoryImpl implements CreateUserRepository {
   final CreateUserDataSource _createUserDataSource;
+  final UserDataRepository _userDataRepository;
 
-  CreateUserRepositoryImpl(this._createUserDataSource);
+  CreateUserRepositoryImpl(
+    this._createUserDataSource,
+    this._userDataRepository,
+  );
 
+  @override
   Future<Either<Failures, UserEntity>> createEmailAndPassword({
     required String email,
     required String password,
@@ -21,6 +28,8 @@ class CreateUserRepositoryImpl implements CreateUserRepository {
         password: password,
       );
 
+      await _userDataRepository.addData(user: result);
+
       return Right(result);
     } on AuthException catch (e) {
       return Left(AuthFailure(_mapAuthError(e.code)));
@@ -28,6 +37,12 @@ class CreateUserRepositoryImpl implements CreateUserRepository {
       return Left(NetworkFailure('تأكد من اتصالك بالإنترنت.'));
     } on ServerException catch (e) {
       return Left(ServerFailure(e.message));
+    } on FirebaseException catch (e) {
+      return Left(
+        ServerFailure(e.message ?? 'حدث خطأ أثناء حفظ بيانات المستخدم.'),
+      );
+    } catch (e) {
+      return Left(ServerFailure('حدث خطأ غير متوقع، يرجى المحاولة مرة أخرى.'));
     }
   }
 

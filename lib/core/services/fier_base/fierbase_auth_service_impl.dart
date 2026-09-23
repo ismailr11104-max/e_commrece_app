@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:e_commrece_app/core/errors/exceptions.dart';
 import 'package:e_commrece_app/core/services/fier_base/fierbase_auth_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -124,7 +126,6 @@ class FierBaseAuthServiceImpl extends FierBaseAuthService {
       final credential = FacebookAuthProvider.credential(
         loginResult.accessToken!.tokenString,
       );
-
       final userCredential = await _firebaseAuth.signInWithCredential(
         credential,
       );
@@ -137,13 +138,11 @@ class FierBaseAuthServiceImpl extends FierBaseAuthService {
           code: 'user-null',
         );
       }
-
       return user;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'network-request-failed') {
         throw NetworkException('Network request failed.', code: e.code);
       }
-
       throw AuthException('Facebook authentication failed.', code: e.code);
     }
   }

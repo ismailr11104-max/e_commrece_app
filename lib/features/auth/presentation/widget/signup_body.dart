@@ -99,7 +99,6 @@ class _SignupBodyState extends State<SignupBody> {
                 },
                 builder: (context, state) {
                   final isLoading = state is EmailAuthLoading;
-
                   return CustomButton(
                     onPressed: isLoading
                         ? null
