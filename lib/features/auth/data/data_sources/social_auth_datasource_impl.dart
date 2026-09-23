@@ -1,3 +1,5 @@
+import 'dart:developer' as developer;
+
 import 'package:e_commrece_app/core/services/fier_base/fierbase_auth_service.dart';
 import 'package:e_commrece_app/features/auth/data/model/user_model.dart';
 
@@ -16,7 +18,22 @@ class SocialAuthDatasourceImpl implements SocialAuthDatasource {
 
   @override
   Future<UserModel> signInWithFacebook() async {
+    developer.log(
+      'DataSource: calling auth service...',
+      name: 'FacebookDataSource',
+    );
     final response = await _authService.signInWithFacebook();
+
+    developer.log(
+      'DataSource: user received from auth service.',
+      name: 'FacebookDataSource',
+    );
+
+    developer.log(
+      'DataSource UID: ${response.uid}',
+      name: 'FacebookDataSource',
+    );
+
     return UserModel.fromFirebaseUser(response);
   }
 }

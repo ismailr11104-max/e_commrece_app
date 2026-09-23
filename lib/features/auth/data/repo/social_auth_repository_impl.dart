@@ -1,3 +1,5 @@
+import 'dart:developer' as developer;
+
 import 'package:dartz/dartz.dart';
 import 'package:e_commrece_app/core/errors/exceptions.dart';
 import 'package:e_commrece_app/core/errors/failures.dart';
@@ -29,15 +31,64 @@ class SocialAuthRepositoryImpl implements SocialAuthRepository {
   @override
   Future<Either<Failures, UserEntity>> signInWithFacebook() async {
     try {
+      developer.log(
+        'Repository: Facebook sign in started.',
+        name: 'FacebookRepository',
+      );
+
       final result = await _socialAuthDatasource.signInWithFacebook();
+
+      developer.log(
+        'Repository: Facebook sign in success.',
+        name: 'FacebookRepository',
+      );
+
       return Right(result);
-    } on AuthException catch (e) {
+    } on AuthException catch (e, stackTrace) {
+      developer.log(
+        'Repository AuthException',
+        name: 'FacebookRepository',
+        error: e,
+        stackTrace: stackTrace,
+      );
+
+      developer.log(
+        'AuthException code: ${e.code}',
+        name: 'FacebookRepository',
+      );
+
+      developer.log(
+        'AuthException message: ${e.message}',
+        name: 'FacebookRepository',
+      );
+
       return Left(AuthFailure(_mapSocialAuthError(e.code)));
-    } on NetworkException {
+    } on NetworkException catch (e, stackTrace) {
+      developer.log(
+        'Repository NetworkException',
+        name: 'FacebookRepository',
+        error: e,
+        stackTrace: stackTrace,
+      );
+
       return Left(NetworkFailure('تأكد من اتصالك بالإنترنت.'));
-    } on ServerException catch (e) {
+    } on ServerException catch (e, stackTrace) {
+      developer.log(
+        'Repository ServerException',
+        name: 'FacebookRepository',
+        error: e,
+        stackTrace: stackTrace,
+      );
+
       return Left(ServerFailure(e.message));
-    } catch (e) {
+    } catch (e, stackTrace) {
+      developer.log(
+        'Repository UNKNOWN ERROR',
+        name: 'FacebookRepository',
+        error: e,
+        stackTrace: stackTrace,
+      );
+
       return Left(ServerFailure('حدث خطأ غير متوقع، يرجى المحاولة لاحقًا.'));
     }
   }
