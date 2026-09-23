@@ -1,20 +1,37 @@
 import 'package:dartz/dartz.dart';
 import 'package:e_commrece_app/core/errors/exceptions.dart';
 import 'package:e_commrece_app/core/errors/failures.dart';
+import 'package:e_commrece_app/features/auth/data/data_sources/create_user_data_source.dart';
 import 'package:e_commrece_app/features/auth/data/data_sources/social_auth_datasource.dart';
 import 'package:e_commrece_app/features/auth/domain/entites/user_entity.dart';
 import 'package:e_commrece_app/features/auth/domain/repo/social_auth_repository.dart';
+import 'package:e_commrece_app/features/auth/domain/repo/user_data_repository.dart';
 
 class SocialAuthRepositoryImpl implements SocialAuthRepository {
   SocialAuthDatasource _socialAuthDatasource;
+  final CreateUserDataSource _createUserDataSource;
+  final UserDataRepository _userDataRepository;
 
-  SocialAuthRepositoryImpl(this._socialAuthDatasource);
+  SocialAuthRepositoryImpl(
+    this._socialAuthDatasource,
+    this._createUserDataSource,
+    this._userDataRepository,
+  );
 
   @override
   Future<Either<Failures, UserEntity>> signInWithGoogle() async {
     try {
-      final result = await _socialAuthDatasource.signInWithGoogle();
-      return Right(result);
+      UserEntity userEntity = await _socialAuthDatasource.signInWithGoogle();
+
+      try {
+        await _userDataRepository.addData(user: userEntity);
+      } catch (e) {
+        await _createUserDataSource.deleteUser();
+        return Left(
+          ServerFailure('فشل حفظ بيانات المستخدم، يرجى المحاولة مرة أخرى.'),
+        );
+      }
+      return Right(userEntity);
     } on AuthException catch (e) {
       return Left(AuthFailure(_mapSocialAuthError(e.code)));
     } on NetworkException {
@@ -29,8 +46,16 @@ class SocialAuthRepositoryImpl implements SocialAuthRepository {
   @override
   Future<Either<Failures, UserEntity>> signInWithFacebook() async {
     try {
-      final result = await _socialAuthDatasource.signInWithFacebook();
-      return Right(result);
+      UserEntity userEntity = await _socialAuthDatasource.signInWithFacebook();
+      try {
+        await _userDataRepository.addData(user: userEntity);
+      } catch (e) {
+        await _createUserDataSource.deleteUser();
+        return Left(
+          ServerFailure('فشل حفظ بيانات المستخدم، يرجى المحاولة مرة أخرى.'),
+        );
+      }
+      return Right(userEntity);
     } on AuthException catch (e) {
       return Left(AuthFailure(_mapSocialAuthError(e.code)));
     } on NetworkException {

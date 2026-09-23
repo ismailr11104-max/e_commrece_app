@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:e_commrece_app/core/errors/exceptions.dart';
 import 'package:e_commrece_app/core/services/fier_base/fierbase_auth_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -145,5 +143,10 @@ class FierBaseAuthServiceImpl extends FierBaseAuthService {
       }
       throw AuthException('Facebook authentication failed.', code: e.code);
     }
+  }
+
+  @override
+  Future<dynamic> deleteUser() async {
+    await _firebaseAuth.currentUser!.delete();
   }
 }

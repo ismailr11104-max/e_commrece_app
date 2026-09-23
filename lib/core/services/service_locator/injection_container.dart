@@ -80,6 +80,10 @@ Future<void> initDependencies() async {
   );
 
   sl.registerLazySingleton<SocialAuthRepository>(
-    () => SocialAuthRepositoryImpl(sl<SocialAuthDatasource>()),
+    () => SocialAuthRepositoryImpl(
+      sl<SocialAuthDatasource>(),
+      sl<CreateUserDataSource>(),
+      sl<UserDataRepository>(),
+    ),
   );
 }

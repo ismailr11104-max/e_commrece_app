@@ -5,4 +5,6 @@ abstract class CreateUserDataSource {
     required String email,
     required String password,
   });
+
+  Future deleteUser();
 }

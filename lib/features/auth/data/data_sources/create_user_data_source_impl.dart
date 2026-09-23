@@ -14,7 +14,11 @@ class CreateUserDataImpl implements CreateUserDataSource {
       email: email,
       password: password,
     );
-
     return UserModel.fromFirebaseUser(response);
+  }
+
+  @override
+  Future<dynamic> deleteUser() async {
+    await _authService.deleteUser();
   }
 }
