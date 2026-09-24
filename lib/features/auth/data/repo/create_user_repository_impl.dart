@@ -1,9 +1,7 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:e_commrece_app/core/errors/exceptions.dart';
 import 'package:e_commrece_app/core/errors/failures.dart';
 import 'package:e_commrece_app/features/auth/data/data_sources/create_user_data_source.dart';
-import 'package:e_commrece_app/features/auth/data/model/user_model.dart';
 import 'package:e_commrece_app/features/auth/domain/entites/user_entity.dart';
 import 'package:e_commrece_app/features/auth/domain/repo/create_user_repository.dart';
 import 'package:e_commrece_app/features/auth/domain/repo/user_data_repository.dart';
@@ -23,18 +21,18 @@ class CreateUserRepositoryImpl implements CreateUserRepository {
     required String password,
     required String name,
   }) async {
-    UserModel? user;
     try {
-      user = await _createUserDataSource.createUser(
+      final user = await _createUserDataSource.createUser(
         email: email,
         password: password,
       );
-      UserEntity userEntity = UserEntity(
-        name: name,
-        uid: user.uid,
-        email: email,
-      );
-      await _userDataRepository.addData(user: userEntity);
+      final userEntity = UserEntity(name: name, uid: user.uid, email: email);
+      try {
+        await _userDataRepository.setData(user: userEntity);
+      } catch (e) {
+        await _createUserDataSource.deleteUser();
+        rethrow;
+      }
       return Right(userEntity);
     } on AuthException catch (e) {
       return Left(AuthFailure(_mapAuthError(e.code)));
@@ -42,10 +40,6 @@ class CreateUserRepositoryImpl implements CreateUserRepository {
       return Left(NetworkFailure('تأكد من اتصالك بالإنترنت.'));
     } on ServerException catch (e) {
       return Left(ServerFailure(e.message));
-    } on FirebaseException catch (e) {
-      return Left(
-        ServerFailure(e.message ?? 'حدث خطأ أثناء حفظ بيانات المستخدم.'),
-      );
     } catch (e) {
       return Left(ServerFailure('حدث خطأ غير متوقع، يرجى المحاولة مرة أخرى.'));
     }

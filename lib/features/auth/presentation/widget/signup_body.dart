@@ -1,5 +1,8 @@
 import 'package:e_commrece_app/core/helper_functions/build_error_bar.dart';
 import 'package:e_commrece_app/core/utils/app_text_styles.dart';
+import 'package:e_commrece_app/core/validators/email_validator.dart';
+import 'package:e_commrece_app/core/validators/name_validator.dart';
+import 'package:e_commrece_app/core/validators/password_validator.dart';
 import 'package:e_commrece_app/core/widget/custom_button.dart';
 import 'package:e_commrece_app/core/widget/custom_password_from_field.dart';
 import 'package:e_commrece_app/core/widget/custom_text_from_field.dart';
@@ -45,35 +48,20 @@ class _SignupBodyState extends State<SignupBody> {
               SizedBox(height: 24),
               CustomTextFromField(
                 controller: nameController,
-                validator: (value) {
-                  if (value == null || value.trim().isEmpty) {
-                    return 'يرجى إدخال اسمك الكامل';
-                  }
-                  return null;
-                },
+                validator: NameValidator.validate,
                 hintText: 'الاسم كامل',
                 keyboardType: TextInputType.name,
               ),
               SizedBox(height: 16),
               CustomTextFromField(
-                validator: (value) {
-                  if (value == null || value.trim().isEmpty) {
-                    return 'يرجى إدخال بريدك الإلكتروني';
-                  }
-                  return null;
-                },
+                validator: EmailValidator.validate,
                 controller: emailController,
                 hintText: 'البريد الإلكتروني',
                 keyboardType: TextInputType.emailAddress,
               ),
               SizedBox(height: 16),
               CustomPasswordFromField(
-                validator: (value) {
-                  if (value == null || value.trim().isEmpty) {
-                    return 'يرجى إدخال كلمة المرور';
-                  }
-                  return null;
-                },
+                validator: PasswordValidator.validate,
                 controller: passwordController,
               ),
               SizedBox(height: 16),
