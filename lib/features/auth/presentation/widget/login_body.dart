@@ -2,6 +2,8 @@ import 'package:e_commrece_app/core/enum/social_provider.dart';
 import 'package:e_commrece_app/core/helper_functions/build_error_bar.dart';
 import 'package:e_commrece_app/core/utils/app_colors.dart';
 import 'package:e_commrece_app/core/utils/app_text_styles.dart';
+import 'package:e_commrece_app/core/validators/email_validator.dart';
+import 'package:e_commrece_app/core/validators/password_validator.dart';
 import 'package:e_commrece_app/core/widget/custom_button.dart';
 import 'package:e_commrece_app/core/widget/custom_password_from_field.dart';
 import 'package:e_commrece_app/core/widget/custom_text_from_field.dart';
@@ -48,24 +50,14 @@ class _LoginBodyState extends State<LoginBody> {
             children: [
               SizedBox(height: 24),
               CustomTextFromField(
-                validator: (value) {
-                  if (value == null || value.trim().isEmpty) {
-                    return 'يرجى إدخال بريدك الإلكتروني';
-                  }
-                  return null;
-                },
+                validator: EmailValidator.validate,
                 hintText: 'البريد الإلكتروني',
                 keyboardType: TextInputType.emailAddress,
                 controller: emailController,
               ),
               SizedBox(height: 16),
               CustomPasswordFromField(
-                validator: (value) {
-                  if (value == null || value.trim().isEmpty) {
-                    return 'يرجى إدخال كلمة المرور';
-                  }
-                  return null;
-                },
+                validator: PasswordValidator.validate,
                 controller: passwordController,
               ),
               SizedBox(height: 16),
@@ -95,14 +87,16 @@ class _LoginBodyState extends State<LoginBody> {
                 builder: (context, state) {
                   final isLoading = state is SignInAuthLoading;
                   return CustomButton(
-                    onPressed: () {
-                      if (formKey.currentState?.validate() ?? false) {
-                        context.read<SignInCubit>().signInWithEmail(
-                          email: emailController.text,
-                          password: passwordController.text,
-                        );
-                      }
-                    },
+                    onPressed: isLoading
+                        ? null
+                        : () {
+                            if (formKey.currentState?.validate() ?? false) {
+                              context.read<SignInCubit>().signInWithEmail(
+                                email: emailController.text.trim(),
+                                password: passwordController.text,
+                              );
+                            }
+                          },
                     child: isLoading
                         ? Row(
                             mainAxisAlignment: MainAxisAlignment.center,

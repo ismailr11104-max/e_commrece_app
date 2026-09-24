@@ -39,30 +39,25 @@ class FierBaseAuthServiceImpl extends FierBaseAuthService {
     }
   }
 
-  @override
   Future<User> signInWithEmail({
     required String email,
     required String password,
   }) async {
-    try {
-      final credential = await _firebaseAuth.signInWithEmailAndPassword(
-        email: email,
-        password: password,
+    final credential = await _firebaseAuth.signInWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+
+    final user = credential.user;
+
+    if (user == null) {
+      throw const AuthException(
+        'User is null after successful sign in.',
+        code: 'user-null',
       );
-      final user = credential.user;
-      if (user == null) {
-        throw const AuthException(
-          'User not found after sign in.',
-          code: 'user-null',
-        );
-      }
-      return user;
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'network-request-failed') {
-        throw NetworkException('Network request failed.', code: e.code);
-      }
-      throw AuthException('Firebase authentication failed.', code: e.code);
     }
+
+    return user;
   }
 
   @override
