@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:e_commrece_app/core/errors/exceptions.dart';
 import 'package:e_commrece_app/core/errors/failures.dart';
+import 'package:e_commrece_app/core/utils/backend_endpoint.dart';
 import 'package:e_commrece_app/features/auth/data/data_sources/create_user_data_source.dart';
 import 'package:e_commrece_app/features/auth/data/data_sources/social_auth_datasource.dart';
 import 'package:e_commrece_app/features/auth/domain/entites/user_entity.dart';
@@ -22,9 +23,17 @@ class SocialAuthRepositoryImpl implements SocialAuthRepository {
   Future<Either<Failures, UserEntity>> signInWithGoogle() async {
     try {
       UserEntity userEntity = await _socialAuthDatasource.signInWithGoogle();
+      final isUserExist = await _userDataRepository.checkIfData(
+        path: BackendEndpoint.isUserExist,
+        documentId: userEntity.uid,
+      );
 
       try {
-        await _userDataRepository.addData(user: userEntity);
+        if (isUserExist) {
+          await _userDataRepository.getData(user: userEntity);
+        } else {
+          await _userDataRepository.setData(user: userEntity);
+        }
       } catch (e) {
         await _createUserDataSource.deleteUser();
         return Left(
@@ -47,8 +56,16 @@ class SocialAuthRepositoryImpl implements SocialAuthRepository {
   Future<Either<Failures, UserEntity>> signInWithFacebook() async {
     try {
       UserEntity userEntity = await _socialAuthDatasource.signInWithFacebook();
+      final isUserExist = await _userDataRepository.checkIfData(
+        path: BackendEndpoint.isUserExist,
+        documentId: userEntity.uid,
+      );
       try {
-        await _userDataRepository.addData(user: userEntity);
+        if (isUserExist) {
+          await _userDataRepository.getData(user: userEntity);
+        } else {
+          await _userDataRepository.setData(user: userEntity);
+        }
       } catch (e) {
         await _createUserDataSource.deleteUser();
         return Left(

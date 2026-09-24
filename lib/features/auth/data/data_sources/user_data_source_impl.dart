@@ -29,4 +29,15 @@ class UserDataSourceImpl implements UserDataSource {
     );
     return UserModel.fromJson(userdata);
   }
+
+  @override
+  Future<bool> checkIfData({
+    required String path,
+    required String documentId,
+  }) async {
+    return await _fireStoreService.checkIfData(
+      path: path,
+      documentId: documentId,
+    );
+  }
 }

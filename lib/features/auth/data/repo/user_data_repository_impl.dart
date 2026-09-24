@@ -9,7 +9,7 @@ class UserDataRepositoryImpl extends UserDataRepository {
   UserDataRepositoryImpl(this._userDataSource);
 
   @override
-  Future<void> addData({required UserEntity user}) async {
+  Future<void> setData({required UserEntity user}) async {
     await _userDataSource.setData(
       path: BackendEndpoint.addUserData,
       documentId: user.uid,
@@ -20,5 +20,16 @@ class UserDataRepositoryImpl extends UserDataRepository {
   @override
   Future<dynamic> getData({required UserEntity user}) async {
     await _userDataSource.getData(uId: user.uid);
+  }
+
+  @override
+  Future<bool> checkIfData({
+    required String path,
+    required String documentId,
+  }) async {
+    return await _userDataSource.checkIfData(
+      path: path,
+      documentId: documentId,
+    );
   }
 }

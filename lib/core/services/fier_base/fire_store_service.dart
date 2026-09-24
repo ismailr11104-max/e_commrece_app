@@ -9,4 +9,6 @@ abstract class FireStoreService {
     required String path,
     required String documentId,
   });
+
+  Future<bool> checkIfData({required String path, required String documentId});
 }
