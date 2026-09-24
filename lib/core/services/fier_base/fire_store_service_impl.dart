@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:e_commrece_app/core/errors/exceptions.dart';
 import 'package:e_commrece_app/core/services/fier_base/fire_store_service.dart';
 
 class FireStoreServiceImpl implements FireStoreService {
@@ -9,10 +10,14 @@ class FireStoreServiceImpl implements FireStoreService {
   @override
   Future<void> setData({
     required String path,
-    required String documentId,
+    String? documentId,
     required Map<String, dynamic> data,
   }) async {
-    await _fireStore.collection(path).doc(documentId).set(data);
+    if (documentId != null) {
+      await _fireStore.collection(path).doc(documentId).set(data);
+    } else {
+      await _fireStore.collection(path).doc(documentId).set(data);
+    }
   }
 
   @override
@@ -20,8 +25,11 @@ class FireStoreServiceImpl implements FireStoreService {
     required String path,
     required String documentId,
   }) async {
-    final userData = await _fireStore.collection(path).doc(documentId).get();
-    return userData.data() as Map<String, dynamic>;
+    final snapshot = await _fireStore.collection(path).doc(documentId).get();
+    if (!snapshot.exists || snapshot.data() == null) {
+      throw ServerException('بيانات المستخدم غير موجودة.');
+    }
+    return snapshot.data()!;
   }
 
   @override

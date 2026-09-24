@@ -22,12 +22,11 @@ class SingInRepositoryImpl implements SingInRepository {
         email: email,
         password: password,
       );
-      UserEntity userEntity = await _userDataRepository.getData(user: user);
-
+      final userEntity = await _userDataRepository.getData(user: user);
       return Right(userEntity);
     } on AuthException catch (e) {
       return Left(AuthFailure(_mapAuthError(e.code)));
-    } on NetworkException {
+    } on NetworkException catch (e) {
       return Left(NetworkFailure('تأكد من اتصالك بالإنترنت.'));
     } on ServerException catch (e) {
       return Left(ServerFailure(e.message));
@@ -42,13 +41,10 @@ class SingInRepositoryImpl implements SingInRepository {
       case 'user-not-found':
       case 'wrong-password':
         return 'البريد الإلكتروني أو كلمة المرور غير صحيحة.';
-
       case 'user-disabled':
         return 'تم تعطيل هذا الحساب.';
-
       case 'too-many-requests':
         return 'تم إجراء محاولات كثيرة، يرجى المحاولة لاحقًا.';
-
       default:
         return 'فشل تسجيل الدخول، يرجى المحاولة مرة أخرى.';
     }
