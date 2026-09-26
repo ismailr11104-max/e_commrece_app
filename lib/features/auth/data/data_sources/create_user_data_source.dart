@@ -6,5 +6,5 @@ abstract class CreateUserDataSource {
     required String password,
   });
 
-  Future deleteUser();
+  Future<void> deleteUser();
 }

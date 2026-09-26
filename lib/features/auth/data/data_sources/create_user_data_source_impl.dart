@@ -35,7 +35,7 @@ class CreateUserDataImpl implements CreateUserDataSource {
     }
   }
 
-  Future<dynamic> deleteUser() async {
+  Future<void> deleteUser() async {
     await _authService.deleteUser();
   }
 }

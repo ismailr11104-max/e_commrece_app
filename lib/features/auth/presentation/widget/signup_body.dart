@@ -9,7 +9,6 @@ import 'package:e_commrece_app/core/widget/custom_text_from_field.dart';
 import 'package:e_commrece_app/features/auth/presentation/controller/sign_up_cupit/sign_up_auth_cubit.dart';
 import 'package:e_commrece_app/features/auth/presentation/widget/terms_and_condition_widget.dart';
 import 'package:e_commrece_app/features/auth/presentation/widget/terms_or_auth_action_widget.dart';
-import 'package:e_commrece_app/features/home/presentation/home_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -76,11 +75,8 @@ class _SignupBodyState extends State<SignupBody> {
               BlocConsumer<EmailAuthCubit, EmailAuthState>(
                 listener: (context, state) {
                   if (state is EmailAuthSuccess) {
-                    Navigator.of(
-                      context,
-                    ).pushReplacementNamed(HomeView.routeHome);
+                    Navigator.of(context).pop();
                   }
-
                   if (state is EmailAuthFailure) {
                     buildErrorBar(context, state.failure);
                   }

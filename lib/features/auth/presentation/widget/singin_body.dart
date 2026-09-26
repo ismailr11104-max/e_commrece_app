@@ -13,18 +13,18 @@ import 'package:e_commrece_app/features/auth/presentation/screen/signup_view.dar
 import 'package:e_commrece_app/features/auth/presentation/widget/or_divider.dart';
 import 'package:e_commrece_app/features/auth/presentation/widget/social_login_button.dart';
 import 'package:e_commrece_app/features/auth/presentation/widget/terms_or_auth_action_widget.dart';
-import 'package:e_commrece_app/features/home/presentation/home_view.dart';
+import 'package:e_commrece_app/features/home/presentation/screen/home_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class LoginBody extends StatefulWidget {
-  const LoginBody({super.key});
+class SingInBody extends StatefulWidget {
+  const SingInBody({super.key});
 
   @override
-  State<LoginBody> createState() => _LoginBodyState();
+  State<SingInBody> createState() => _LoginBodyState();
 }
 
-class _LoginBodyState extends State<LoginBody> {
+class _LoginBodyState extends State<SingInBody> {
   final TextEditingController emailController = TextEditingController();
 
   final TextEditingController passwordController = TextEditingController();
@@ -61,16 +61,18 @@ class _LoginBodyState extends State<LoginBody> {
                 controller: passwordController,
               ),
               SizedBox(height: 16),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Text(
-                    'نسيت كلمة المرور؟',
-                    style: TextStyles.semiBold13.copyWith(
-                      color: AppColors.lightPrimaryColor,
+              GestureDetector(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Text(
+                      'نسيت كلمة المرور؟',
+                      style: TextStyles.semiBold13.copyWith(
+                        color: AppColors.lightPrimaryColor,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
               const SizedBox(height: 32),
               BlocConsumer<SignInCubit, SignInState>(

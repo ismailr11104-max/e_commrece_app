@@ -4,7 +4,7 @@ import 'package:e_commrece_app/features/auth/domain/repo/sing_in_repository.dart
 import 'package:e_commrece_app/features/auth/domain/repo/social_auth_repository.dart';
 import 'package:e_commrece_app/features/auth/presentation/controller/sign_in_cubit/sign_in_cubit.dart';
 import 'package:e_commrece_app/features/auth/presentation/controller/social_auth_cupit/social_auth_cubit.dart';
-import 'package:e_commrece_app/features/auth/presentation/widget/login_body.dart';
+import 'package:e_commrece_app/features/auth/presentation/widget/singin_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -28,7 +28,7 @@ class SignInView extends StatelessWidget {
       ],
       child: Scaffold(
         appBar: CustomAppBar(context, title: 'تسجيل دخول'),
-        body: LoginBody(),
+        body: SingInBody(),
       ),
     );
   }

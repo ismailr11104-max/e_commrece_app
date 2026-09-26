@@ -8,5 +8,5 @@ abstract class FierBaseAuthService {
   });
   Future<User> signInWithGoogle();
   Future<User> signInWithFacebook();
-  Future deleteUser();
+  Future<void> deleteUser();
 }

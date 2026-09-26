@@ -4,7 +4,7 @@ import 'package:e_commrece_app/core/errors/failures.dart';
 import 'package:e_commrece_app/core/utils/backend_endpoint.dart';
 import 'package:e_commrece_app/features/auth/data/data_sources/create_user_data_source.dart';
 import 'package:e_commrece_app/features/auth/data/data_sources/social_auth_datasource.dart';
-import 'package:e_commrece_app/features/auth/domain/entites/user_entity.dart';
+import 'package:e_commrece_app/features/auth/domain/entities/user_entity.dart';
 import 'package:e_commrece_app/features/auth/domain/repo/social_auth_repository.dart';
 import 'package:e_commrece_app/features/auth/domain/repo/user_data_repository.dart';
 

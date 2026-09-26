@@ -141,7 +141,7 @@ class FierBaseAuthServiceImpl extends FierBaseAuthService {
   }
 
   @override
-  Future<dynamic> deleteUser() async {
+  Future<void> deleteUser() async {
     await _firebaseAuth.currentUser!.delete();
   }
 }

@@ -1,6 +1,6 @@
 import 'package:e_commrece_app/core/utils/backend_endpoint.dart';
 import 'package:e_commrece_app/features/auth/data/data_sources/user_data_source.dart';
-import 'package:e_commrece_app/features/auth/domain/entites/user_entity.dart';
+import 'package:e_commrece_app/features/auth/domain/entities/user_entity.dart';
 import 'package:e_commrece_app/features/auth/domain/repo/user_data_repository.dart';
 
 class UserDataRepositoryImpl extends UserDataRepository {

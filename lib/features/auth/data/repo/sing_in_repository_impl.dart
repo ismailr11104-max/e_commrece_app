@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:e_commrece_app/core/errors/exceptions.dart';
 import 'package:e_commrece_app/core/errors/failures.dart';
 import 'package:e_commrece_app/features/auth/data/data_sources/sign_in_with_email_data_source.dart';
-import 'package:e_commrece_app/features/auth/domain/entites/user_entity.dart';
+import 'package:e_commrece_app/features/auth/domain/entities/user_entity.dart';
 import 'package:e_commrece_app/features/auth/domain/repo/sing_in_repository.dart';
 import 'package:e_commrece_app/features/auth/domain/repo/user_data_repository.dart';
 

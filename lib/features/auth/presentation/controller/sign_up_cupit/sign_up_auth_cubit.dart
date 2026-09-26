@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:e_commrece_app/features/auth/domain/entites/user_entity.dart';
+import 'package:e_commrece_app/features/auth/domain/entities/user_entity.dart';
 import 'package:e_commrece_app/features/auth/domain/repo/create_user_repository.dart';
 import 'package:meta/meta.dart';
 
