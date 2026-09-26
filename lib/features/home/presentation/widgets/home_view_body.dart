@@ -1,5 +1,6 @@
 import 'package:e_commrece_app/core/widget/search_text_field.dart';
 import 'package:e_commrece_app/features/home/presentation/widgets/Featured_list.dart';
+import 'package:e_commrece_app/features/home/presentation/widgets/best_selling_gred_view.dart';
 import 'package:e_commrece_app/features/home/presentation/widgets/best_selling_header.dart';
 import 'package:e_commrece_app/features/home/presentation/widgets/costom_home_app_bar.dart';
 import 'package:flutter/material.dart';
@@ -24,10 +25,12 @@ class HomeViewBody extends StatelessWidget {
                 FeaturedList(),
                 SizedBox(height: 12),
                 BestSellingHeader(),
+                SizedBox(height: 8),
               ],
             ),
           ),
         ),
+        BestSellingGredView(),
       ],
     );
   }
