@@ -33,7 +33,7 @@ class ActiveItem extends StatelessWidget {
                 ),
               ),
               child: Center(
-                child: SvgPicture.asset(image, width: 24, height: 24),
+                child: SvgPicture.asset(image, width: 16, height: 16),
               ),
             ),
             const SizedBox(width: 4),

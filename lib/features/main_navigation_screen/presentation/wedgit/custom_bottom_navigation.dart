@@ -35,7 +35,6 @@ class CustomBottomNavigationBar extends StatelessWidget {
         children: List.generate(bottomNavigationItem.length, (index) {
           final item = bottomNavigationItem[index];
           final isSelected = selectedIndex == index;
-
           return Expanded(
             flex: isSelected ? 3 : 2,
             child: GestureDetector(
