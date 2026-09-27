@@ -25,9 +25,15 @@ class ProductItem extends StatelessWidget {
           Positioned.fill(
             child: Column(
               children: [
-                const SizedBox(height: 20),
-                Flexible(child: Image.asset('assets/images/avocado.png')),
-                const SizedBox(height: 24),
+                SizedBox(height: 12),
+                Flexible(
+                  child: Image.asset(
+                    'assets/images/avocado.png',
+                    width: 90,
+                    height: 90,
+                    fit: BoxFit.fill,
+                  ),
+                ),
                 ListTile(
                   title: Text(
                     'أفوكادو',

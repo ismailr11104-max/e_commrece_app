@@ -14,6 +14,7 @@ import 'package:e_commrece_app/features/auth/presentation/widget/or_divider.dart
 import 'package:e_commrece_app/features/auth/presentation/widget/social_login_button.dart';
 import 'package:e_commrece_app/features/auth/presentation/widget/terms_or_auth_action_widget.dart';
 import 'package:e_commrece_app/features/home/presentation/screen/home_view.dart';
+import 'package:e_commrece_app/features/main_navigation_screen/presentation/main_navigation_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -78,9 +79,9 @@ class _LoginBodyState extends State<SingInBody> {
               BlocConsumer<SignInCubit, SignInState>(
                 listener: (context, state) {
                   if (state is SignInAuthSuccess) {
-                    Navigator.of(
-                      context,
-                    ).pushReplacementNamed(HomeView.routeHome);
+                    Navigator.of(context).pushReplacementNamed(
+                      MainNavigationView.routeBottomNavigation,
+                    );
                   }
                   if (state is SignInAuthFailure) {
                     buildErrorBar(context, state.failure);

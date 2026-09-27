@@ -3,9 +3,14 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class InActiveItem extends StatelessWidget {
   const InActiveItem({super.key, required this.image});
+
   final String image;
+
   @override
   Widget build(BuildContext context) {
-    return Container(color: Colors.transparent, child: SvgPicture.asset(image));
+    return Container(
+      color: Colors.transparent,
+      child: SvgPicture.asset(image, width: 24, height: 24),
+    );
   }
 }

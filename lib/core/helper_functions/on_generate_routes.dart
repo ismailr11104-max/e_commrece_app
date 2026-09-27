@@ -1,6 +1,7 @@
 import 'package:e_commrece_app/features/auth/presentation/screen/sign_in_view.dart';
 import 'package:e_commrece_app/features/auth/presentation/screen/signup_view.dart';
 import 'package:e_commrece_app/features/home/presentation/screen/home_view.dart';
+import 'package:e_commrece_app/features/main_navigation_screen/presentation/main_navigation_view.dart';
 import 'package:e_commrece_app/features/onboarding/presentation/onboarding_view.dart';
 import 'package:e_commrece_app/features/splash/presentation/splash_view.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,10 @@ Route<double> onGenerateRoutes(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => const SignInView());
     case SignupView.routesSignUp:
       return MaterialPageRoute(builder: (context) => const SignupView());
+    case MainNavigationView.routeBottomNavigation:
+      return MaterialPageRoute(
+        builder: (context) => const MainNavigationView(),
+      );
     case HomeView.routeHome:
       return MaterialPageRoute(builder: (context) => const HomeView());
     default:

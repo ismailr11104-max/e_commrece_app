@@ -4,14 +4,14 @@ class BottomNavigationEntities {
   final String active, nonActive;
   final String name;
 
-  BottomNavigationEntities({
+  const BottomNavigationEntities({
     required this.active,
     required this.nonActive,
     required this.name,
   });
 }
 
-List<BottomNavigationEntities> get bottomNavigationItem => [
+List<BottomNavigationEntities> bottomNavigationItem = [
   BottomNavigationEntities(
     active: Assets.imagesHomeActive,
     nonActive: Assets.imagesHomeNonActive,

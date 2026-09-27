@@ -32,7 +32,9 @@ class ActiveItem extends StatelessWidget {
                   borderRadius: BorderRadius.circular(30),
                 ),
               ),
-              child: Center(child: SvgPicture.asset(image)),
+              child: Center(
+                child: SvgPicture.asset(image, width: 24, height: 24),
+              ),
             ),
             const SizedBox(width: 4),
             Text(

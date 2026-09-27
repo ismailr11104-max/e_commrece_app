@@ -1,7 +1,7 @@
-import 'package:e_commrece_app/features/home/domain/entities/bottom_navigation_entitie.dart';
+import 'package:e_commrece_app/features/main_navigation_screen/domain/entities/bottom_navigation_entitie.dart';
+import 'package:e_commrece_app/features/main_navigation_screen/presentation/wedgit/active_item.dart';
 import 'package:flutter/material.dart';
 
-import 'active_item.dart';
 import 'in_active_item.dart';
 
 class NavigationBarItem extends StatelessWidget {
