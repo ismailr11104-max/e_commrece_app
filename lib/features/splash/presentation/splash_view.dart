@@ -1,8 +1,9 @@
+import 'package:e_commrece_app/core/services/service_locator/injection_container.dart';
 import 'package:e_commrece_app/core/services/shared_preferences/shared_pref_manger.dart';
 import 'package:e_commrece_app/features/auth/presentation/screen/sign_in_view.dart';
-import 'package:e_commrece_app/features/home/presentation/screen/home_view.dart';
 import 'package:e_commrece_app/features/onboarding/presentation/onboarding_view.dart';
 import 'package:e_commrece_app/features/splash/presentation/widgets/splash_widget_body.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class SplashView extends StatefulWidget {
@@ -31,14 +32,13 @@ class _SplashViewState extends State<SplashView> {
       if (!mounted) return;
       final bool onboardingCompleted =
           SharedPrefManger().getBool("onboarding_completed") ?? false;
-      final bool isLogin = SharedPrefManger().getBool("is_login") ?? false;
-
+      final bool isLogin = sl<FirebaseAuth>().currentUser != null;
       if (!onboardingCompleted) {
         Navigator.of(context).pushReplacementNamed(OnBoardingView.routeName);
-      } else if (!isLogin) {
+      } else if (isLogin) {
         Navigator.of(context).pushReplacementNamed(SignInView.routeLogin);
       } else {
-        Navigator.of(context).pushReplacementNamed(HomeView.routeHome);
+        Navigator.of(context).pushReplacementNamed(SignInView.routeLogin);
       }
     });
   }

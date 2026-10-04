@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:e_commrece_app/core/errors/exceptions.dart';
 import 'package:e_commrece_app/core/errors/failures.dart';
 import 'package:e_commrece_app/features/auth/data/data_sources/sign_in_with_email_data_source.dart';
-import 'package:e_commrece_app/features/auth/domain/entities/user_entity.dart';
+import 'package:e_commrece_app/features/auth/data/model/user_model.dart';
 import 'package:e_commrece_app/features/auth/domain/repo/sing_in_repository.dart';
 import 'package:e_commrece_app/features/auth/domain/repo/user_data_repository.dart';
 
@@ -13,7 +13,7 @@ class SingInRepositoryImpl implements SingInRepository {
   SingInRepositoryImpl(this._emailDataSource, this._userDataRepository);
 
   @override
-  Future<Either<Failures, UserEntity>> signInWithEmail({
+  Future<Either<Failures, UserModel>> signInWithEmail({
     required String email,
     required String password,
   }) async {
@@ -22,11 +22,13 @@ class SingInRepositoryImpl implements SingInRepository {
         email: email,
         password: password,
       );
-      final userEntity = await _userDataRepository.getData(user: user);
-      return Right(userEntity);
+
+      final userData = await _userDataRepository.getData(user: user);
+      await _userDataRepository.saveData(user: userData);
+      return Right(userData);
     } on AuthException catch (e) {
       return Left(AuthFailure(_mapAuthError(e.code)));
-    } on NetworkException catch (e) {
+    } on NetworkException {
       return Left(NetworkFailure('تأكد من اتصالك بالإنترنت.'));
     } on ServerException catch (e) {
       return Left(ServerFailure(e.message));

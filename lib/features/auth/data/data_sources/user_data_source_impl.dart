@@ -2,7 +2,6 @@ import 'package:e_commrece_app/core/services/fier_base/fire_store_service.dart';
 import 'package:e_commrece_app/core/utils/backend_endpoint.dart';
 import 'package:e_commrece_app/features/auth/data/data_sources/user_data_source.dart';
 import 'package:e_commrece_app/features/auth/data/model/user_model.dart';
-import 'package:e_commrece_app/features/auth/domain/entities/user_entity.dart';
 
 class UserDataSourceImpl implements UserDataSource {
   final FireStoreService _fireStoreService;
@@ -22,7 +21,7 @@ class UserDataSourceImpl implements UserDataSource {
   }
 
   @override
-  Future<UserEntity> getData({required String uId}) async {
+  Future<UserModel> getData({required String uId}) async {
     final userdata = await _fireStoreService.getData(
       path: BackendEndpoint.getUserData,
       documentId: uId,

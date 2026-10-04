@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:e_commrece_app/core/errors/exceptions.dart';
 import 'package:e_commrece_app/core/errors/failures.dart';
 import 'package:e_commrece_app/features/auth/data/data_sources/create_user_data_source.dart';
-import 'package:e_commrece_app/features/auth/domain/entities/user_entity.dart';
+import 'package:e_commrece_app/features/auth/data/model/user_model.dart';
 import 'package:e_commrece_app/features/auth/domain/repo/create_user_repository.dart';
 import 'package:e_commrece_app/features/auth/domain/repo/user_data_repository.dart';
 
@@ -16,7 +16,7 @@ class CreateUserRepositoryImpl implements CreateUserRepository {
   );
 
   @override
-  Future<Either<Failures, UserEntity>> createEmailAndPassword({
+  Future<Either<Failures, UserModel>> createEmailAndPassword({
     required String email,
     required String password,
     required String name,
@@ -26,14 +26,17 @@ class CreateUserRepositoryImpl implements CreateUserRepository {
         email: email,
         password: password,
       );
-      final userEntity = UserEntity(name: name, uid: user.uid, email: email);
+
+      final userModel = UserModel(name: name, uid: user.uid, email: email);
+
       try {
-        await _userDataRepository.setData(user: userEntity);
+        await _userDataRepository.setData(user: userModel);
       } catch (e) {
         await _createUserDataSource.deleteUser();
         rethrow;
       }
-      return Right(userEntity);
+
+      return Right(userModel);
     } on AuthException catch (e) {
       return Left(AuthFailure(_mapAuthError(e.code)));
     } on NetworkException {

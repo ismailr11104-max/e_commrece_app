@@ -1,5 +1,4 @@
 import 'package:e_commrece_app/core/services/observer/custom_observer.dart';
-import 'package:e_commrece_app/core/services/service_locator/injection_container.dart';
 import 'package:e_commrece_app/core/services/shared_preferences/shared_pref_manger.dart';
 import 'package:e_commrece_app/core/utils/app_colors.dart';
 import 'package:e_commrece_app/features/splash/presentation/splash_view.dart';
@@ -16,7 +15,6 @@ import 'generated/l10n.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SharedPrefManger().init();
-  await initDependencies();
   Bloc.observer = CustomObserver();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await GoogleSignIn.instance.initialize(

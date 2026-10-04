@@ -27,9 +27,7 @@ class SingInBody extends StatefulWidget {
 
 class _LoginBodyState extends State<SingInBody> {
   final TextEditingController emailController = TextEditingController();
-
   final TextEditingController passwordController = TextEditingController();
-
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override

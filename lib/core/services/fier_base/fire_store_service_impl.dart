@@ -16,7 +16,7 @@ class FireStoreServiceImpl implements FireStoreService {
     if (documentId != null) {
       await _fireStore.collection(path).doc(documentId).set(data);
     } else {
-      await _fireStore.collection(path).doc(documentId).set(data);
+      await _fireStore.collection(path).add(data);
     }
   }
 

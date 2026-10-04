@@ -1,7 +1,7 @@
-import 'package:e_commrece_app/features/auth/domain/entities/user_entity.dart';
+import 'package:e_commrece_app/features/auth/data/model/user_model.dart';
 
 abstract class SignInWithEmailDataSource {
-  Future<UserEntity> signInWithEmail({
+  Future<UserModel> signInWithEmail({
     required String email,
     required String password,
   });

@@ -9,4 +9,5 @@ abstract class FierBaseAuthService {
   Future<User> signInWithGoogle();
   Future<User> signInWithFacebook();
   Future<void> deleteUser();
+  bool isLoggedIn();
 }

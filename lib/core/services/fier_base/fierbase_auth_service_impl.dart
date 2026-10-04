@@ -144,4 +144,9 @@ class FierBaseAuthServiceImpl extends FierBaseAuthService {
   Future<void> deleteUser() async {
     await _firebaseAuth.currentUser!.delete();
   }
+
+  @override
+  bool isLoggedIn() {
+    return _firebaseAuth.currentUser != null;
+  }
 }

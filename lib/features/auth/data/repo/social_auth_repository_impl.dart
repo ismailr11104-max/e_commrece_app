@@ -4,7 +4,7 @@ import 'package:e_commrece_app/core/errors/failures.dart';
 import 'package:e_commrece_app/core/utils/backend_endpoint.dart';
 import 'package:e_commrece_app/features/auth/data/data_sources/create_user_data_source.dart';
 import 'package:e_commrece_app/features/auth/data/data_sources/social_auth_datasource.dart';
-import 'package:e_commrece_app/features/auth/domain/entities/user_entity.dart';
+import 'package:e_commrece_app/features/auth/data/model/user_model.dart';
 import 'package:e_commrece_app/features/auth/domain/repo/social_auth_repository.dart';
 import 'package:e_commrece_app/features/auth/domain/repo/user_data_repository.dart';
 
@@ -20,19 +20,19 @@ class SocialAuthRepositoryImpl implements SocialAuthRepository {
   );
 
   @override
-  Future<Either<Failures, UserEntity>> signInWithGoogle() async {
+  Future<Either<Failures, UserModel>> signInWithGoogle() async {
     try {
-      UserEntity userEntity = await _socialAuthDatasource.signInWithGoogle();
+      UserModel user = await _socialAuthDatasource.signInWithGoogle();
       final isUserExist = await _userDataRepository.checkIfData(
         path: BackendEndpoint.isUserExist,
-        documentId: userEntity.uid,
+        documentId: user.uid,
       );
 
       try {
         if (isUserExist) {
-          await _userDataRepository.getData(user: userEntity);
+          await _userDataRepository.getData(user: user);
         } else {
-          await _userDataRepository.setData(user: userEntity);
+          await _userDataRepository.setData(user: user);
         }
       } catch (e) {
         await _createUserDataSource.deleteUser();
@@ -40,7 +40,16 @@ class SocialAuthRepositoryImpl implements SocialAuthRepository {
           ServerFailure('فشل حفظ بيانات المستخدم، يرجى المحاولة مرة أخرى.'),
         );
       }
-      return Right(userEntity);
+      try {
+        await _userDataRepository.saveData(user: user);
+      } catch (e) {
+        return Left(
+          ServerFailure(
+            'فشل حفظ بيانات المستخدم محليًا، يرجى المحاولة مرة أخرى.',
+          ),
+        );
+      }
+      return Right(user);
     } on AuthException catch (e) {
       return Left(AuthFailure(_mapSocialAuthError(e.code)));
     } on NetworkException {
@@ -53,18 +62,18 @@ class SocialAuthRepositoryImpl implements SocialAuthRepository {
   }
 
   @override
-  Future<Either<Failures, UserEntity>> signInWithFacebook() async {
+  Future<Either<Failures, UserModel>> signInWithFacebook() async {
     try {
-      UserEntity userEntity = await _socialAuthDatasource.signInWithFacebook();
+      UserModel user = await _socialAuthDatasource.signInWithFacebook();
       final isUserExist = await _userDataRepository.checkIfData(
         path: BackendEndpoint.isUserExist,
-        documentId: userEntity.uid,
+        documentId: user.uid,
       );
       try {
         if (isUserExist) {
-          await _userDataRepository.getData(user: userEntity);
+          await _userDataRepository.getData(user: user);
         } else {
-          await _userDataRepository.setData(user: userEntity);
+          await _userDataRepository.setData(user: user);
         }
       } catch (e) {
         await _createUserDataSource.deleteUser();
@@ -72,7 +81,16 @@ class SocialAuthRepositoryImpl implements SocialAuthRepository {
           ServerFailure('فشل حفظ بيانات المستخدم، يرجى المحاولة مرة أخرى.'),
         );
       }
-      return Right(userEntity);
+      try {
+        await _userDataRepository.saveData(user: user);
+      } catch (e) {
+        return Left(
+          ServerFailure(
+            'فشل حفظ بيانات المستخدم محليًا، يرجى المحاولة مرة أخرى.',
+          ),
+        );
+      }
+      return Right(user);
     } on AuthException catch (e) {
       return Left(AuthFailure(_mapSocialAuthError(e.code)));
     } on NetworkException {
