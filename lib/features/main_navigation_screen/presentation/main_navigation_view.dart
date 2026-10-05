@@ -1,6 +1,6 @@
 import 'package:e_commrece_app/features/%20profile/presentation/profile_view.dart';
 import 'package:e_commrece_app/features/category/presentation/category_view.dart';
-import 'package:e_commrece_app/features/home/presentation/screen/home_view.dart';
+import 'package:e_commrece_app/features/home/presentation/screen/main_view.dart';
 import 'package:e_commrece_app/features/shopping/presentation/shopping_view.dart';
 import 'package:flutter/material.dart';
 
@@ -19,7 +19,7 @@ class _MainNavigationScreenState extends State<MainNavigationView> {
   int currentIndex = 0;
 
   final List<Widget> pages = const [
-    HomeView(),
+    MainView(),
     CategoryView(),
     ShoppingView(),
     ProfileView(),

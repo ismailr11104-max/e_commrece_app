@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:e_commrece_app/core/services/fier_base/fierbase_auth_service.dart';
-import 'package:e_commrece_app/core/services/fier_base/fierbase_auth_service_impl.dart';
-import 'package:e_commrece_app/core/services/fier_base/fire_store_service.dart';
-import 'package:e_commrece_app/core/services/fier_base/fire_store_service_impl.dart';
+import 'package:e_commrece_app/core/repo/product_repo.dart';
+import 'package:e_commrece_app/core/repo/product_repo_impl.dart';
+import 'package:e_commrece_app/core/services/network/fierbase_auth_service.dart';
+import 'package:e_commrece_app/core/services/network/fierbase_auth_service_impl.dart';
+import 'package:e_commrece_app/core/services/network/fire_store_service.dart';
+import 'package:e_commrece_app/core/services/network/fire_store_service_impl.dart';
 import 'package:e_commrece_app/features/auth/data/data_sources/create_user_data_source.dart';
 import 'package:e_commrece_app/features/auth/data/data_sources/create_user_data_source_impl.dart';
 import 'package:e_commrece_app/features/auth/data/data_sources/sign_in_with_email_data_source.dart';
@@ -19,19 +21,27 @@ import 'package:e_commrece_app/features/auth/domain/repo/create_user_repository.
 import 'package:e_commrece_app/features/auth/domain/repo/sing_in_repository.dart';
 import 'package:e_commrece_app/features/auth/domain/repo/social_auth_repository.dart';
 import 'package:e_commrece_app/features/auth/domain/repo/user_data_repository.dart';
+import 'package:e_commrece_app/features/category/data/data_sourse/category_data_source.dart';
+import 'package:e_commrece_app/features/category/data/data_sourse/category_data_source_impl.dart';
+import 'package:e_commrece_app/features/category/data/repo/category_repo_impl.dart';
+import 'package:e_commrece_app/features/category/domain/repo/category_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
 
 final sl = GetIt.instance;
 
 Future<void> initDependencies() async {
+  // =========================
   // Firebase
+  // =========================
 
   sl.registerLazySingleton<FirebaseAuth>(() => FirebaseAuth.instance);
 
   sl.registerLazySingleton<FirebaseFirestore>(() => FirebaseFirestore.instance);
 
+  // =========================
   // Firebase Services
+  // =========================
 
   sl.registerLazySingleton<FierBaseAuthService>(
     () => FierBaseAuthServiceImpl(sl<FirebaseAuth>()),
@@ -53,7 +63,10 @@ Future<void> initDependencies() async {
     () => UserDataRepositoryImpl(sl<UserDataSource>()),
   );
 
+  // =========================
   // Create User
+  // =========================
+
   sl.registerLazySingleton<CreateUserDataSource>(
     () => CreateUserDataImpl(sl<FierBaseAuthService>()),
   );
@@ -65,7 +78,10 @@ Future<void> initDependencies() async {
     ),
   );
 
+  // =========================
   // Sign In With Email
+  // =========================
+
   sl.registerLazySingleton<SignInWithEmailDataSource>(
     () => SignInWithEmailDataSourceImpl(sl<FierBaseAuthService>()),
   );
@@ -77,7 +93,10 @@ Future<void> initDependencies() async {
     ),
   );
 
+  // =========================
   // Social Auth
+  // =========================
+
   sl.registerLazySingleton<SocialAuthDatasource>(
     () => SocialAuthDatasourceImpl(sl<FierBaseAuthService>()),
   );
@@ -88,5 +107,25 @@ Future<void> initDependencies() async {
       sl<CreateUserDataSource>(),
       sl<UserDataRepository>(),
     ),
+  );
+
+  // =========================
+  // Category
+  // =========================
+
+  sl.registerLazySingleton<CategoryDataSource>(
+    () => CategoryDataSourceImpl(sl<FireStoreService>()),
+  );
+
+  sl.registerLazySingleton<CategoryRepository>(
+    () => CategoryRepoImpl(sl<CategoryDataSource>()),
+  );
+
+  // =========================
+  // Product
+  // =========================
+
+  sl.registerLazySingleton<ProductRepo>(
+    () => ProductRepoImpl(sl<FireStoreService>()),
   );
 }

@@ -1,5 +1,5 @@
 import 'package:e_commrece_app/core/errors/exceptions.dart';
-import 'package:e_commrece_app/core/services/fier_base/fierbase_auth_service.dart';
+import 'package:e_commrece_app/core/services/network/fierbase_auth_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';

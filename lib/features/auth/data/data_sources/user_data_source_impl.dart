@@ -1,4 +1,4 @@
-import 'package:e_commrece_app/core/services/fier_base/fire_store_service.dart';
+import 'package:e_commrece_app/core/services/network/fire_store_service.dart';
 import 'package:e_commrece_app/core/utils/backend_endpoint.dart';
 import 'package:e_commrece_app/features/auth/data/data_sources/user_data_source.dart';
 import 'package:e_commrece_app/features/auth/data/model/user_model.dart';
@@ -26,7 +26,7 @@ class UserDataSourceImpl implements UserDataSource {
       path: BackendEndpoint.getUserData,
       documentId: uId,
     );
-    return UserModel.fromJson(userdata);
+    return UserModel.fromJson(userdata!);
   }
 
   @override

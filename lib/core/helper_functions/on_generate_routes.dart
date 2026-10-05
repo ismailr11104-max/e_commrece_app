@@ -1,6 +1,6 @@
 import 'package:e_commrece_app/features/auth/presentation/screen/sign_in_view.dart';
 import 'package:e_commrece_app/features/auth/presentation/screen/signup_view.dart';
-import 'package:e_commrece_app/features/home/presentation/screen/home_view.dart';
+import 'package:e_commrece_app/features/home/presentation/screen/main_view.dart';
 import 'package:e_commrece_app/features/main_navigation_screen/presentation/main_navigation_view.dart';
 import 'package:e_commrece_app/features/onboarding/presentation/onboarding_view.dart';
 import 'package:e_commrece_app/features/splash/presentation/splash_view.dart';
@@ -20,8 +20,8 @@ Route<double> onGenerateRoutes(RouteSettings settings) {
       return MaterialPageRoute(
         builder: (context) => const MainNavigationView(),
       );
-    case HomeView.routeHome:
-      return MaterialPageRoute(builder: (context) => const HomeView());
+    case MainView.routeHome:
+      return MaterialPageRoute(builder: (context) => const MainView());
     default:
       return MaterialPageRoute(builder: (context) => const Scaffold());
   }

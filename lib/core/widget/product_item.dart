@@ -1,15 +1,19 @@
+import 'package:e_commrece_app/core/entities/product_entities.dart';
 import 'package:e_commrece_app/core/utils/app_colors.dart';
 import 'package:e_commrece_app/core/utils/app_text_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class ProductItem extends StatelessWidget {
-  const ProductItem({super.key});
+  final ProductEntities product;
+
+  const ProductItem({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: ShapeDecoration(
-        color: Color(0xffF3F5F7),
+        color: const Color(0xffF3F5F7),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
       ),
       child: Stack(
@@ -19,45 +23,52 @@ class ProductItem extends StatelessWidget {
             right: 0,
             child: IconButton(
               onPressed: () {},
-              icon: Icon(Icons.favorite_border),
+              icon: const Icon(Icons.favorite_border),
             ),
           ),
+
           Positioned.fill(
             child: Column(
               children: [
-                SizedBox(height: 12),
+                const SizedBox(height: 12),
+
                 Flexible(
-                  child: Image.asset(
-                    'assets/images/avocado.png',
-                    width: 90,
-                    height: 90,
-                    fit: BoxFit.fill,
+                  child: Image.network(
+                    product.imageUrl ?? '',
+                    width: 250,
+                    height: 250,
+                    fit: BoxFit.contain,
+                    errorBuilder: (context, error, stackTrace) {
+                      return const Icon(Icons.image_not_supported, size: 50);
+                    },
                   ),
                 ),
+
                 ListTile(
                   title: Text(
-                    'أفوكادو',
+                    product.name,
                     style: TextStyles.semiBold16.copyWith(
-                      color: Color(0xff0C0D0D),
+                      color: const Color(0xff0C0D0D),
                     ),
                   ),
+
                   subtitle: Text.rich(
                     TextSpan(
                       children: [
                         TextSpan(
-                          text: 'جنيه 30',
+                          text: '${product.price} جنيه',
                           style: TextStyles.bold13.copyWith(
                             color: AppColors.secondaryColor,
                           ),
                         ),
                         TextSpan(
-                          text: '/',
+                          text: ' / ',
                           style: TextStyles.bold13.copyWith(
                             color: AppColors.secondaryColor,
                           ),
                         ),
                         TextSpan(
-                          text: 'الكيلو',
+                          text: '${product.unitAmount} كيلو',
                           style: TextStyles.semiBold13.copyWith(
                             color: AppColors.lightSecondaryColor,
                           ),
@@ -66,9 +77,12 @@ class ProductItem extends StatelessWidget {
                     ),
                     textAlign: TextAlign.right,
                   ),
-                  trailing: CircleAvatar(
-                    backgroundColor: AppColors.primaryColor,
-                    child: Icon(Icons.add, color: Colors.white),
+
+                  trailing: Skeleton.leaf(
+                    child: CircleAvatar(
+                      backgroundColor: AppColors.primaryColor,
+                      child: const Icon(Icons.add, color: Colors.white),
+                    ),
                   ),
                 ),
               ],

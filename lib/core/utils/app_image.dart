@@ -52,4 +52,5 @@ class Assets {
 
   // Other
   static const String imagesPlan = 'assets/images/plan.svg';
+  static const String allProduct = 'assets/images/fire.png';
 }

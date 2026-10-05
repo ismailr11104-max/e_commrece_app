@@ -9,6 +9,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 import 'core/helper_functions/on_generate_routes.dart';
+import 'core/services/service_locator/injection_container.dart';
 import 'firebase_options.dart';
 import 'generated/l10n.dart';
 
@@ -16,6 +17,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SharedPrefManger().init();
   Bloc.observer = CustomObserver();
+  await initDependencies();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await GoogleSignIn.instance.initialize(
     serverClientId:
