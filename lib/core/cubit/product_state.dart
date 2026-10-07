@@ -5,12 +5,12 @@ import 'package:flutter/foundation.dart';
 @immutable
 class ProductsState {
   const ProductsState({
-    this.status = ProductsStatus.initial,
+    this.productsStatus = ProductsStatus.initial,
     this.products = const [],
     this.errorMessage,
   });
 
-  final ProductsStatus status;
+  final ProductsStatus productsStatus;
   final List<ProductEntities> products;
   final String? errorMessage;
 
@@ -20,7 +20,7 @@ class ProductsState {
     String? errorMessage,
   }) {
     return ProductsState(
-      status: status ?? this.status,
+      productsStatus: status ?? this.productsStatus,
       products: products ?? this.products,
       errorMessage: errorMessage,
     );

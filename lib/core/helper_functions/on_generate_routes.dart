@@ -1,5 +1,6 @@
 import 'package:e_commrece_app/features/auth/presentation/screen/sign_in_view.dart';
 import 'package:e_commrece_app/features/auth/presentation/screen/signup_view.dart';
+import 'package:e_commrece_app/features/best_selling/presentation/best_selling_view.dart';
 import 'package:e_commrece_app/features/home/presentation/screen/main_view.dart';
 import 'package:e_commrece_app/features/main_navigation_screen/presentation/main_navigation_view.dart';
 import 'package:e_commrece_app/features/onboarding/presentation/onboarding_view.dart';
@@ -22,6 +23,8 @@ Route<double> onGenerateRoutes(RouteSettings settings) {
       );
     case MainView.routeHome:
       return MaterialPageRoute(builder: (context) => const MainView());
+    case BestSellingView.bestSellingRoute:
+      return MaterialPageRoute(builder: (context) => const BestSellingView());
     default:
       return MaterialPageRoute(builder: (context) => const Scaffold());
   }
