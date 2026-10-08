@@ -15,7 +15,7 @@ class CustomHomeAppBar extends StatelessWidget {
         style: TextStyles.regular16.copyWith(color: Color(0xff949D9E)),
       ),
       subtitle: Text(
-        getUser()!.name,
+        getUser()?.name ?? 'أحمد',
         style: TextStyles.bold16.copyWith(color: Color(0xff0C0D0D)),
       ),
       trailing: NotificationWidget(),

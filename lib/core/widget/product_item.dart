@@ -1,7 +1,9 @@
 import 'package:e_commrece_app/core/entities/product_entities.dart';
 import 'package:e_commrece_app/core/utils/app_colors.dart';
 import 'package:e_commrece_app/core/utils/app_text_styles.dart';
+import 'package:e_commrece_app/features/shopping/presentation/controller/cart_cubit/cart_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 class ProductItem extends StatelessWidget {
@@ -79,9 +81,14 @@ class ProductItem extends StatelessWidget {
                   ),
 
                   trailing: Skeleton.leaf(
-                    child: CircleAvatar(
-                      backgroundColor: AppColors.primaryColor,
-                      child: const Icon(Icons.add, color: Colors.white),
+                    child: GestureDetector(
+                      onTap: () {
+                        context.read<CartCubit>().addProduct(product);
+                      },
+                      child: CircleAvatar(
+                        backgroundColor: AppColors.primaryColor,
+                        child: const Icon(Icons.add, color: Colors.white),
+                      ),
                     ),
                   ),
                 ),

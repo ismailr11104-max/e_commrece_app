@@ -2,7 +2,7 @@ import 'package:e_commrece_app/core/services/shared_preferences/shared_pref_mang
 import 'package:e_commrece_app/core/utils/app_colors.dart';
 import 'package:e_commrece_app/core/utils/app_text_styles.dart';
 import 'package:e_commrece_app/core/widget/custom_button.dart';
-import 'package:e_commrece_app/features/auth/presentation/screen/sign_in_view.dart';
+import 'package:e_commrece_app/features/main_navigation_screen/presentation/main_navigation_view.dart';
 import 'package:e_commrece_app/features/onboarding/data/models/onboarding_item_model.dart';
 import 'package:e_commrece_app/features/onboarding/presentation/controller/onboarding_cubit.dart';
 import 'package:e_commrece_app/features/onboarding/presentation/widgets/page_view_widget.dart';
@@ -55,9 +55,9 @@ class OnboardingBodyWidget extends StatelessWidget {
                 child: CustomButton(
                   onPressed: () {
                     SharedPrefManger().setBool('onboarding_completed', true);
-                    Navigator.of(
-                      context,
-                    ).pushReplacementNamed(SignInView.routeLogin);
+                    Navigator.of(context).pushReplacementNamed(
+                      MainNavigationView.routeBottomNavigation,
+                    );
                   },
                   child: Text(
                     'ابدأ الان',
