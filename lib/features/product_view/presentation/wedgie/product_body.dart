@@ -1,7 +1,7 @@
 import 'package:e_commrece_app/core/cubit/product_cubit.dart';
 import 'package:e_commrece_app/core/cubit/product_state.dart';
-import 'package:e_commrece_app/core/widget/build_app_bar.dart';
 import 'package:e_commrece_app/core/widget/search_text_field.dart';
+import 'package:e_commrece_app/core/widget/show_app_bar.dart';
 import 'package:e_commrece_app/features/home/presentation/widgets/product_grid_view_cubit.dart';
 import 'package:e_commrece_app/features/product_view/presentation/wedgie/filter_product.dart';
 import 'package:flutter/material.dart';

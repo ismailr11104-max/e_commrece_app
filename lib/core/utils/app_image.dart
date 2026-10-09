@@ -55,4 +55,7 @@ class Assets {
   static const String allProduct = 'assets/images/fire.png';
   static const String search_found = 'assets/images/search_found.png';
   static const String trash = 'assets/images/trash.svg';
+
+  static const String location = 'assets/images/location.svg';
+  static const String edit = 'assets/images/edit.svg';
 }
