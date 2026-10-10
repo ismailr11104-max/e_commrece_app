@@ -15,7 +15,7 @@ class BestSellingView extends StatelessWidget {
     return BlocProvider(
       create: (context) => BestSellingCubit(sl())..getBestSellingProduct(),
       child: Scaffold(
-        appBar: buildAppBar(context, title: 'الأكثر مبيعًا'),
+        appBar: ShowAppBar(context, title: 'الأكثر مبيعًا'),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12.0),
           child: BestSellingBody(),

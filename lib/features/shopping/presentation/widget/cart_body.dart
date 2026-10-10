@@ -22,7 +22,7 @@ class CartBody extends StatelessWidget {
             SliverToBoxAdapter(
               child: Column(
                 children: [
-                  buildAppBar(context, title: 'السلة', isBack: false),
+                  ShowAppBar(context, title: 'السلة', isBack: false),
                   const SizedBox(height: 16),
                   const CartHeader(),
                   const SizedBox(height: 12),

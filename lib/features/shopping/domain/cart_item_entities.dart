@@ -33,7 +33,7 @@ class CartItemEntities {
         return cartItems;
       }
     }
-    return CartEntities(productEntities: product, count: 1);
+    return CartEntities(productEntities: product, quantity: 1);
   }
 
   bool removedCartItem(CartEntities cartEntities) {

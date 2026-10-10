@@ -28,10 +28,12 @@ Route<double> onGenerateRoutes(RouteSettings settings) {
     case BestSellingView.bestSellingRoute:
       return MaterialPageRoute(builder: (context) => const BestSellingView());
     case CheckoutView.checkOutRouts:
-      final cartEntity = settings.arguments as CartItemEntities;
       return MaterialPageRoute(
-        builder: (context) => CheckoutView(cartItemEntities: cartEntity),
+        builder: (context) => CheckoutView(
+          cartItemEntities: settings.arguments as CartItemEntities,
+        ),
       );
+
     default:
       return MaterialPageRoute(builder: (context) => const Scaffold());
   }

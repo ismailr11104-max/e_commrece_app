@@ -35,10 +35,10 @@ class _MainNavigationScreenState extends State<MainNavigationView> {
       child: BlocListener<CartCubit, CartState>(
         listener: (context, state) {
           if (state is CartItemAdd) {
-            buildErrorBar(context, 'تمت إضافة المنتج إلى السلة بنجاح');
+            ShowErrorBar(context, 'تمت إضافة المنتج إلى السلة بنجاح');
           }
           if (state is CartItemRemoved) {
-            buildErrorBar(context, 'تمت حذف المنتج من السلة بنجاح');
+            ShowErrorBar(context, 'تمت حذف المنتج من السلة بنجاح');
           }
         },
         child: Scaffold(

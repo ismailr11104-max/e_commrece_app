@@ -19,7 +19,7 @@ class ProductBody extends StatelessWidget {
             SliverToBoxAdapter(
               child: Column(
                 children: [
-                  buildAppBar(context, title: 'المنتجات', isBack: false),
+                  ShowAppBar(context, title: 'المنتجات', isBack: false),
                   const SizedBox(height: 16),
                   const SearchTextField(),
                   const SizedBox(height: 12),

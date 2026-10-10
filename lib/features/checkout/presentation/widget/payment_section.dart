@@ -8,7 +8,12 @@ class PaymentSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: [SizedBox(height: 24), OrderDetails(), ShippingAddressWidget()],
+      children: [
+        SizedBox(height: 24),
+        OrderDetails(),
+        SizedBox(height: 24),
+        ShippingAddressWidget(),
+      ],
     );
   }
 }

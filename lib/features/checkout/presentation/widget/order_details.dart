@@ -1,6 +1,8 @@
 import 'package:e_commrece_app/core/utils/app_text_styles.dart';
+import 'package:e_commrece_app/features/checkout/domain/order_entities.dart';
 import 'package:e_commrece_app/features/checkout/presentation/widget/payment_details.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class OrderDetails extends StatelessWidget {
   const OrderDetails({super.key});
@@ -19,7 +21,7 @@ class OrderDetails extends StatelessWidget {
                 style: TextStyles.regular13.copyWith(color: Color(0xff4E5556)),
               ),
               Text(
-                '150 جنيه',
+                '${context.read<OrderEntities>().cartItemEntities.calculateTotal()}',
                 style: TextStyles.semiBold16.copyWith(color: Color(0xff0C0D0D)),
               ),
             ],
@@ -57,6 +59,7 @@ class OrderDetails extends StatelessWidget {
               ),
             ],
           ),
+          SizedBox(height: 8),
         ],
       ),
     );

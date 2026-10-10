@@ -78,7 +78,7 @@ class _SignupBodyState extends State<SignupBody> {
                     Navigator.of(context).pop();
                   }
                   if (state is EmailAuthFailure) {
-                    buildErrorBar(context, state.failure);
+                    ShowErrorBar(context, state.failure);
                   }
                 },
                 builder: (context, state) {
@@ -97,7 +97,7 @@ class _SignupBodyState extends State<SignupBody> {
                                       name: nameController.text.trim(),
                                     );
                               } else {
-                                buildErrorBar(
+                                ShowErrorBar(
                                   context,
                                   'يرجى الموافقة على الشروط والأحكام',
                                 );

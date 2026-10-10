@@ -10,32 +10,37 @@ class ShippingSection extends StatefulWidget {
   State<ShippingSection> createState() => _ShippingSectionState();
 }
 
-class _ShippingSectionState extends State<ShippingSection> {
+class _ShippingSectionState extends State<ShippingSection>
+    with AutomaticKeepAliveClientMixin {
   int isSelectedIndex = -1;
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
+    final controller = context.read<OrderEntities>();
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 16),
       child: Column(
         children: [
           ShippingItem(
             onTap: () {
+              isSelectedIndex = 0;
               setState(() {
-                isSelectedIndex = 0;
+                controller.payWithCash = true;
               });
             },
             isSelected: isSelectedIndex == 0,
             title: 'الدفع عند الاستلام',
             subTitle: 'التسليم من المكان',
             price:
-                '${context.read<OrderEntities>().cartItemEntities.calculateTotal() + 40}',
+                '${context.read<OrderEntities>().cartItemEntities.calculateTotal() + 8}',
           ),
           SizedBox(height: 12),
           ShippingItem(
             onTap: () {
+              isSelectedIndex = 1;
               setState(() {
-                isSelectedIndex = 1;
+                controller.payWithCash = false;
               });
             },
             isSelected: isSelectedIndex == 1,
@@ -48,4 +53,7 @@ class _ShippingSectionState extends State<ShippingSection> {
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

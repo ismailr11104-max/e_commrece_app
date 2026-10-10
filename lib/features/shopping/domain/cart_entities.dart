@@ -2,25 +2,25 @@ import 'package:e_commrece_app/core/entities/product_entities.dart';
 
 class CartEntities {
   final ProductEntities productEntities;
-  int count;
+  int quantity;
 
-  CartEntities({required this.productEntities, this.count = 0});
+  CartEntities({required this.productEntities, this.quantity = 0});
 
   num calculateTotalPrice() {
-    return productEntities.price * count;
+    return productEntities.price * quantity;
   }
 
   num calculateTotalWeight() {
-    return productEntities.unitAmount * count;
+    return productEntities.unitAmount * quantity;
   }
 
-  void incrementCount() {
-    count++;
+  void incrementQuantity() {
+    quantity++;
   }
 
-  void decrementCount() {
-    if (count > 1) {
-      count--;
+  void decrementQuantity() {
+    if (quantity > 1) {
+      quantity--;
     }
   }
 }

@@ -2,7 +2,7 @@ import 'package:e_commrece_app/core/utils/app_text_styles.dart';
 import 'package:e_commrece_app/core/widget/notification_widget.dart';
 import 'package:flutter/material.dart';
 
-AppBar buildAppBar(
+AppBar ShowAppBar(
   BuildContext context, {
   required String title,
   bool isBack = true,

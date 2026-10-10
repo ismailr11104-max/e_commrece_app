@@ -5,18 +5,20 @@ class CustomTextFromField extends StatelessWidget {
     super.key,
     required this.hintText,
     required this.keyboardType,
-    required this.controller,
+    this.controller,
     this.suffixIcon,
     this.validator,
     this.obscureText = false,
     this.textInputAction,
+    this.onSaved,
   });
 
-  final TextEditingController controller;
+  final TextEditingController? controller;
   final String hintText;
   final TextInputType keyboardType;
   final Widget? suffixIcon;
   final bool obscureText;
+  final void Function(String?)? onSaved;
   final String? Function(String?)? validator;
   final TextInputAction? textInputAction;
 
@@ -27,6 +29,7 @@ class CustomTextFromField extends StatelessWidget {
       keyboardType: keyboardType,
       obscureText: obscureText,
       validator: validator,
+      onSaved: onSaved,
       textInputAction: textInputAction,
       decoration: InputDecoration(
         hintText: hintText,

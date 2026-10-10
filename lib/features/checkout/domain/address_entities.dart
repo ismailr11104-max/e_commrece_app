@@ -1,15 +1,20 @@
 class AddressEntities {
-  final String fullName;
-  final String phone;
-  final String address;
-  final String email;
-  final String addressDetails;
+  String? fullName;
+  String? phone;
+  String? address;
+  String? email;
+  String? floorDetails;
 
-  AddressEntities(
+  AddressEntities({
     this.fullName,
     this.phone,
     this.address,
     this.email,
-    this.addressDetails,
-  );
+    this.floorDetails,
+  });
+
+  @override
+  String toString() {
+    return ' $address,$floorDetails';
+  }
 }
