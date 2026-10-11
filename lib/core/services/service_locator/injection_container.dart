@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:e_commrece_app/core/repo/order_repo.dart';
+import 'package:e_commrece_app/core/repo/order_repo_impl.dart';
 import 'package:e_commrece_app/core/repo/product_repo.dart';
 import 'package:e_commrece_app/core/repo/product_repo_impl.dart';
 import 'package:e_commrece_app/core/services/network/fierbase_auth_service.dart';
@@ -127,5 +129,9 @@ Future<void> initDependencies() async {
 
   sl.registerLazySingleton<ProductRepo>(
     () => ProductRepoImpl(sl<FireStoreService>()),
+  );
+
+  sl.registerLazySingleton<OrderRepo>(
+    () => OrderRepoImpl(sl<FireStoreService>()),
   );
 }
