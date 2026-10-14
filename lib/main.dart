@@ -1,3 +1,4 @@
+import 'package:device_preview/device_preview.dart';
 import 'package:e_commrece_app/core/services/observer/custom_observer.dart';
 import 'package:e_commrece_app/core/services/shared_preferences/shared_pref_manger.dart';
 import 'package:e_commrece_app/core/utils/app_colors.dart';
@@ -23,7 +24,7 @@ void main() async {
     serverClientId:
         '473106444167-fs4ecku3drnhpt2nrdlntlnnmdh4vo93.apps.googleusercontent.com',
   );
-  runApp(const FruitHub());
+  runApp(DevicePreview(enabled: true, builder: (context) => const FruitHub()));
 }
 
 class FruitHub extends StatelessWidget {

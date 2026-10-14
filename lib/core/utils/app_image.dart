@@ -3,7 +3,7 @@ class Assets {
 
   // App
   static const String imagesAppIcon = 'assets/images/icon_app.png';
-  static const String imagesLogo = 'assets/images/logo.svg';
+  static const String imageSplash = 'assets/images/image_splash.png';
 
   // Social / Auth
   static const String imagesAppleIcon = 'assets/images/apple_icon.svg';
@@ -12,7 +12,6 @@ class Assets {
 
   // General
   static const String imagesCheck = 'assets/images/check.svg';
-  static const String imagesEllipse = 'assets/images/ellipse.svg';
   static const String imagesEye = 'assets/images/eye.svg';
   static const String imagesFavorite = 'assets/images/favorite.svg';
   static const String imagesFilter = 'assets/images/filter.svg';
@@ -37,21 +36,7 @@ class Assets {
   static const String imagesFruits = 'assets/images/fruits.png';
   static const String imagesProfileImage = 'assets/images/profile_image.png';
 
-  // Onboarding
-  static const String imagesPageViewItem1BackgroundImage =
-      'assets/images/page_view_item1_background_image.svg';
-  static const String imagesPageViewItem1Image =
-      'assets/images/page_view_item1_image.svg';
-  static const String imagesPageViewItem2BackgroundImage =
-      'assets/images/page_view_item2_background_image.svg';
-  static const String imagesPageViewItem2Image =
-      'assets/images/page_view_item2_image.svg';
-
-  // Splash
-  static const String imagesSplashBottom = 'assets/images/splash_bottom.svg';
-
   // Other
-  static const String imagesPlan = 'assets/images/plan.svg';
   static const String allProduct = 'assets/images/fire.png';
   static const String search_found = 'assets/images/search_found.png';
   static const String trash = 'assets/images/trash.svg';

@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:e_commrece_app/core/repo/order_repo.dart';
-import 'package:e_commrece_app/features/checkout/domain/order_entities.dart';
+import 'package:e_commrece_app/features/checkout/domain/entities/order_entities.dart';
 import 'package:meta/meta.dart';
 
 part 'add_order_state.dart';

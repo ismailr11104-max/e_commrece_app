@@ -1,4 +1,4 @@
-import 'package:e_commrece_app/features/checkout/domain/order_entities.dart';
+import 'package:e_commrece_app/features/checkout/domain/entities/order_entities.dart';
 import 'package:e_commrece_app/features/checkout/presentation/widget/shipping_item.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

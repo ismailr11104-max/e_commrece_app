@@ -1,9 +1,10 @@
 import 'package:e_commrece_app/core/helper_functions/get_user_data.dart';
 import 'package:e_commrece_app/core/services/service_locator/injection_container.dart';
 import 'package:e_commrece_app/core/widget/show_app_bar.dart';
-import 'package:e_commrece_app/features/checkout/domain/address_entities.dart';
-import 'package:e_commrece_app/features/checkout/domain/order_entities.dart';
+import 'package:e_commrece_app/features/checkout/domain/entities/address_entities.dart';
+import 'package:e_commrece_app/features/checkout/domain/entities/order_entities.dart';
 import 'package:e_commrece_app/features/checkout/presentation/controller/add_order_cubit.dart';
+import 'package:e_commrece_app/features/checkout/presentation/widget/add_order_bloc_builder.dart';
 import 'package:e_commrece_app/features/checkout/presentation/widget/check_out_body.dart';
 import 'package:e_commrece_app/features/shopping/domain/cart_item_entities.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +30,7 @@ class CheckoutView extends StatelessWidget {
             addressEntities: AddressEntities(),
             uId: getUser()!.uid,
           ),
-          child: CheckOutBody(),
+          child: AddOrderBlocBuilder(child: CheckOutBody()),
         ),
       ),
     );

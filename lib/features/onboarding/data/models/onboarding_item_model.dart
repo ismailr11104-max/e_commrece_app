@@ -1,11 +1,9 @@
 class OnboardingItemModel {
-  final String image;
   final String backgroundImage;
   final String title;
   final String subTitle;
 
   const OnboardingItemModel({
-    required this.image,
     required this.backgroundImage,
     required this.title,
     required this.subTitle,
@@ -13,18 +11,23 @@ class OnboardingItemModel {
 
   static const List<OnboardingItemModel> items = [
     OnboardingItemModel(
-      image: 'assets/images/page_view_item1_image.svg',
-      backgroundImage: 'assets/images/page_view_item1_background_image.svg',
-      title: 'مرحبًا بك في HUB Fruit',
+      backgroundImage: 'assets/images/farm_Image.png',
+      title: 'طازج من المزرعة إلى مائدتك',
       subTitle:
-          'اكتشف تجربة تسوق فريدة مع FruitHUB. استكشف\n مجموعتنا الواسعة من الفواكه الطازجة الممتازة \nواحصل على أفضل العروض والجودة العالية.',
+          'اكتشف تشكيلة من الخضروات والفواكه الطازجة\nالمختارة بعناية لتمنح وجباتك مذاقًا لذيذًا وانتعاشًا كل يوم.',
     ),
     OnboardingItemModel(
-      image: 'assets/images/page_view_item2_image.svg',
-      backgroundImage: 'assets/images/page_view_item2_background_image.svg',
+      backgroundImage: 'assets/images/mate.png',
       title: 'ابحث وتسوق',
       subTitle:
-          'نقدم لك أفضل الفواكه المختارة بعناية. اطلع على \nالتفاصيل والصور والتقييمات لتتأكد من اختيار الفاكه\n المثالية',
+          'استمتع بتشكيلة من اللحوم المختارة بعناية لتحضير أشهى الوجبات ومشاركة أجمل اللحظات مع عائلتك.',
+    ),
+
+    OnboardingItemModel(
+      backgroundImage: 'assets/images/order.png',
+      title: 'كل احتياجاتك في طلب واحد',
+      subTitle:
+          'اجمع احتياجاتك من الخضروات والفواكه واللحوم في مكان واحد، واستمتع بتجربة تسوق سهلة ومريحة كل يوم.',
     ),
   ];
 }

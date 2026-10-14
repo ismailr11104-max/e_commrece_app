@@ -1,5 +1,5 @@
 import 'package:e_commrece_app/core/widget/custom_text_from_field.dart';
-import 'package:e_commrece_app/features/checkout/domain/order_entities.dart';
+import 'package:e_commrece_app/features/checkout/domain/entities/order_entities.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

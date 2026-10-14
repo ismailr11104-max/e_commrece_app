@@ -8,10 +8,12 @@ class FeaturedItemButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 32,
+      height: 38,
       child: TextButton(
         style: TextButton.styleFrom(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
           backgroundColor: Colors.white,
         ),
         onPressed: onPressed,
@@ -19,7 +21,7 @@ class FeaturedItemButton extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 24),
           child: FittedBox(
             child: Text(
-              'تسوق الان',
+              'اطلب الان',
               style: TextStyles.bold13.copyWith(color: AppColors.primaryColor),
             ),
           ),

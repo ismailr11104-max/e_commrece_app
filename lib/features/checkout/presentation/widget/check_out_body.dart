@@ -1,11 +1,15 @@
 import 'package:e_commrece_app/core/helper_functions/build_error_bar.dart';
+import 'package:e_commrece_app/core/utils/app_keys.dart';
 import 'package:e_commrece_app/core/utils/app_text_styles.dart';
 import 'package:e_commrece_app/core/widget/custom_button.dart';
-import 'package:e_commrece_app/features/checkout/domain/order_entities.dart';
+import 'package:e_commrece_app/features/checkout/domain/entities/order_entities.dart';
+import 'package:e_commrece_app/features/checkout/domain/entities/pay_pal_payment/paypal_payment_entity.dart';
+import 'package:e_commrece_app/features/checkout/presentation/controller/add_order_cubit.dart';
 import 'package:e_commrece_app/features/checkout/presentation/widget/check_steps.dart';
 import 'package:e_commrece_app/features/checkout/presentation/widget/page_view_step.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_paypal_payment/flutter_paypal_payment.dart';
 
 class CheckOutBody extends StatefulWidget {
   const CheckOutBody({super.key});
@@ -61,6 +65,11 @@ class _CheckOutBodyState extends State<CheckOutBody> {
                 _handleShippingSectionValidation(context);
               } else if (currentPage == 1) {
                 _handleAddressValidation();
+              } else {
+                final orderEntity = context.read<OrderEntities>();
+                context.read<AddOrderCubit>().addOrder(
+                  orderEntity: orderEntity,
+                );
               }
             },
             child: Text(
@@ -82,7 +91,7 @@ class _CheckOutBodyState extends State<CheckOutBody> {
         curve: Curves.bounceIn,
       );
     } else {
-      ShowErrorBar(context, 'يرجي تحديد طريقه الدفع');
+      ShowBar(context, 'يرجي تحديد طريقه الدفع');
     }
   }
 
@@ -97,6 +106,34 @@ class _CheckOutBodyState extends State<CheckOutBody> {
     } else {
       valueNotifier.value = AutovalidateMode.always;
     }
+  }
+
+  void processPayment() {
+    final orderEntity = context.read<OrderEntities>();
+    PaypalPaymentEntity paypalPaymentEntity = PaypalPaymentEntity.fromEntity(
+      orderEntity,
+    );
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (BuildContext context) => PaypalCheckoutView(
+          sandboxMode: true,
+          clientId: kPaypalClientIDKey,
+          secretKey: kPaypalSecretKey,
+          transactions: [paypalPaymentEntity.toJson()],
+          note: "Contact us for any questions on your order.",
+          onSuccess: (Map params) async {
+            print("onSuccess: $params");
+          },
+          onError: (error) {
+            print("onError: $error");
+            Navigator.pop(context);
+          },
+          onCancel: () {
+            print('cancelled:');
+          },
+        ),
+      ),
+    );
   }
 
   getNextButtonPage(int currentState) {

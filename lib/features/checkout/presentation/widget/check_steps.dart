@@ -1,5 +1,5 @@
 import 'package:e_commrece_app/core/helper_functions/build_error_bar.dart';
-import 'package:e_commrece_app/features/checkout/domain/order_entities.dart';
+import 'package:e_commrece_app/features/checkout/domain/entities/order_entities.dart';
 import 'package:e_commrece_app/features/checkout/presentation/widget/step_item.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -29,7 +29,7 @@ class CheckSteps extends StatelessWidget {
                   curve: Curves.easeInBack,
                 );
               } else {
-                ShowErrorBar(context, 'يرجي تحديد طريقة الدفع');
+                ShowBar(context, 'يرجي تحديد طريقة الدفع');
               }
             },
             child: StepItem(

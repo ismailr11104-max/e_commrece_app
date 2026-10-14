@@ -1,4 +1,4 @@
-import 'package:e_commrece_app/features/checkout/domain/address_entities.dart';
+import 'package:e_commrece_app/features/checkout/domain/entities/address_entities.dart';
 
 class AddressModel {
   String? name;

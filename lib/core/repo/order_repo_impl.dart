@@ -4,7 +4,7 @@ import 'package:e_commrece_app/core/repo/order_repo.dart';
 import 'package:e_commrece_app/core/services/network/fire_store_service.dart';
 import 'package:e_commrece_app/core/utils/backend_endpoint.dart';
 import 'package:e_commrece_app/features/checkout/data/model/order_model.dart';
-import 'package:e_commrece_app/features/checkout/domain/order_entities.dart';
+import 'package:e_commrece_app/features/checkout/domain/entities/order_entities.dart';
 
 class OrderRepoImpl implements OrderRepo {
   final FireStoreService _storeService;
