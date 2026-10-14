@@ -1,25 +1,15 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:e_commrece_app/core/utils/app_image.dart';
+import 'package:flutter/material.dart';
 
 class SplashWidgetBody extends StatelessWidget {
   const SplashWidgetBody({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final locale = Localizations.localeOf(context);
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Row(
-          mainAxisAlignment: locale.languageCode == 'ar'
-              ? MainAxisAlignment.end
-              : MainAxisAlignment.start,
-          children: [SvgPicture.asset('assets/images/plan.svg')],
-        ),
-        SvgPicture.asset('assets/images/logo.svg', width: 178, height: 173),
-        SvgPicture.asset('assets/images/splash_bottom.svg'),
-      ],
+    return SizedBox(
+      width: 180,
+      height: 130,
+      child: Image.asset(Assets.imageSplash, fit: BoxFit.contain),
     );
   }
 }

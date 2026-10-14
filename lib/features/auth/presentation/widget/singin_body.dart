@@ -82,7 +82,7 @@ class _LoginBodyState extends State<SingInBody> {
                     );
                   }
                   if (state is SignInAuthFailure) {
-                    ShowErrorBar(context, state.failure);
+                    ShowBar(context, state.failure);
                   }
                 },
                 builder: (context, state) {
@@ -145,7 +145,7 @@ class _LoginBodyState extends State<SingInBody> {
                     Navigator.pushReplacementNamed(context, MainView.routeHome);
                   }
                   if (state is SocialAuthFailure) {
-                    ShowErrorBar(context, state.failure);
+                    ShowBar(context, state.failure);
                   }
                 },
                 builder: (context, state) {
