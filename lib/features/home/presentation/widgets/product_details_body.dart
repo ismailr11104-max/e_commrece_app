@@ -1,7 +1,6 @@
 import 'package:e_commrece_app/core/entities/product_entities.dart';
 import 'package:e_commrece_app/core/utils/app_text_styles.dart';
 import 'package:e_commrece_app/core/widget/show_app_bar.dart';
-import 'package:e_commrece_app/features/home/presentation/widgets/button_product_details.dart';
 import 'package:e_commrece_app/features/home/presentation/widgets/image_product_details.dart';
 import 'package:e_commrece_app/features/home/presentation/widgets/price_product.dart';
 import 'package:e_commrece_app/features/home/presentation/widgets/product_description.dart';
@@ -11,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../shopping/domain/cart_entities.dart';
+import 'nutritional_badge_car.dart';
 
 class ProductDetailsBody extends StatelessWidget {
   const ProductDetailsBody({
@@ -47,7 +47,7 @@ class ProductDetailsBody extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 16),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: ProductDescription(
@@ -55,36 +55,19 @@ class ProductDetailsBody extends StatelessWidget {
               description: product.desc,
             ),
           ),
-          SizedBox(height: 80),
-          Container(
-            width: double.infinity,
-            height: 80,
-            decoration: ShapeDecoration(
-              color: Color(0xFFFFF3C5),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(24),
-                  topRight: Radius.circular(24),
-                ),
-              ),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  ButtonProductDetails(
-                    onPressed: () {
-                      context.read<CartCubit>().addProduct(
-                        product,
-                        count: cartEntities.quantity,
-                      );
-                    },
-                  ),
-                  SizedBox(width: 6),
-                  Expanded(child: PriceProduct(cartEntities: cartEntities)),
-                ],
-              ),
+          const SizedBox(height: 16),
+          NutritionalBadgeCar(productEntities: product),
+          SizedBox(height: 55),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: PriceProduct(
+              cartEntities: cartEntities,
+              onPressed: () {
+                context.read<CartCubit>().addProduct(
+                  product,
+                  count: cartEntities.quantity,
+                );
+              },
             ),
           ),
         ],

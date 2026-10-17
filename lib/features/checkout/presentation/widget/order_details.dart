@@ -41,10 +41,7 @@ class OrderDetails extends StatelessWidget {
             ],
           ),
           SizedBox(height: 8),
-          SizedBox(
-            width: 274,
-            child: Divider(height: 1, color: Color(0xffCACECE)),
-          ),
+          Divider(height: 1, color: Color(0xffCACECE)),
           SizedBox(height: 8),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

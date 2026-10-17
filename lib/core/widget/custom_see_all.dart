@@ -1,0 +1,31 @@
+import 'package:e_commrece_app/core/utils/app_text_styles.dart';
+import 'package:e_commrece_app/features/best_selling/presentation/best_selling_view.dart';
+import 'package:flutter/material.dart';
+
+class CustomSeeAll extends StatelessWidget {
+  const CustomSeeAll({super.key, required this.title});
+
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.of(context).pushNamed(BestSellingView.bestSellingRoute);
+      },
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            title,
+            style: TextStyles.bold16.copyWith(color: Color(0xff0C0D0D)),
+          ),
+          Text(
+            'المزيد',
+            style: TextStyles.regular13.copyWith(color: Color(0xff949D9E)),
+          ),
+        ],
+      ),
+    );
+  }
+}

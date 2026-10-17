@@ -8,10 +8,8 @@ class CustomBottomNavigationBar extends StatelessWidget {
     required this.selectedIndex,
     required this.onItemTapped,
   });
-
   final int selectedIndex;
   final ValueChanged<int> onItemTapped;
-
   @override
   Widget build(BuildContext context) {
     return Container(

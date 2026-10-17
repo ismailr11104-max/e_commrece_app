@@ -39,10 +39,46 @@
               "client_type": 3
             },
             {
-              "client_id": "473106444167-slo5p2gqmu83c8o8185t87vukcpepspg.apps.googleusercontent.com",
+              "client_id": "473106444167-dgo5tl39klvj5melkkuh1p54ie2ueva7.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.ismail.eCommreceApp"
+                "bundle_id": "com.ismail.fruitsHubDashboard"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:473106444167:android:0f4222fe5097f416212d22",
+        "android_client_info": {
+          "package_name": "com.ismail.fruits_hub_dashboard"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "473106444167-fs4ecku3drnhpt2nrdlntlnnmdh4vo93.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCKXcJV7SK2eq0C2KtqqlnqejMEdWZEIFY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "473106444167-1frdo0i9u3lqri7bfga88i5hqjit59t7.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "473106444167-dgo5tl39klvj5melkkuh1p54ie2ueva7.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.ismail.fruitsHubDashboard"
               }
             }
           ]

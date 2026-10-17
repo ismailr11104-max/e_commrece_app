@@ -43,4 +43,7 @@ class Assets {
 
   static const String location = 'assets/images/location.svg';
   static const String edit = 'assets/images/edit.svg';
+  static const String calories = 'assets/images/calories.svg';
+  static const String expiryDate = 'assets/images/expiry_date.svg';
+  static const String lotus = 'assets/images/lotus.svg';
 }
