@@ -2,7 +2,9 @@ import 'package:e_commrece_app/core/entities/product_entities.dart';
 import 'package:e_commrece_app/core/utils/app_text_styles.dart';
 import 'package:e_commrece_app/features/home/presentation/screen/product_details.dart';
 import 'package:e_commrece_app/features/shopping/domain/cart_entities.dart';
+import 'package:e_commrece_app/features/shopping/presentation/controller/cart_cubit/cart_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProductItem extends StatelessWidget {
   final ProductEntities product;
@@ -80,7 +82,9 @@ class ProductItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    context.read<CartCubit>().addProduct(product);
+                  },
                   borderRadius: BorderRadius.circular(10),
                   child: Container(
                     padding: const EdgeInsets.all(6),

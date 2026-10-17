@@ -27,6 +27,7 @@ import 'package:e_commrece_app/features/category/data/data_sourse/category_data_
 import 'package:e_commrece_app/features/category/data/data_sourse/category_data_source_impl.dart';
 import 'package:e_commrece_app/features/category/data/repo/category_repo_impl.dart';
 import 'package:e_commrece_app/features/category/domain/repo/category_repository.dart';
+import 'package:e_commrece_app/features/shopping/presentation/controller/cart_cubit/cart_cubit.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
 
@@ -134,4 +135,6 @@ Future<void> initDependencies() async {
   sl.registerLazySingleton<OrderRepo>(
     () => OrderRepoImpl(sl<FireStoreService>()),
   );
+
+  sl.registerLazySingleton<CartCubit>(() => CartCubit());
 }

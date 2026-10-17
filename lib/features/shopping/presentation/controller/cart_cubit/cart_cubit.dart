@@ -8,16 +8,17 @@ part 'cart_state.dart';
 
 class CartCubit extends Cubit<CartState> {
   CartCubit() : super(CartInitial());
-
   CartItemEntities cartEntity = CartItemEntities([]);
-  void addProduct(ProductEntities product) {
+  void addProduct(ProductEntities product, {int count = 1}) {
     bool isProduct = this.cartEntity.isExist(product);
     final cartItem = this.cartEntity.getCartItem(product);
     if (isProduct) {
-      cartItem.incrementQuantity();
+      cartItem.quantity += count;
     } else {
+      cartItem.quantity = count;
       cartEntity.addCartItem(cartItem);
     }
+    emit(CartInitial());
     emit(CartItemAdd());
   }
 

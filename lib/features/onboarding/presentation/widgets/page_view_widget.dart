@@ -15,7 +15,10 @@ class PageViewWidget extends StatelessWidget {
       onPageChanged: cubit.onPageChange,
       itemCount: OnboardingItemModel.items.length,
       itemBuilder: (context, index) {
-        return PageViewItem(itemModel: OnboardingItemModel.items[index]);
+        return PageViewItem(
+          itemModel: OnboardingItemModel.items[index],
+          index: index,
+        );
       },
     );
   }

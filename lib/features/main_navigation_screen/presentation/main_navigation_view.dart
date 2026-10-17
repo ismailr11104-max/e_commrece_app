@@ -1,4 +1,5 @@
 import 'package:e_commrece_app/core/helper_functions/build_error_bar.dart';
+import 'package:e_commrece_app/core/services/service_locator/injection_container.dart';
 import 'package:e_commrece_app/features/%20profile/presentation/profile_view.dart';
 import 'package:e_commrece_app/features/home/presentation/screen/main_view.dart';
 import 'package:e_commrece_app/features/product_view/presentation/product_view.dart';
@@ -30,8 +31,8 @@ class _MainNavigationScreenState extends State<MainNavigationView> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => CartCubit(),
+    return BlocProvider.value(
+      value: sl<CartCubit>(),
       child: BlocListener<CartCubit, CartState>(
         listener: (context, state) {
           if (state is CartItemAdd) {

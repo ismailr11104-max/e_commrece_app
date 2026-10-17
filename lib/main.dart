@@ -4,6 +4,7 @@ import 'package:e_commrece_app/core/services/shared_preferences/shared_pref_mang
 import 'package:e_commrece_app/core/utils/app_colors.dart';
 import 'package:e_commrece_app/features/splash/presentation/splash_view.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -20,10 +21,17 @@ void main() async {
   Bloc.observer = CustomObserver();
   await initDependencies();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  await GoogleSignIn.instance.initialize(
-    serverClientId:
-        '473106444167-fs4ecku3drnhpt2nrdlntlnnmdh4vo93.apps.googleusercontent.com',
-  );
+  if (kIsWeb) {
+    await GoogleSignIn.instance.initialize(
+      clientId:
+          '473106444167-fs4ecku3drnhpt2nrdlntlnnmdh4vo93.apps.googleusercontent.com',
+    );
+  } else {
+    await GoogleSignIn.instance.initialize(
+      serverClientId:
+          '473106444167-fs4ecku3drnhpt2nrdlntlnnmdh4vo93.apps.googleusercontent.com',
+    );
+  }
   runApp(DevicePreview(enabled: true, builder: (context) => const FruitHub()));
 }
 
@@ -33,19 +41,21 @@ class FruitHub extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      useInheritedMediaQuery: true,
+      locale: DevicePreview.locale(context),
+      builder: DevicePreview.appBuilder,
       theme: ThemeData(
         scaffoldBackgroundColor: Colors.white,
         fontFamily: 'Cairo',
         colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primaryColor),
       ),
-      localizationsDelegates: [
+      localizationsDelegates: const [
         S.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: S.delegate.supportedLocales,
-      locale: const Locale('ar'),
       onGenerateRoute: onGenerateRoutes,
       initialRoute: SplashView.routeName,
     );

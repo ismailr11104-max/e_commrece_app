@@ -1,4 +1,3 @@
-import 'package:e_commrece_app/core/utils/app_colors.dart';
 import 'package:e_commrece_app/core/utils/app_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -13,35 +12,24 @@ class ActiveItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Container(
-        padding: const EdgeInsets.only(left: 16),
+        height: 48,
+        padding: const EdgeInsets.symmetric(horizontal: 16),
         decoration: ShapeDecoration(
-          color: const Color(0xFFEEEEEE),
+          color: const Color(0xFF56A25F),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30),
           ),
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          spacing: 7,
           children: [
-            Container(
-              width: 30,
-              height: 30,
-              decoration: ShapeDecoration(
-                color: AppColors.primaryColor,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30),
-                ),
-              ),
-              child: Center(
-                child: SvgPicture.asset(image, width: 16, height: 16),
-              ),
-            ),
-            const SizedBox(width: 4),
+            Center(child: SvgPicture.asset(image, width: 16, height: 16)),
             Text(
               text,
-              style: TextStyles.semiBold11.copyWith(
-                color: AppColors.primaryColor,
-              ),
+              style: TextStyles.semiBold11.copyWith(color: Colors.white),
             ),
           ],
         ),

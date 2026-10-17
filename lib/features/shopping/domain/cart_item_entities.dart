@@ -20,7 +20,7 @@ class CartItemEntities {
 
   bool isExist(ProductEntities product) {
     for (var cartItems in cartItem) {
-      if (cartItems.productEntities == product) {
+      if (cartItems.productEntities.name == product.name) {
         return true;
       }
     }
@@ -29,11 +29,11 @@ class CartItemEntities {
 
   CartEntities getCartItem(ProductEntities product) {
     for (var cartItems in cartItem) {
-      if (cartItems.productEntities == product) {
+      if (cartItems.productEntities.name == product.name) {
         return cartItems;
       }
     }
-    return CartEntities(productEntities: product, quantity: 1);
+    return CartEntities(productEntities: product, quantity: 0);
   }
 
   bool removedCartItem(CartEntities cartEntities) {

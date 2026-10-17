@@ -17,10 +17,7 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -56,13 +53,23 @@ class DefaultFirebaseOptions {
     projectId: 'fruit-hub-d698f',
     storageBucket: 'fruit-hub-d698f.firebasestorage.app',
   );
-
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyDccNMgaecrAnMFnoiIn2maV0T0eI351KI',
     appId: '1:473106444167:ios:88bcb1d670df3bd1212d22',
     messagingSenderId: '473106444167',
     projectId: 'fruit-hub-d698f',
     storageBucket: 'fruit-hub-d698f.firebasestorage.app',
+    androidClientId: '473106444167-kr53rsreb16qonknhgmpaeufcf0c159k.apps.googleusercontent.com',
+    iosClientId: '473106444167-slo5p2gqmu83c8o8185t87vukcpepspg.apps.googleusercontent.com',
     iosBundleId: 'com.ismail.eCommreceApp',
+  );
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyDuGmRXlf1xMkESCJk7Plx-Ca2KcYMt5cs',
+    appId: '1:473106444167:web:5e55dd418ab20554212d22',
+    messagingSenderId: '473106444167',
+    projectId: 'fruit-hub-d698f',
+    authDomain: 'fruit-hub-d698f.firebaseapp.com',
+    storageBucket: 'fruit-hub-d698f.firebasestorage.app',
+    measurementId: 'G-62KTJG8PE2',
   );
 }

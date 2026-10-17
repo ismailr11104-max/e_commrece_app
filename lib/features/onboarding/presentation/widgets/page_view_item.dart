@@ -9,9 +9,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class PageViewItem extends StatelessWidget {
-  const PageViewItem({required this.itemModel, super.key});
+  const PageViewItem({required this.itemModel, required this.index, super.key});
 
   final OnboardingItemModel itemModel;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
@@ -53,21 +54,20 @@ class PageViewItem extends StatelessWidget {
               Positioned(
                 top: 16,
                 right: 16,
-                child: Visibility(
-                  visible: state.currentIndex == 2,
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).pushReplacementNamed(
-                        MainNavigationView.routeBottomNavigation,
-                      );
-                    },
-                    child: Text(
-                      'تخطي',
-                      style: TextStyles.semiBold16.copyWith(
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).pushReplacementNamed(
+                      MainNavigationView.routeBottomNavigation,
+                    );
+                  },
+                  child: index == 2
+                      ? SizedBox()
+                      : Text(
+                          'تخطي',
+                          style: TextStyles.semiBold16.copyWith(
+                            color: Colors.white,
+                          ),
+                        ),
                 ),
               ),
               Positioned(
@@ -130,7 +130,7 @@ class PageViewItem extends StatelessWidget {
                           );
                         },
                         child: Text(
-                          state.currentIndex == 2 ? 'ابدأ التسوق' : 'التالي',
+                          state.isLastPage ? 'ابدأ التسوق' : 'التالي',
                           style: TextStyles.bold16.copyWith(
                             color: Colors.white,
                           ),

@@ -24,9 +24,7 @@ class _SplashViewState extends State<SplashView> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: SafeArea(child: Center(child: SplashWidgetBody())),
-    );
+    return const Scaffold(body: Center(child: SplashWidgetBody()));
   }
 
   void executeNavigation() {

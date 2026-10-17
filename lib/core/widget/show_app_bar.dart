@@ -23,7 +23,7 @@ AppBar ShowAppBar(
             Navigator.pop(context);
           },
           child: const Icon(
-            Icons.arrow_forward_ios_rounded,
+            Icons.arrow_back_ios,
             color: Colors.black,
             size: 24,
           ),
