@@ -18,45 +18,52 @@ class OrderDetails extends StatelessWidget {
             children: [
               Text(
                 'المجموع الفرعي :',
-                style: TextStyles.regular13.copyWith(color: Color(0xff4E5556)),
+                style: TextStyles.semiBold13.copyWith(color: Color(0xff999590)),
               ),
               Text(
                 '${context.read<OrderEntities>().cartItemEntities.calculateTotal()}',
-                style: TextStyles.semiBold16.copyWith(color: Color(0xff0C0D0D)),
+                style: TextStyles.semiBold13.copyWith(color: Color(0xff999590)),
               ),
             ],
           ),
-          SizedBox(height: 8),
+          SizedBox(height: 12),
+          Divider(height: 1, color: Color(0xffCACECE)),
+          SizedBox(height: 12),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
                 'التوصيل  :',
-                style: TextStyles.regular13.copyWith(color: Color(0xff4E5556)),
+                style: TextStyles.semiBold13.copyWith(color: Color(0xff999590)),
               ),
               Text(
                 '30 جنيه',
-                style: TextStyles.semiBold13.copyWith(color: Color(0xff4E5556)),
+                style: TextStyles.semiBold13.copyWith(color: Color(0xff999590)),
               ),
             ],
           ),
-          SizedBox(height: 8),
+          SizedBox(height: 12),
           Divider(height: 1, color: Color(0xffCACECE)),
-          SizedBox(height: 8),
+          SizedBox(height: 12),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
                 'الكلي',
-                style: TextStyles.bold16.copyWith(color: Color(0xff0C0D0D)),
+                style: TextStyles.semiBold16.copyWith(
+                  color: Color(0xff333333),
+                  fontSize: 16,
+                ),
               ),
               Text(
-                '180 جنيه',
-                style: TextStyles.bold16.copyWith(color: Color(0xff0C0D0D)),
+                '${context.read<OrderEntities>().cartItemEntities.calculateTotal() + 30}',
+                style: TextStyles.semiBold16.copyWith(
+                  color: Color(0xff333333),
+                  fontSize: 16,
+                ),
               ),
             ],
           ),
-          SizedBox(height: 8),
         ],
       ),
     );

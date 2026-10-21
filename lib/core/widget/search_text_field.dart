@@ -8,15 +8,13 @@ class SearchTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            color: Color(0x0A000000),
-            blurRadius: 9,
-            offset: Offset(0, 2),
-            spreadRadius: 0,
-          ),
-        ],
+      width: double.infinity,
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      decoration: ShapeDecoration(
+        shape: RoundedRectangleBorder(
+          side: BorderSide(width: 1, color: const Color(0xFFCCC7C0)),
+          borderRadius: BorderRadius.circular(12),
+        ),
       ),
       child: TextField(
         keyboardType: TextInputType.text,

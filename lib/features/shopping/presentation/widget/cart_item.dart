@@ -31,57 +31,58 @@ class CartItem extends StatelessWidget {
           child: Row(
             children: [
               Container(
-                width: 73,
-                height: 92,
-                decoration: const BoxDecoration(color: Color(0xFFF3F5F7)),
-                child: Image.network(cartEntities.productEntities.imageUrl!),
+                width: 100,
+                height: 100,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: NetworkImage(cartEntities.productEntities.imageUrl!),
+                    fit: BoxFit.cover,
+                  ),
+                ),
               ),
-
               const SizedBox(width: 17),
-
               Expanded(
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  spacing: 6,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          cartEntities.productEntities.name,
-                          style: TextStyles.bold13,
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            context.read<CartCubit>().removedProduct(
-                              cartEntities,
-                            );
-                          },
-                          child: SvgPicture.asset(Assets.trash),
-                        ),
-                      ],
+                    Text(
+                      cartEntities.productEntities.name,
+                      style: TextStyles.semiBold16.copyWith(
+                        color: const Color(0xFF262626),
+                      ),
                     ),
-
                     Text(
                       '${cartEntities.calculateTotalWeight()} كم',
                       style: TextStyles.regular13.copyWith(
                         color: AppColors.lightSecondaryColor,
                       ),
                     ),
-
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        ActionButtons(cartEntities: cartEntities),
-
-                        Text(
-                          '${cartEntities.calculateTotalPrice()} جنيه',
-                          style: TextStyles.bold16.copyWith(
-                            color: AppColors.secondaryColor,
-                          ),
-                        ),
-                      ],
+                    Text(
+                      '${cartEntities.calculateTotalPrice()} جنيه',
+                      style: TextStyles.bold16.copyWith(
+                        color: AppColors.secondaryColor,
+                      ),
                     ),
+                  ],
+                ),
+              ),
+              Container(
+                height: 74,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        context.read<CartCubit>().removedProduct(cartEntities);
+                      },
+                      child: SvgPicture.asset(Assets.trash),
+                    ),
+                    ActionButtons(cartEntities: cartEntities),
                   ],
                 ),
               ),
