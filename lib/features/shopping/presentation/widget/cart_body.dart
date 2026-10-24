@@ -1,4 +1,5 @@
 import 'package:e_commrece_app/core/helper_functions/build_error_bar.dart';
+import 'package:e_commrece_app/core/utils/app_sizes.dart';
 import 'package:e_commrece_app/core/utils/app_text_styles.dart';
 import 'package:e_commrece_app/core/widget/custom_button.dart';
 import 'package:e_commrece_app/core/widget/custom_order_details.dart';
@@ -25,25 +26,25 @@ class CartBody extends StatelessWidget {
               child: Column(
                 children: [
                   ShowAppBar(context, title: 'السلة', isBack: false),
-                  const SizedBox(height: 16),
+                  SizedBox(height: AppSizes.h16),
                   const CartHeader(),
-                  const SizedBox(height: 12),
+                  SizedBox(height: AppSizes.h12),
                 ],
               ),
             ),
 
             CartList(cartList: cartItems),
-            const SliverToBoxAdapter(child: SizedBox(height: 80)),
+            SliverToBoxAdapter(child: SizedBox(height: AppSizes.h64 + AppSizes.h16)),
           ],
         ),
         Positioned(
-          left: 12,
-          right: 12,
+          left: AppSizes.s12,
+          right: AppSizes.s12,
           bottom: 1,
           child: Column(
             children: [
-              CustomOrderDetails(),
-              SizedBox(height: 24),
+              const CustomOrderDetails(),
+              SizedBox(height: AppSizes.h24),
               CustomButton(
                 onPressed: () {
                   if (context

@@ -1,5 +1,6 @@
 import 'package:e_commrece_app/core/utils/app_colors.dart';
 import 'package:e_commrece_app/core/utils/app_image.dart';
+import 'package:e_commrece_app/core/utils/app_sizes.dart';
 import 'package:e_commrece_app/core/utils/app_text_styles.dart';
 import 'package:e_commrece_app/features/shopping/domain/cart_entities.dart';
 import 'package:e_commrece_app/features/shopping/presentation/controller/cart_action/cart_action_cubit.dart';
@@ -7,6 +8,7 @@ import 'package:e_commrece_app/features/shopping/presentation/controller/cart_cu
 import 'package:e_commrece_app/features/shopping/presentation/widget/action_buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class CartItem extends StatelessWidget {
@@ -27,12 +29,12 @@ class CartItem extends StatelessWidget {
       },
       builder: (context, state) {
         return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12.0),
+          padding: AppSizes.horizontalP12,
           child: Row(
             children: [
               Container(
-                width: 100,
-                height: 100,
+                width: 100.w,
+                height: 100.h,
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     image: NetworkImage(cartEntities.productEntities.imageUrl!),
@@ -40,13 +42,12 @@ class CartItem extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(width: 17),
+              SizedBox(width: 17.w),
               Expanded(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  spacing: 6,
                   children: [
                     Text(
                       cartEntities.productEntities.name,
@@ -54,12 +55,14 @@ class CartItem extends StatelessWidget {
                         color: const Color(0xFF262626),
                       ),
                     ),
+                    SizedBox(height: AppSizes.h6),
                     Text(
                       '${cartEntities.calculateTotalWeight()} كم',
                       style: TextStyles.regular13.copyWith(
                         color: AppColors.lightSecondaryColor,
                       ),
                     ),
+                    SizedBox(height: AppSizes.h6),
                     Text(
                       '${cartEntities.calculateTotalPrice()} جنيه',
                       style: TextStyles.bold16.copyWith(
@@ -69,8 +72,8 @@ class CartItem extends StatelessWidget {
                   ],
                 ),
               ),
-              Container(
-                height: 74,
+              SizedBox(
+                height: 74.h,
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

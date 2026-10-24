@@ -1,4 +1,5 @@
 import 'package:e_commrece_app/core/utils/app_colors.dart';
+import 'package:e_commrece_app/core/utils/app_sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -19,8 +20,8 @@ class CustomCheckBox extends StatelessWidget {
         onChecked(!isChecked);
       },
       child: AnimatedContainer(
-        width: 24,
-        height: 24,
+        width: AppSizes.s24,
+        height: AppSizes.h24,
         duration: const Duration(milliseconds: 100),
         decoration: ShapeDecoration(
           color: isChecked ? AppColors.primaryColor : Colors.white,
@@ -29,12 +30,12 @@ class CustomCheckBox extends StatelessWidget {
               width: 1.50,
               color: isChecked ? Colors.transparent : const Color(0xFFDCDEDE),
             ),
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: AppSizes.borderR8,
           ),
         ),
         child: isChecked
             ? Padding(
-                padding: const EdgeInsets.all(2),
+                padding: AppSizes.p4,
                 child: SvgPicture.asset('assets/images/check.svg'),
               )
             : const SizedBox(),

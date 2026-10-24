@@ -1,3 +1,4 @@
+import 'package:e_commrece_app/core/utils/app_sizes.dart';
 import 'package:e_commrece_app/core/utils/app_text_styles.dart';
 import 'package:e_commrece_app/features/shopping/presentation/controller/cart_action/cart_action_cubit.dart';
 import 'package:e_commrece_app/features/shopping/presentation/controller/cart_cubit/cart_cubit.dart';
@@ -15,11 +16,11 @@ class CustomOrderDetails extends StatelessWidget {
         const deliveryFee = 30;
         final total = subtotal + deliveryFee;
         return Container(
-          padding: EdgeInsets.all(10),
+          padding: AppSizes.p10,
           decoration: ShapeDecoration(
             color: Colors.white,
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: AppSizes.borderR12,
             ),
           ),
           child: Column(
@@ -33,59 +34,59 @@ class CustomOrderDetails extends StatelessWidget {
                   Text(
                     'المجموع الفرعي :',
                     style: TextStyles.semiBold13.copyWith(
-                      color: Color(0xff999590),
+                      color: const Color(0xff999590),
                     ),
                   ),
                   Text(
-                    '${subtotal}',
+                    '$subtotal',
                     style: TextStyles.semiBold13.copyWith(
-                      color: Color(0xff999590),
+                      color: const Color(0xff999590),
                     ),
                   ),
                 ],
               ),
-              SizedBox(height: 12),
-              Divider(height: 1, color: Color(0xffCACECE)),
-              SizedBox(height: 12),
+              SizedBox(height: AppSizes.h12),
+              const Divider(height: 1, color: Color(0xffCACECE)),
+              SizedBox(height: AppSizes.h12),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
                     'التوصيل  :',
                     style: TextStyles.semiBold13.copyWith(
-                      color: Color(0xff999590),
+                      color: const Color(0xff999590),
                     ),
                   ),
                   Text(
                     context.read<CartCubit>().cartEntity.cartItem.isEmpty
                         ? '0'
-                        : '${deliveryFee}',
+                        : '$deliveryFee',
                     style: TextStyles.semiBold13.copyWith(
-                      color: Color(0xff999590),
+                      color: const Color(0xff999590),
                     ),
                   ),
                 ],
               ),
-              SizedBox(height: 12),
-              Divider(height: 1, color: Color(0xffCACECE)),
-              SizedBox(height: 12),
+              SizedBox(height: AppSizes.h12),
+              const Divider(height: 1, color: Color(0xffCACECE)),
+              SizedBox(height: AppSizes.h12),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
                     'الكلي',
                     style: TextStyles.semiBold16.copyWith(
-                      color: Color(0xff333333),
-                      fontSize: 16,
+                      color: const Color(0xff333333),
+                      fontSize: AppSizes.font16,
                     ),
                   ),
                   Text(
                     context.read<CartCubit>().cartEntity.cartItem.isEmpty
                         ? '0'
-                        : '${total}',
+                        : '$total',
                     style: TextStyles.semiBold16.copyWith(
-                      color: Color(0xff333333),
-                      fontSize: 16,
+                      color: const Color(0xff333333),
+                      fontSize: AppSizes.font16,
                     ),
                   ),
                 ],

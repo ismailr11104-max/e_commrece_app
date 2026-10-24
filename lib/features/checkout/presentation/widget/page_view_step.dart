@@ -1,3 +1,4 @@
+import 'package:e_commrece_app/core/utils/app_sizes.dart';
 import 'package:e_commrece_app/features/checkout/presentation/widget/address_input_section.dart';
 import 'package:e_commrece_app/features/checkout/presentation/widget/payment_section.dart';
 import 'package:e_commrece_app/features/checkout/presentation/widget/shipping_section.dart';
@@ -19,7 +20,7 @@ class PageViewStep extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 16),
+      padding: EdgeInsets.symmetric(vertical: AppSizes.h16),
       child: PageView.builder(
         itemCount: getPages().length,
         controller: pageController,
@@ -32,9 +33,9 @@ class PageViewStep extends StatelessWidget {
 
   List<Widget> getPages() {
     return [
-      ShippingSection(),
+      const ShippingSection(),
       AddressInputSection(formKey: formKey, valueListenable: valueListenable),
-      PaymentSection(),
+      const PaymentSection(),
     ];
   }
 }

@@ -1,4 +1,5 @@
 import 'package:e_commrece_app/core/utils/abb_decorations.dart';
+import 'package:e_commrece_app/core/utils/app_sizes.dart';
 import 'package:e_commrece_app/core/utils/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
@@ -14,7 +15,7 @@ class PaymentDetails extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(title, style: TextStyles.bold13),
-        SizedBox(height: 8),
+        SizedBox(height: AppSizes.h8),
         Container(decoration: AbbDecorations.greyBoxDecorations, child: child),
       ],
     );

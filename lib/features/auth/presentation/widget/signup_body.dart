@@ -1,4 +1,5 @@
 import 'package:e_commrece_app/core/helper_functions/build_error_bar.dart';
+import 'package:e_commrece_app/core/utils/app_sizes.dart';
 import 'package:e_commrece_app/core/utils/app_text_styles.dart';
 import 'package:e_commrece_app/core/validators/email_validator.dart';
 import 'package:e_commrece_app/core/validators/name_validator.dart';
@@ -37,33 +38,33 @@ class _SignupBodyState extends State<SignupBody> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      padding: AppSizes.horizontalP16,
       child: SingleChildScrollView(
         child: Form(
           key: formKey,
           autovalidateMode: AutovalidateMode.onUserInteraction,
           child: Column(
             children: [
-              SizedBox(height: 24),
+              SizedBox(height: AppSizes.h24),
               CustomTextFromField(
                 controller: nameController,
                 validator: NameValidator.validate,
                 hintText: 'الاسم كامل',
                 keyboardType: TextInputType.name,
               ),
-              SizedBox(height: 16),
+              SizedBox(height: AppSizes.h16),
               CustomTextFromField(
                 validator: EmailValidator.validate,
                 controller: emailController,
                 hintText: 'البريد الإلكتروني',
                 keyboardType: TextInputType.emailAddress,
               ),
-              SizedBox(height: 16),
+              SizedBox(height: AppSizes.h16),
               CustomPasswordFromField(
                 validator: PasswordValidator.validate,
                 controller: passwordController,
               ),
-              SizedBox(height: 16),
+              SizedBox(height: AppSizes.h16),
               TermsAndConditionsWidget(
                 onChanged: (bool value) {
                   setState(() {
@@ -71,7 +72,7 @@ class _SignupBodyState extends State<SignupBody> {
                   });
                 },
               ),
-              const SizedBox(height: 32),
+              SizedBox(height: AppSizes.h32),
               BlocConsumer<EmailAuthCubit, EmailAuthState>(
                 listener: (context, state) {
                   if (state is EmailAuthSuccess) {
@@ -109,14 +110,14 @@ class _SignupBodyState extends State<SignupBody> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               SizedBox(
-                                width: 24,
-                                height: 24,
-                                child: CircularProgressIndicator(
+                                width: AppSizes.s24,
+                                height: AppSizes.h24,
+                                child: const CircularProgressIndicator(
                                   color: Colors.white,
                                   strokeWidth: 2,
                                 ),
                               ),
-                              SizedBox(width: 12),
+                              SizedBox(width: AppSizes.s12),
                               Text(
                                 'إنشاء حساب جديد',
                                 style: TextStyles.bold16.copyWith(
@@ -134,7 +135,7 @@ class _SignupBodyState extends State<SignupBody> {
                   );
                 },
               ),
-              const SizedBox(height: 26),
+              SizedBox(height: AppSizes.h24),
               TermsOrAuthActionWidget(
                 mainText: 'تمتلك حساب بالفعل؟',
                 actionText: 'تسجيل دخول',

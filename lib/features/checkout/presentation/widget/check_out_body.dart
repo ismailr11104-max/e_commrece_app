@@ -1,5 +1,6 @@
 import 'package:e_commrece_app/core/helper_functions/build_error_bar.dart';
 import 'package:e_commrece_app/core/utils/app_keys.dart';
+import 'package:e_commrece_app/core/utils/app_sizes.dart';
 import 'package:e_commrece_app/core/utils/app_text_styles.dart';
 import 'package:e_commrece_app/core/widget/custom_button.dart';
 import 'package:e_commrece_app/features/checkout/domain/entities/order_entities.dart';
@@ -47,10 +48,10 @@ class _CheckOutBodyState extends State<CheckOutBody> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      padding: AppSizes.horizontalP16,
       child: Column(
         children: [
-          SizedBox(height: 20),
+          SizedBox(height: AppSizes.h20),
           CheckSteps(currentPage: currentPage, pageController: pageController),
           Expanded(
             child: PageViewStep(
@@ -77,7 +78,7 @@ class _CheckOutBodyState extends State<CheckOutBody> {
               style: TextStyles.bold16.copyWith(color: Colors.white),
             ),
           ),
-          SizedBox(height: 48),
+          SizedBox(height: AppSizes.h48),
         ],
       ),
     );

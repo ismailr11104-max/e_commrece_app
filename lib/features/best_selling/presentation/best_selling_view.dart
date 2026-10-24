@@ -1,4 +1,5 @@
 import 'package:e_commrece_app/core/services/service_locator/injection_container.dart';
+import 'package:e_commrece_app/core/utils/app_sizes.dart';
 import 'package:e_commrece_app/core/widget/show_app_bar.dart';
 import 'package:e_commrece_app/features/best_selling/presentation/widget/best_selling_body.dart';
 import 'package:e_commrece_app/features/home/presentation/controller/best_selling_cubit/best_selling_cubit.dart';
@@ -17,8 +18,8 @@ class BestSellingView extends StatelessWidget {
       child: Scaffold(
         appBar: ShowAppBar(context, title: 'الأكثر مبيعًا'),
         body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12.0),
-          child: BestSellingBody(),
+          padding: AppSizes.horizontalP12,
+          child: const BestSellingBody(),
         ),
       ),
     );

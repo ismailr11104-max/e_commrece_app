@@ -1,3 +1,4 @@
+import 'package:e_commrece_app/core/utils/app_sizes.dart';
 import 'package:e_commrece_app/features/home/presentation/widgets/featured_item.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +18,7 @@ class FeaturedList extends StatelessWidget {
           return const FeaturedItem();
         },
         separatorBuilder: (context, index) {
-          return const SizedBox(width: 8);
+          return SizedBox(width: AppSizes.s8);
         },
       ),
     );

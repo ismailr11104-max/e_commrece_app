@@ -1,3 +1,4 @@
+import 'package:e_commrece_app/core/utils/app_sizes.dart';
 import 'package:flutter/material.dart';
 
 class QuantityActionButton extends StatelessWidget {
@@ -25,11 +26,11 @@ class QuantityActionButton extends StatelessWidget {
       child: Container(
         width: width,
         height: height,
-        padding: const EdgeInsets.all(2),
+        padding: AppSizes.p4,
         decoration: ShapeDecoration(
           color: color,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(100),
+            borderRadius: AppSizes.borderRFull,
           ),
         ),
         child: FittedBox(child: Icon(icon, color: iconColor)),

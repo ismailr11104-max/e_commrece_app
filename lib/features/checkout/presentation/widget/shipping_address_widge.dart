@@ -1,4 +1,5 @@
 import 'package:e_commrece_app/core/utils/app_image.dart';
+import 'package:e_commrece_app/core/utils/app_sizes.dart';
 import 'package:e_commrece_app/core/utils/app_text_styles.dart';
 import 'package:e_commrece_app/features/checkout/domain/entities/order_entities.dart';
 import 'package:e_commrece_app/features/checkout/presentation/widget/payment_details.dart';
@@ -18,7 +19,7 @@ class ShippingAddressWidget extends StatelessWidget {
         child: Row(
           children: [
             SvgPicture.asset(Assets.location),
-            const SizedBox(width: 8),
+            SizedBox(width: AppSizes.s8),
             Text(
               '${context.read<OrderEntities>().addressEntities.toString()}',
               textAlign: TextAlign.right,
@@ -33,7 +34,7 @@ class ShippingAddressWidget extends StatelessWidget {
                 child: Row(
                   children: [
                     SvgPicture.asset(Assets.edit),
-                    const SizedBox(width: 4),
+                    SizedBox(width: AppSizes.s4),
                     Text(
                       'تعديل',
                       style: TextStyles.semiBold13.copyWith(

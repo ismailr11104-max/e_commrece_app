@@ -1,4 +1,5 @@
 import 'package:e_commrece_app/core/entities/product_entities.dart';
+import 'package:e_commrece_app/core/utils/app_sizes.dart';
 import 'package:e_commrece_app/core/utils/app_text_styles.dart';
 import 'package:e_commrece_app/features/home/presentation/screen/product_details.dart';
 import 'package:e_commrece_app/features/shopping/domain/cart_entities.dart';
@@ -23,10 +24,10 @@ class ProductItem extends StatelessWidget {
         );
       },
       child: Container(
-        padding: const EdgeInsets.all(12),
+        padding: AppSizes.p12,
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: AppSizes.borderR20,
           boxShadow: [
             BoxShadow(
               color: Colors.black.withValues(alpha: 0.05),
@@ -45,9 +46,9 @@ class ProductItem extends StatelessWidget {
                     child: Image.network(
                       product.imageUrl ?? '',
                       fit: BoxFit.contain,
-                      errorBuilder: (context, error, stackTrace) => const Icon(
+                      errorBuilder: (context, error, stackTrace) => Icon(
                         Icons.broken_image,
-                        size: 40,
+                        size: AppSizes.iconLarge,
                         color: Colors.grey,
                       ),
                     ),
@@ -55,29 +56,29 @@ class ProductItem extends StatelessWidget {
                   Align(
                     alignment: Alignment.topRight,
                     child: Container(
-                      padding: const EdgeInsets.all(6),
+                      padding: AppSizes.p6,
                       decoration: BoxDecoration(
                         color: const Color(0xFFE8F5E9),
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: AppSizes.borderR10,
                       ),
-                      child: const Icon(
+                      child: Icon(
                         Icons.bookmark_border_rounded,
-                        color: Color(0xFF4CAF50),
-                        size: 18,
+                        color: const Color(0xFF4CAF50),
+                        size: AppSizes.font18,
                       ),
                     ),
                   ),
                 ],
               ),
             ),
-            const SizedBox(height: 6),
+            SizedBox(height: AppSizes.h6),
             Text(
               product.name,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: TextStyles.semiBold16,
             ),
-            const SizedBox(height: 6),
+            SizedBox(height: AppSizes.h6),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -85,14 +86,14 @@ class ProductItem extends StatelessWidget {
                   onTap: () {
                     context.read<CartCubit>().addProduct(product);
                   },
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: AppSizes.borderR10,
                   child: Container(
-                    padding: const EdgeInsets.all(6),
+                    padding: AppSizes.p6,
                     decoration: BoxDecoration(
                       color: const Color(0xFF2ECC71),
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: AppSizes.borderR10,
                     ),
-                    child: const Icon(Icons.add, color: Colors.white, size: 18),
+                    child: Icon(Icons.add, color: Colors.white, size: AppSizes.font18),
                   ),
                 ),
                 Flexible(

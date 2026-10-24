@@ -1,3 +1,4 @@
+import 'package:e_commrece_app/core/utils/app_sizes.dart';
 import 'package:e_commrece_app/core/utils/app_text_styles.dart';
 import 'package:e_commrece_app/features/checkout/domain/entities/order_entities.dart';
 import 'package:e_commrece_app/features/checkout/presentation/widget/payment_details.dart';
@@ -18,48 +19,48 @@ class OrderDetails extends StatelessWidget {
             children: [
               Text(
                 'المجموع الفرعي :',
-                style: TextStyles.semiBold13.copyWith(color: Color(0xff999590)),
+                style: TextStyles.semiBold13.copyWith(color: const Color(0xff999590)),
               ),
               Text(
                 '${context.read<OrderEntities>().cartItemEntities.calculateTotal()}',
-                style: TextStyles.semiBold13.copyWith(color: Color(0xff999590)),
+                style: TextStyles.semiBold13.copyWith(color: const Color(0xff999590)),
               ),
             ],
           ),
-          SizedBox(height: 12),
-          Divider(height: 1, color: Color(0xffCACECE)),
-          SizedBox(height: 12),
+          SizedBox(height: AppSizes.h12),
+          const Divider(height: 1, color: Color(0xffCACECE)),
+          SizedBox(height: AppSizes.h12),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
                 'التوصيل  :',
-                style: TextStyles.semiBold13.copyWith(color: Color(0xff999590)),
+                style: TextStyles.semiBold13.copyWith(color: const Color(0xff999590)),
               ),
               Text(
                 '30 جنيه',
-                style: TextStyles.semiBold13.copyWith(color: Color(0xff999590)),
+                style: TextStyles.semiBold13.copyWith(color: const Color(0xff999590)),
               ),
             ],
           ),
-          SizedBox(height: 12),
-          Divider(height: 1, color: Color(0xffCACECE)),
-          SizedBox(height: 12),
+          SizedBox(height: AppSizes.h12),
+          const Divider(height: 1, color: Color(0xffCACECE)),
+          SizedBox(height: AppSizes.h12),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
                 'الكلي',
                 style: TextStyles.semiBold16.copyWith(
-                  color: Color(0xff333333),
-                  fontSize: 16,
+                  color: const Color(0xff333333),
+                  fontSize: AppSizes.font16,
                 ),
               ),
               Text(
                 '${context.read<OrderEntities>().cartItemEntities.calculateTotal() + 30}',
                 style: TextStyles.semiBold16.copyWith(
-                  color: Color(0xff333333),
-                  fontSize: 16,
+                  color: const Color(0xff333333),
+                  fontSize: AppSizes.font16,
                 ),
               ),
             ],

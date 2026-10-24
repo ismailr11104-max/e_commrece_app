@@ -1,3 +1,4 @@
+import 'package:e_commrece_app/core/utils/app_sizes.dart';
 import 'package:e_commrece_app/features/main_navigation_screen/domain/entities/bottom_navigation_entitie.dart';
 import 'package:e_commrece_app/features/main_navigation_screen/presentation/wedgit/naivation_bar_item.dart';
 import 'package:flutter/material.dart';
@@ -13,9 +14,9 @@ class CustomBottomNavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 70,
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+      height: AppSizes.bottomNavHeight,
+      margin: EdgeInsets.symmetric(horizontal: AppSizes.s16, vertical: AppSizes.h20),
+      padding: EdgeInsets.symmetric(horizontal: AppSizes.s8, vertical: AppSizes.h6),
       decoration: ShapeDecoration(
         color: Colors.white,
         shape: RoundedRectangleBorder(
@@ -23,9 +24,9 @@ class CustomBottomNavigationBar extends StatelessWidget {
             width: 0.50,
             color: Colors.black.withValues(alpha: 0.20),
           ),
-          borderRadius: BorderRadius.circular(50),
+          borderRadius: AppSizes.borderRFull,
         ),
-        shadows: [
+        shadows: const [
           BoxShadow(
             color: Color(0x0A20221F),
             blurRadius: 9,

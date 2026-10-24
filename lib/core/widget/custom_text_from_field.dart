@@ -1,3 +1,4 @@
+import 'package:e_commrece_app/core/utils/app_sizes.dart';
 import 'package:flutter/material.dart';
 
 class CustomTextFromField extends StatelessWidget {
@@ -45,7 +46,7 @@ class CustomTextFromField extends StatelessWidget {
 
   OutlineInputBorder _buildBorder() {
     return OutlineInputBorder(
-      borderRadius: BorderRadius.circular(8),
+      borderRadius: AppSizes.borderR8,
       borderSide: const BorderSide(width: 1, color: Color(0xffE6E9E9)),
     );
   }

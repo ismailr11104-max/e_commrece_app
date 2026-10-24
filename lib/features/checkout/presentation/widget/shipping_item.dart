@@ -1,4 +1,5 @@
 import 'package:e_commrece_app/core/utils/app_colors.dart';
+import 'package:e_commrece_app/core/utils/app_sizes.dart';
 import 'package:e_commrece_app/core/utils/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
@@ -22,20 +23,20 @@ class ShippingItem extends StatelessWidget {
       onTap: onTap,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 300),
-        padding: const EdgeInsets.only(
-          top: 16,
-          right: 28,
+        padding: EdgeInsets.only(
+          top: AppSizes.h16,
+          right: AppSizes.s28,
           left: 13,
-          bottom: 16,
+          bottom: AppSizes.h16,
         ),
         clipBehavior: Clip.antiAlias,
         decoration: ShapeDecoration(
-          color: Color(0x33D9D9D9),
+          color: const Color(0x33D9D9D9),
           shape: RoundedRectangleBorder(
             side: BorderSide(
               color: isSelected ? AppColors.primaryColor : Colors.transparent,
             ),
-            borderRadius: BorderRadius.circular(4),
+            borderRadius: AppSizes.borderR4,
           ),
         ),
         child: IntrinsicHeight(
@@ -45,24 +46,25 @@ class ShippingItem extends StatelessWidget {
               isSelected
                   ? const ActiveShippingItemDot()
                   : const InActiveShippingItemDot(),
-              SizedBox(width: 10),
+              SizedBox(width: AppSizes.s10),
               Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     title,
                     style: TextStyles.semiBold13.copyWith(color: Colors.black),
                   ),
-                  SizedBox(height: 6),
+                  SizedBox(height: AppSizes.h6),
                   Text(
                     subTitle,
                     style: TextStyles.regular13.copyWith(color: Colors.black),
                   ),
                 ],
               ),
-              Spacer(),
+              const Spacer(),
               Center(
                 child: Text(
-                  ' ${price}جنيه ',
+                  ' $priceجنيه ',
                   style: TextStyles.bold16.copyWith(
                     color: AppColors.lightPrimaryColor,
                   ),

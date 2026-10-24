@@ -1,3 +1,4 @@
+import 'package:e_commrece_app/core/utils/app_sizes.dart';
 import 'package:e_commrece_app/core/utils/app_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -9,24 +10,24 @@ class SearchTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      padding: EdgeInsets.symmetric(horizontal: AppSizes.s12, vertical: AppSizes.s8),
       decoration: ShapeDecoration(
         shape: RoundedRectangleBorder(
           side: BorderSide(width: 1, color: const Color(0xFFCCC7C0)),
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: AppSizes.borderR12,
         ),
       ),
       child: TextField(
         keyboardType: TextInputType.text,
         decoration: InputDecoration(
           prefixIcon: SizedBox(
-            width: 20,
+            width: AppSizes.s20,
             child: Center(
               child: SvgPicture.asset('assets/images/search-normal.svg'),
             ),
           ),
           suffixIcon: SizedBox(
-            width: 20,
+            width: AppSizes.s20,
             child: Center(child: SvgPicture.asset('assets/images/filter.svg')),
           ),
           hintStyle: TextStyles.regular13.copyWith(
@@ -45,7 +46,7 @@ class SearchTextField extends StatelessWidget {
 
   OutlineInputBorder buildBorder() {
     return OutlineInputBorder(
-      borderRadius: BorderRadius.circular(4),
+      borderRadius: AppSizes.borderR4,
       borderSide: const BorderSide(width: 1, color: Colors.white),
     );
   }

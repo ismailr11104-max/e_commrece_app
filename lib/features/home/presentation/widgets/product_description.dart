@@ -1,3 +1,4 @@
+import 'package:e_commrece_app/core/utils/app_sizes.dart';
 import 'package:e_commrece_app/core/utils/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
@@ -25,7 +26,7 @@ class ProductDescription extends StatelessWidget {
                   text: '$price KD ', // استخدام $price المباشر
                   style: TextStyles.bold16.copyWith(
                     color: const Color(0xFF56A25F),
-                    fontSize: 22,
+                    fontSize: AppSizes.font22,
                   ),
                 ),
                 TextSpan(
@@ -38,7 +39,7 @@ class ProductDescription extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(height: 16),
+        SizedBox(height: AppSizes.h16),
         SizedBox(
           width: double.infinity,
           child: Text.rich(

@@ -1,4 +1,5 @@
 import 'package:e_commrece_app/core/utils/app_colors.dart';
+import 'package:e_commrece_app/core/utils/app_sizes.dart';
 import 'package:e_commrece_app/core/utils/app_text_styles.dart';
 import 'package:e_commrece_app/core/widget/quantity_action_button.dart';
 import 'package:e_commrece_app/features/shopping/domain/cart_entities.dart';
@@ -16,8 +17,8 @@ class ActionButtons extends StatelessWidget {
     return Row(
       children: [
         QuantityActionButton(
-          width: 24,
-          height: 24,
+          width: AppSizes.s24,
+          height: AppSizes.h24,
           iconColor: Colors.white,
           icon: Icons.add,
           color: AppColors.primaryColor,
@@ -28,7 +29,7 @@ class ActionButtons extends StatelessWidget {
         ),
 
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
+          padding: AppSizes.horizontalP16,
           child: Text(
             '${cartEntities.quantity}',
             textAlign: TextAlign.center,
@@ -37,8 +38,8 @@ class ActionButtons extends StatelessWidget {
         ),
 
         QuantityActionButton(
-          width: 24,
-          height: 24,
+          width: AppSizes.s24,
+          height: AppSizes.h24,
           iconColor: Colors.grey,
           icon: Icons.remove,
           color: const Color(0xFFF3F5F7),

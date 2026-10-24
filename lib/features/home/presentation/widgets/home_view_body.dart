@@ -1,3 +1,4 @@
+import 'package:e_commrece_app/core/utils/app_sizes.dart';
 import 'package:e_commrece_app/core/widget/custom_see_all.dart';
 import 'package:e_commrece_app/core/widget/search_text_field.dart';
 import 'package:e_commrece_app/features/home/presentation/widgets/Featured_list.dart';
@@ -12,21 +13,21 @@ class HomeViewBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8),
+      padding: EdgeInsets.symmetric(horizontal: AppSizes.s8),
       child: CustomScrollView(
         slivers: [
           SliverToBoxAdapter(
             child: Column(
               children: [
-                const SizedBox(height: 16),
+                SizedBox(height: AppSizes.h16),
                 const CustomHomeAppBar(),
-                const SizedBox(height: 16),
+                SizedBox(height: AppSizes.h16),
                 const SearchTextField(),
-                const SizedBox(height: 12),
+                SizedBox(height: AppSizes.h12),
                 const FeaturedList(),
-                const SizedBox(height: 16),
+                SizedBox(height: AppSizes.h16),
                 const CustomSeeAll(title: 'Categories'),
-                const SizedBox(height: 12),
+                SizedBox(height: AppSizes.h12),
                 const CategpryListCubit(),
               ],
             ),

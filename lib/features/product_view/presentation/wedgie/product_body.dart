@@ -1,5 +1,6 @@
 import 'package:e_commrece_app/core/cubit/product_cubit.dart';
 import 'package:e_commrece_app/core/cubit/product_state.dart';
+import 'package:e_commrece_app/core/utils/app_sizes.dart';
 import 'package:e_commrece_app/core/widget/search_text_field.dart';
 import 'package:e_commrece_app/core/widget/show_app_bar.dart';
 import 'package:e_commrece_app/features/home/presentation/widgets/product_grid_view_cubit.dart';
@@ -20,9 +21,9 @@ class ProductBody extends StatelessWidget {
               child: Column(
                 children: [
                   ShowAppBar(context, title: 'المنتجات', isBack: false),
-                  const SizedBox(height: 16),
+                  SizedBox(height: AppSizes.h16),
                   const SearchTextField(),
-                  const SizedBox(height: 12),
+                  SizedBox(height: AppSizes.h12),
                   FilterProduct(ProductLength: state.products.length),
                 ],
               ),

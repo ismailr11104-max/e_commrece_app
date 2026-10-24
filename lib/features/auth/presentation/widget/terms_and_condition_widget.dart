@@ -1,7 +1,7 @@
 import 'package:e_commrece_app/core/utils/app_colors.dart';
+import 'package:e_commrece_app/core/utils/app_sizes.dart';
 import 'package:e_commrece_app/core/utils/app_text_styles.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 import 'custom_check_box.dart';
 
@@ -28,7 +28,7 @@ class _TermsAndConditionsWidgetState extends State<TermsAndConditionsWidget> {
           },
           isChecked: isTermsAccepted,
         ),
-        const SizedBox(width: 16),
+        SizedBox(width: AppSizes.s16),
         Expanded(
           child: Text.rich(
             TextSpan(

@@ -1,4 +1,6 @@
+import 'package:e_commrece_app/core/utils/app_sizes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ImageProductDetails extends StatelessWidget {
   const ImageProductDetails({super.key, required this.image});
@@ -9,19 +11,19 @@ class ImageProductDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 250,
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+      height: 250.h,
+      padding: EdgeInsets.symmetric(horizontal: AppSizes.s8, vertical: 5.h),
       clipBehavior: Clip.antiAlias,
       decoration: ShapeDecoration(
-        gradient: LinearGradient(
+        gradient: const LinearGradient(
           begin: Alignment(0.50, 1.02),
           end: Alignment(0.50, -0.00),
-          colors: [const Color(0xFFFFF3C5), const Color(0xFFFDF9DA)],
+          colors: [Color(0xFFFFF3C5), Color(0xFFFDF9DA)],
         ),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(12),
-            bottomRight: Radius.circular(12),
+            bottomLeft: AppSizes.radius12,
+            bottomRight: AppSizes.radius12,
           ),
         ),
       ),
@@ -29,7 +31,7 @@ class ImageProductDetails extends StatelessWidget {
         image,
         fit: BoxFit.contain,
         errorBuilder: (context, error, stackTrace) =>
-            const Icon(Icons.broken_image, size: 60, color: Colors.grey),
+            Icon(Icons.broken_image, size: AppSizes.iconLarge * 1.5, color: Colors.grey),
       ),
     );
   }

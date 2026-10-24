@@ -1,3 +1,4 @@
+import 'package:e_commrece_app/core/utils/app_sizes.dart';
 import 'package:e_commrece_app/features/checkout/domain/entities/order_entities.dart';
 import 'package:e_commrece_app/features/checkout/presentation/widget/shipping_item.dart';
 import 'package:flutter/cupertino.dart';
@@ -19,7 +20,7 @@ class _ShippingSectionState extends State<ShippingSection>
     super.build(context);
     final controller = context.read<OrderEntities>();
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 16),
+      padding: EdgeInsets.symmetric(vertical: AppSizes.h16),
       child: Column(
         children: [
           ShippingItem(
@@ -35,7 +36,7 @@ class _ShippingSectionState extends State<ShippingSection>
             price:
                 '${context.read<OrderEntities>().cartItemEntities.calculateTotal() + 8}',
           ),
-          SizedBox(height: 12),
+          SizedBox(height: AppSizes.h12),
           ShippingItem(
             onTap: () {
               isSelectedIndex = 1;

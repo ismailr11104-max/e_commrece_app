@@ -1,3 +1,4 @@
+import 'package:e_commrece_app/core/utils/app_sizes.dart';
 import 'package:e_commrece_app/core/utils/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
@@ -8,15 +9,15 @@ class OrDivider extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Expanded(child: Divider(color: Color(0xffDDDFDF), thickness: 1)),
+        const Expanded(child: Divider(color: Color(0xffDDDFDF), thickness: 1)),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 18.0),
+          padding: EdgeInsets.symmetric(horizontal: AppSizes.s18),
           child: Text(
             'أو',
-            style: TextStyles.semiBold16.copyWith(color: Color(0xff0C0D0D)),
+            style: TextStyles.semiBold16.copyWith(color: const Color(0xff0C0D0D)),
           ),
         ),
-        Expanded(child: Divider(color: Color(0xffDDDFDF), thickness: 1)),
+        const Expanded(child: Divider(color: Color(0xffDDDFDF), thickness: 1)),
       ],
     );
   }

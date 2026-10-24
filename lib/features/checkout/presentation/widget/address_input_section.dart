@@ -1,3 +1,4 @@
+import 'package:e_commrece_app/core/utils/app_sizes.dart';
 import 'package:e_commrece_app/core/widget/custom_text_from_field.dart';
 import 'package:e_commrece_app/features/checkout/domain/entities/order_entities.dart';
 import 'package:flutter/foundation.dart';
@@ -5,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AddressInputSection extends StatelessWidget {
-  AddressInputSection({
+  const AddressInputSection({
     super.key,
     required this.formKey,
     required this.valueListenable,
@@ -16,7 +17,7 @@ class AddressInputSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = context.read<OrderEntities>().addressEntities!;
+    final controller = context.read<OrderEntities>().addressEntities;
     return ValueListenableBuilder(
       valueListenable: valueListenable,
       builder: (context, value, child) {
@@ -25,7 +26,7 @@ class AddressInputSection extends StatelessWidget {
             key: formKey,
             child: Column(
               children: [
-                SizedBox(height: 24),
+                SizedBox(height: AppSizes.h24),
                 CustomTextFromField(
                   hintText: 'الاسم كامل',
                   keyboardType: TextInputType.text,
@@ -33,7 +34,7 @@ class AddressInputSection extends StatelessWidget {
                     controller.fullName = value;
                   },
                 ),
-                SizedBox(height: 16),
+                SizedBox(height: AppSizes.h16),
                 CustomTextFromField(
                   hintText: 'البريد الإلكتروني',
                   keyboardType: TextInputType.emailAddress,
@@ -41,7 +42,7 @@ class AddressInputSection extends StatelessWidget {
                     controller.email = value;
                   },
                 ),
-                SizedBox(height: 16),
+                SizedBox(height: AppSizes.h16),
                 CustomTextFromField(
                   hintText: 'العنوان',
                   keyboardType: TextInputType.text,
@@ -49,7 +50,7 @@ class AddressInputSection extends StatelessWidget {
                     controller.address = value;
                   },
                 ),
-                SizedBox(height: 16),
+                SizedBox(height: AppSizes.h16),
                 CustomTextFromField(
                   hintText: 'رقم الطابق , رقم الشقه ..',
                   keyboardType: TextInputType.text,
@@ -57,7 +58,7 @@ class AddressInputSection extends StatelessWidget {
                     controller.floorDetails = value;
                   },
                 ),
-                SizedBox(height: 16),
+                SizedBox(height: AppSizes.h16),
                 CustomTextFromField(
                   hintText: 'رقم الهاتف',
                   keyboardType: TextInputType.text,
@@ -65,7 +66,7 @@ class AddressInputSection extends StatelessWidget {
                     controller.phone = value;
                   },
                 ),
-                SizedBox(height: 16),
+                SizedBox(height: AppSizes.h16),
               ],
             ),
           ),

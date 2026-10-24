@@ -1,4 +1,5 @@
 import 'package:e_commrece_app/core/services/shared_preferences/shared_pref_manger.dart';
+import 'package:e_commrece_app/core/utils/app_sizes.dart';
 import 'package:e_commrece_app/core/utils/app_text_styles.dart';
 import 'package:e_commrece_app/core/widget/custom_button.dart';
 import 'package:e_commrece_app/features/main_navigation_screen/presentation/main_navigation_view.dart';
@@ -6,6 +7,7 @@ import 'package:e_commrece_app/features/onboarding/data/models/onboarding_item_m
 import 'package:e_commrece_app/features/onboarding/presentation/controller/onboarding_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class PageViewItem extends StatelessWidget {
@@ -52,8 +54,8 @@ class PageViewItem extends StatelessWidget {
                 ),
               ),
               Positioned(
-                top: 16,
-                right: 16,
+                top: AppSizes.h16,
+                right: AppSizes.s16,
                 child: GestureDetector(
                   onTap: () {
                     Navigator.of(context).pushReplacementNamed(
@@ -61,7 +63,7 @@ class PageViewItem extends StatelessWidget {
                     );
                   },
                   child: index == 2
-                      ? SizedBox()
+                      ? const SizedBox()
                       : Text(
                           'تخطي',
                           style: TextStyles.semiBold16.copyWith(
@@ -71,9 +73,9 @@ class PageViewItem extends StatelessWidget {
                 ),
               ),
               Positioned(
-                left: 16,
-                right: 16,
-                bottom: 50,
+                left: AppSizes.s16,
+                right: AppSizes.s16,
+                bottom: 50.h,
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -82,33 +84,33 @@ class PageViewItem extends StatelessWidget {
                       textAlign: TextAlign.center,
                       style: TextStyles.bold16.copyWith(
                         color: Colors.white,
-                        fontSize: 24,
+                        fontSize: AppSizes.font24,
                       ),
                     ),
-                    const SizedBox(height: 12),
+                    SizedBox(height: AppSizes.h12),
                     Text(
                       itemModel.subTitle,
                       textAlign: TextAlign.center,
                       style: TextStyles.regular16.copyWith(
                         color: Colors.white.withValues(alpha: 0.85),
-                        fontSize: 16,
+                        fontSize: AppSizes.font16,
                       ),
                     ),
-                    const SizedBox(height: 24),
+                    SizedBox(height: AppSizes.h24),
                     SmoothPageIndicator(
                       controller: cubit.pageController,
                       count: OnboardingItemModel.items.length,
                       axisDirection: Axis.horizontal,
                       effect: WormEffect(
-                        spacing: 5,
-                        dotWidth: 6,
-                        dotHeight: 6,
+                        spacing: 5.w,
+                        dotWidth: 6.w,
+                        dotHeight: 6.h,
                         dotColor: Colors.white.withValues(alpha: 0.35),
                         activeDotColor: Colors.white,
                       ),
                     ),
 
-                    const SizedBox(height: 24),
+                    SizedBox(height: AppSizes.h24),
                     SizedBox(
                       width: double.infinity,
                       child: CustomButton(

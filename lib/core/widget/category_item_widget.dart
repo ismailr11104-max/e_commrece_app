@@ -1,3 +1,4 @@
+import 'package:e_commrece_app/core/utils/app_sizes.dart';
 import 'package:e_commrece_app/core/utils/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
@@ -23,14 +24,14 @@ class CategoryItemWidget extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Container(
-            width: 64,
-            height: 64,
+            width: AppSizes.s64,
+            height: AppSizes.h64,
             decoration: const BoxDecoration(
               color: Color(0xFFF3F5F7),
               shape: BoxShape.circle,
             ),
             child: Padding(
-              padding: const EdgeInsets.all(12),
+              padding: AppSizes.p12,
               child: isNetworkImage
                   ? Image.network(
                       imagePath,
@@ -46,10 +47,10 @@ class CategoryItemWidget extends StatelessWidget {
                     ),
             ),
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: AppSizes.h8),
           Text(
             title,
-            style: TextStyles.semiBold13.copyWith(color: Color(0xff0C0D0D)),
+            style: TextStyles.semiBold13.copyWith(color: const Color(0xff0C0D0D)),
           ),
         ],
       ),

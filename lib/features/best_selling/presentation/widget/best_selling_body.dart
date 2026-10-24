@@ -1,5 +1,6 @@
 import 'package:e_commrece_app/core/helper_functions/get_dummy_product.dart';
 import 'package:e_commrece_app/core/utils/app_image.dart';
+import 'package:e_commrece_app/core/utils/app_sizes.dart';
 import 'package:e_commrece_app/core/utils/app_text_styles.dart';
 import 'package:e_commrece_app/core/widget/product_grid_view.dart';
 import 'package:e_commrece_app/features/home/presentation/controller/best_selling_cubit/best_selling_cubit.dart';
@@ -14,13 +15,13 @@ class BestSellingBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomScrollView(
       slivers: [
-        const SliverToBoxAdapter(child: SizedBox(height: 24)),
+        SliverToBoxAdapter(child: SizedBox(height: AppSizes.h24)),
 
         SliverToBoxAdapter(
           child: Text('الأكثر مبيعًا', style: TextStyles.bold16),
         ),
 
-        const SliverToBoxAdapter(child: SizedBox(height: 8)),
+        SliverToBoxAdapter(child: SizedBox(height: AppSizes.h8)),
 
         BlocBuilder<BestSellingCubit, BestSellingState>(
           builder: (context, state) {
@@ -59,7 +60,7 @@ class BestSellingBody extends StatelessWidget {
                             color: const Color(0xff616A6B),
                           ),
                         ),
-                        const SizedBox(height: 6),
+                        SizedBox(height: AppSizes.h6),
                         Text(
                           'عفوًا... هذه المعلومات غير متوفرة للحظة',
                           style: TextStyles.regular13.copyWith(
